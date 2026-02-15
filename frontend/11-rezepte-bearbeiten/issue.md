@@ -1,10 +1,6 @@
 ---
 layout: default
 title: Rezepte bearbeiten
-parent: Frontend
-grand_parent: Übungen
-nav_order: 11
-has_toc: false
 ---
 
 # Formular zum Bearbeiten bestehender Rezepte erweitern

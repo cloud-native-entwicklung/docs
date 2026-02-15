@@ -1,10 +1,6 @@
 ---
 layout: default
 title: Spectator mit Vitest (Alternative)
-parent: Frontend
-grand_parent: Übungen
-nav_order: 15
-has_toc: false
 ---
 
 # Alternative: Spectator mit Vitest für Komponententests integrieren

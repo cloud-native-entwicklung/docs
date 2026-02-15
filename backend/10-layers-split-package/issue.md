@@ -1,10 +1,6 @@
 ---
 layout: default
 title: Schichtenarchitektur aufteilen
-parent: Backend
-grand_parent: Übungen
-nav_order: 10
-has_toc: false
 ---
 
 # Pakete nach Schichtenarchitektur aufteilen

@@ -1,10 +1,6 @@
 ---
 layout: default
 title: Rezepte validieren
-parent: Backend
-grand_parent: Übungen
-nav_order: 3
-has_toc: false
 ---
 
 # Rezepte mit Bean Validation validieren

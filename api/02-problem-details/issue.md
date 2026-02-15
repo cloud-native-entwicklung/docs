@@ -1,10 +1,6 @@
 ---
 layout: default
 title: Problem Details
-parent: REST-API
-grand_parent: Übungen
-nav_order: 2
-has_toc: false
 ---
 
 # Fehlerantworten mit Problem Details standardisieren

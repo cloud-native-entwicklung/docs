@@ -1,10 +1,6 @@
 ---
 layout: default
 title: Unit-Tests mit Spectator
-parent: Frontend
-grand_parent: Übungen
-nav_order: 13
-has_toc: false
 ---
 
 # Umfassende Unit-Tests mit Spectator schreiben

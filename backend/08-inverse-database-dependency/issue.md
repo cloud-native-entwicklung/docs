@@ -1,10 +1,6 @@
 ---
 layout: default
 title: Dependency Inversion
-parent: Backend
-grand_parent: Übungen
-nav_order: 8
-has_toc: false
 ---
 
 # Dependency Inversion Principle anwenden

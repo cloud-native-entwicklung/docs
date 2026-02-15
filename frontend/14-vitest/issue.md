@@ -1,10 +1,6 @@
 ---
 layout: default
 title: Vitest einrichten (Alternative)
-parent: Frontend
-grand_parent: Übungen
-nav_order: 14
-has_toc: false
 ---
 
 # Alternative: Test-Infrastruktur auf Vitest migrieren

@@ -1,10 +1,6 @@
 ---
 layout: default
 title: Frontend
-parent: Übungen
-nav_order: 3
-has_children: true
-has_toc: false
 ---
 
 # Frontend-Übungen (Angular / NPM)

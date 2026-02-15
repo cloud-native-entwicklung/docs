@@ -1,10 +1,6 @@
 ---
 layout: default
 title: Domain Events
-parent: Backend
-grand_parent: Übungen
-nav_order: 12
-has_toc: false
 ---
 
 # Domain Events mit CDI Events

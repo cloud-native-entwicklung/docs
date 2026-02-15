@@ -1,10 +1,6 @@
 ---
 layout: default
 title: HTTP-Zugriff auf das Backend
-parent: Frontend
-grand_parent: Übungen
-nav_order: 6
-has_toc: false
 ---
 
 # Rezeptdaten per HTTP vom Backend laden

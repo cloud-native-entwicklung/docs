@@ -1,10 +1,6 @@
 ---
 layout: default
 title: Projekt aufsetzen
-parent: Frontend
-grand_parent: Übungen
-nav_order: 1
-has_toc: false
 ---
 
 # Angular-Projekt aufsetzen

@@ -1,10 +1,6 @@
 ---
 layout: default
 title: Interceptors
-parent: Backend
-grand_parent: Übungen
-nav_order: 13
-has_toc: false
 ---
 
 # Querschnittslogik mit CDI Interceptors

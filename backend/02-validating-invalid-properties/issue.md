@@ -1,10 +1,6 @@
 ---
 layout: default
 title: Ungültige Properties abweisen
-parent: Backend
-grand_parent: Übungen
-nav_order: 2
-has_toc: false
 ---
 
 # Ungültige Properties abweisen

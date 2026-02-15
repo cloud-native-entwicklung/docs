@@ -1,10 +1,6 @@
 ---
 layout: default
 title: Ingredients Subresource
-parent: REST-API
-grand_parent: Übungen
-nav_order: 4
-has_toc: false
 ---
 
 # Zutaten als eigenständige Ressource mit Subresource-Pattern

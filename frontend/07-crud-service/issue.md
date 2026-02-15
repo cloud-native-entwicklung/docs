@@ -1,10 +1,6 @@
 ---
 layout: default
 title: CRUD-Service erweitern
-parent: Frontend
-grand_parent: Übungen
-nav_order: 7
-has_toc: false
 ---
 
 # Service um vollständige CRUD-Operationen erweitern

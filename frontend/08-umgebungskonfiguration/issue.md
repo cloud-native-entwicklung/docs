@@ -1,10 +1,6 @@
 ---
 layout: default
 title: Umgebungskonfiguration
-parent: Frontend
-grand_parent: Übungen
-nav_order: 8
-has_toc: false
 ---
 
 # Umgebungsspezifische Konfiguration einrichten

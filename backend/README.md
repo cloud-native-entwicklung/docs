@@ -1,10 +1,6 @@
 ---
 layout: default
 title: Backend
-parent: Übungen
-nav_order: 2
-has_children: true
-has_toc: false
 ---
 
 # Backend-Übungen (Quarkus / Maven)

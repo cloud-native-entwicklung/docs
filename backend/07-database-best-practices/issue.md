@@ -1,10 +1,6 @@
 ---
 layout: default
 title: Datenbank-Best-Practices
-parent: Backend
-grand_parent: Übungen
-nav_order: 7
-has_toc: false
 ---
 
 # JPA Best Practices anwenden

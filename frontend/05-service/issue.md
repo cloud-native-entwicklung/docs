@@ -1,10 +1,6 @@
 ---
 layout: default
 title: Service einführen
-parent: Frontend
-grand_parent: Übungen
-nav_order: 5
-has_toc: false
 ---
 
 # Service für die Datenverwaltung einführen

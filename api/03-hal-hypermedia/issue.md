@@ -1,10 +1,6 @@
 ---
 layout: default
 title: HAL Hypermedia
-parent: REST-API
-grand_parent: Übungen
-nav_order: 3
-has_toc: false
 ---
 
 # HAL-Format für Hypermedia-getriebene Responses einführen

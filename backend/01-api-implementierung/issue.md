@@ -1,10 +1,6 @@
 ---
 layout: default
 title: API-Implementierung
-parent: Backend
-grand_parent: Übungen
-nav_order: 1
-has_toc: false
 ---
 
 # Rezepte-API implementieren

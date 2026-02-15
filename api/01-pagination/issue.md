@@ -1,10 +1,6 @@
 ---
 layout: default
 title: Pagination
-parent: REST-API
-grand_parent: Übungen
-nav_order: 1
-has_toc: false
 ---
 
 # Cursor-basierte Pagination für Rezepte

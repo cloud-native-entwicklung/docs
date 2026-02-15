@@ -1,10 +1,6 @@
 ---
 layout: default
 title: Custom Constraint
-parent: Backend
-grand_parent: Übungen
-nav_order: 4
-has_toc: false
 ---
 
 # Custom Composed Constraint für URL-Validierung

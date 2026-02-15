@@ -1,10 +1,6 @@
 ---
 layout: default
 title: Datenbankanbindung
-parent: Backend
-grand_parent: Übungen
-nav_order: 6
-has_toc: false
 ---
 
 # Datenbankanbindung mit Hibernate ORM und Panache

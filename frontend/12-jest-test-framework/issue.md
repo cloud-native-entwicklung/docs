@@ -1,10 +1,6 @@
 ---
 layout: default
 title: Jest-Test-Framework einrichten
-parent: Frontend
-grand_parent: Übungen
-nav_order: 12
-has_toc: false
 ---
 
 # Test-Infrastruktur von Karma/Jasmine auf Jest migrieren
