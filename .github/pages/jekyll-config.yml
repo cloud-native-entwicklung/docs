@@ -1,0 +1,9 @@
+remote_theme: just-the-docs/just-the-docs
+title: Cloud-Native Entwicklung - Übungen
+color_scheme: dark
+
+search_enabled: true
+heading_anchors: true
+
+# Footer content
+footer_content: "Copyright &copy; 2025 AVD Academy"
