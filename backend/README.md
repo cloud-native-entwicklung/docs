@@ -11,6 +11,7 @@ Die Branches sind nummeriert (01-*, 02-*, ...) und bauen aufeinander auf.
 
 | Nr. | Übung | Branch |
 |-----|-------|--------|
+| 00 | [Quarkus-Projekt erstellen](00-quarkus-projekt-erstellen/issue.md) | `main` |
 | 01 | [API-Implementierung](01-api-implementierung/issue.md) | `01-api-implementierung` |
 | 02 | [Ungültige Properties abweisen](02-validating-invalid-properties/issue.md) | `02-validating-invalid-properties` |
 | 03 | [Rezepte validieren](03-validate-recipes/issue.md) | `03-validate-recipes` |

@@ -12,7 +12,8 @@ Die Übungen sind nach Technologie gegliedert und bauen jeweils aufeinander auf.
 
 | Nr. | Übung                                                              |
 |-----|--------------------------------------------------------------------|
-| 01  | [Pagination](api/01-pagination/issue.md)                           |
+| 00  | [OpenAPI-Spezifikation erstellen](api/00-openapi-erstellen/issue.md) |
+| 01  | [Pagination](api/01-pagination/issue.md)                             |
 | 02  | [Problem Details](api/02-problem-details/issue.md)                 |
 | 03  | [HAL Hypermedia](api/03-hal-hypermedia/issue.md)                   |
 | 04  | [Ingredients Subresource](api/04-ingredients-subresource/issue.md) |
@@ -21,6 +22,7 @@ Die Übungen sind nach Technologie gegliedert und bauen jeweils aufeinander auf.
 
 | Nr. | Übung                                                                                |
 |-----|--------------------------------------------------------------------------------------|
+| 00  | [Quarkus-Projekt erstellen](backend/00-quarkus-projekt-erstellen/issue.md)           |
 | 01  | [API-Implementierung](backend/01-api-implementierung/issue.md)                       |
 | 02  | [Read-Only Properties validieren](backend/02-validating-invalid-properties/issue.md) |
 | 03  | [Bean Validation](backend/03-validate-recipes/issue.md)                              |

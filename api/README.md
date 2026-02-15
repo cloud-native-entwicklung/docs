@@ -11,6 +11,7 @@ Die Branches sind nummeriert (01-*, 02-*, ...) und bauen aufeinander auf.
 
 | Nr. | Übung | Branch |
 |-----|-------|--------|
+| 00 | [OpenAPI-Spezifikation erstellen](00-openapi-erstellen/issue.md) | `main` |
 | 01 | [Pagination](01-pagination/issue.md) | `01-pagination` |
 | 02 | [Problem Details](02-problem-details/issue.md) | `02-problem-details` |
 | 03 | [HAL Hypermedia](03-hal-hypermedia/issue.md) | `03-hal-hypermedia` |
