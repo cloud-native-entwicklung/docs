@@ -2,7 +2,7 @@
 layout: default
 title: Vitest einrichten (Alternative)
 parent: Frontend
-grand_parent: Trainerleitfaden
+grand_parent: Übungen
 nav_order: 14
 has_toc: false
 ---

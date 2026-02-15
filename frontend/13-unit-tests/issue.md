@@ -2,7 +2,7 @@
 layout: default
 title: Unit-Tests mit Spectator
 parent: Frontend
-grand_parent: Trainerleitfaden
+grand_parent: Übungen
 nav_order: 13
 has_toc: false
 ---

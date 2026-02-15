@@ -2,7 +2,7 @@
 layout: default
 title: Rezept-Formular erstellen
 parent: Frontend
-grand_parent: Trainerleitfaden
+grand_parent: Übungen
 nav_order: 10
 has_toc: false
 ---
