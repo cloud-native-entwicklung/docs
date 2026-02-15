@@ -2,7 +2,7 @@
 layout: default
 title: Custom Constraint
 parent: Backend
-grand_parent: Trainerleitfaden
+grand_parent: Übungen
 nav_order: 4
 has_toc: false
 ---

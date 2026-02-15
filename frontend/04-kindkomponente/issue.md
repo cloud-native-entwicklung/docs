@@ -2,7 +2,7 @@
 layout: default
 title: Kindkomponente extrahieren
 parent: Frontend
-grand_parent: Trainerleitfaden
+grand_parent: Übungen
 nav_order: 4
 has_toc: false
 ---

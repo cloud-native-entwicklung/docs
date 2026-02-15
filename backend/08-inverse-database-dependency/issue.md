@@ -2,7 +2,7 @@
 layout: default
 title: Dependency Inversion
 parent: Backend
-grand_parent: Trainerleitfaden
+grand_parent: Übungen
 nav_order: 8
 has_toc: false
 ---

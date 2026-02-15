@@ -2,7 +2,7 @@
 layout: default
 title: Detail-Ansicht mit Routing
 parent: Frontend
-grand_parent: Trainerleitfaden
+grand_parent: Übungen
 nav_order: 9
 has_toc: false
 ---

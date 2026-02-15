@@ -2,7 +2,7 @@
 layout: default
 title: Pagination
 parent: REST-API
-grand_parent: Trainerleitfaden
+grand_parent: Übungen
 nav_order: 1
 has_toc: false
 ---

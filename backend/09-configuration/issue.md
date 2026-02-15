@@ -2,7 +2,7 @@
 layout: default
 title: Konfiguration
 parent: Backend
-grand_parent: Trainerleitfaden
+grand_parent: Übungen
 nav_order: 9
 has_toc: false
 ---

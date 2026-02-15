@@ -1,8 +1,7 @@
 ---
 layout: default
 title: REST-API
-parent: Trainerleitfaden
-grand_parent: Cloud-Native Entwicklung
+parent: Übungen
 nav_order: 1
 has_children: true
 has_toc: false

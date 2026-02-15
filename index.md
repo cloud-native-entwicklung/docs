@@ -1,6 +1,7 @@
 ---
 layout: home
 title: Übungen
+has_children: true
 has_toc: false
 ---
 

@@ -2,7 +2,7 @@
 layout: default
 title: HTTP-Zugriff auf das Backend
 parent: Frontend
-grand_parent: Trainerleitfaden
+grand_parent: Übungen
 nav_order: 6
 has_toc: false
 ---

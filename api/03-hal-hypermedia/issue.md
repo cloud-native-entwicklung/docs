@@ -2,7 +2,7 @@
 layout: default
 title: HAL Hypermedia
 parent: REST-API
-grand_parent: Trainerleitfaden
+grand_parent: Übungen
 nav_order: 3
 has_toc: false
 ---

@@ -2,7 +2,7 @@
 layout: default
 title: Service-Schicht einführen
 parent: Backend
-grand_parent: Trainerleitfaden
+grand_parent: Übungen
 nav_order: 5
 has_toc: false
 ---

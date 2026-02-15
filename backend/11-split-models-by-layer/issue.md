@@ -2,7 +2,7 @@
 layout: default
 title: Modelle pro Schicht
 parent: Backend
-grand_parent: Trainerleitfaden
+grand_parent: Übungen
 nav_order: 11
 has_toc: false
 ---

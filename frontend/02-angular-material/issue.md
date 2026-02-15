@@ -2,7 +2,7 @@
 layout: default
 title: Angular Material einbinden
 parent: Frontend
-grand_parent: Trainerleitfaden
+grand_parent: Übungen
 nav_order: 2
 has_toc: false
 ---
