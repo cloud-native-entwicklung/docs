@@ -10,7 +10,7 @@ bearbeitet.
 
 | Nr. | Übung                                                            | Thema                              |
 |-----|------------------------------------------------------------------|------------------------------------|
-| 01  | [Cloud vs. On-Premise](01-cloud-vs-onpremise/issue.md)          | Gruppenarbeit: Vorteile & Herausforderungen |
+| 01  | [Microservices vs. Monolith](01-microservices-vs-monolith/issue.md) | Gruppenarbeit: Vorteile & Herausforderungen |
 | 02  | [Frontend-Technologien](02-frontend-technologien/issue.md)      | HTML, CSS, JavaScript, DOM         |
 | 03  | [NPM-Einstieg](03-npm-einstieg/issue.md)                        | Node Package Manager & SemVer      |
 | 04  | [TypeScript-Einstieg](04-typescript-einstieg/issue.md)           | Typsystem, Transpiling, tsc        |
