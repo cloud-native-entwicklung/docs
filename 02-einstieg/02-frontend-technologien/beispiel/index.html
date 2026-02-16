@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rezepte-Sammlung</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>Meine Rezepte-Sammlung</h1>
+    <p>Eine kleine Übung zu <a href="https://developer.mozilla.org/de/docs/Web/HTML">HTML</a>,
+       <a href="https://developer.mozilla.org/de/docs/Web/CSS">CSS</a> und
+       <a href="https://developer.mozilla.org/de/docs/Web/JavaScript">JavaScript</a>.</p>
+  </header>
+
+  <main class="container">
+    <section class="rezepte">
+      <h2>Rezepte</h2>
+      <ul id="rezept-liste">
+        <li>Spaghetti Bolognese</li>
+        <li>Kartoffelsuppe</li>
+        <li>Pfannkuchen</li>
+      </ul>
+
+      <div class="eingabe">
+        <input type="text" id="neues-rezept" placeholder="Neues Rezept...">
+        <button id="hinzufuegen-btn">Hinzufügen</button>
+      </div>
+
+      <p class="zaehler">Anzahl Rezepte: <span id="anzahl">3</span></p>
+    </section>
+
+    <aside class="info">
+      <h2>Was ist Hypertext?</h2>
+      <p><strong>Hypertext</strong> ist Text, der <a href="https://de.wikipedia.org/wiki/Hypertext">Verweise (Links)</a>
+         auf andere Texte enthält. HTML steht für <em>Hypertext Markup Language</em> —
+         eine Auszeichnungssprache, die Struktur und Verweise beschreibt.</p>
+      <p>Im Gegensatz zu einem Buch kann man in Hypertext nicht-linear navigieren:
+         Jeder Link führt zu einem anderen Dokument oder einer anderen Stelle.</p>
+    </aside>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

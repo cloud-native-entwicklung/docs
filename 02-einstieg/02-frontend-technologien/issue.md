@@ -55,6 +55,10 @@ Browser.
    beobachte das Ergebnis. Wechsle in die Console und teste z.B.
    `document.querySelectorAll('li').length`, um die Anzahl der Listenelemente abzufragen.
 
+## 💡 Beispiel
+
+→ [Beispiel öffnen](beispiel/index.html) (HTML + CSS + JS im Unterordner `beispiel/`)
+
 ## 📚 Selbstlernmaterial
 
 * [MDN Web Docs — HTML](https://developer.mozilla.org/de/docs/Web/HTML) — Referenz und Tutorials zu HTML
