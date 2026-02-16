@@ -5,13 +5,14 @@ title: NPM-Einstieg
 
 # NPM-Einstieg: Node Package Manager verstehen
 
-NPM ist das zentrale Werkzeug für die Verwaltung von JavaScript-Projekten und deren Abhängigkeiten. In dieser Übung arbeitet Ihr ein Tutorial durch und versteht die Grundkonzepte, die wir für Angular und TypeScript brauchen.
+NPM ist das zentrale Werkzeug für die Verwaltung von JavaScript-Projekten und deren Abhängigkeiten. In dieser Übung
+arbeitet Ihr ein Tutorial durch und versteht die Grundkonzepte, die wir für Angular und TypeScript brauchen.
 
 ## 🎯 Lernziele
 
-* Du kannst ein neues NPM-Projekt initialisieren und die Rolle der `package.json` erklären.
+* Du kannst ein neues NPM-Projekt initialisieren.
+* Du kannst die Rolle der Dateien `package.json` und `package-lock.json` erklären.
 * Du verstehst den Unterschied zwischen `npm install` und `npm ci` und weißt, wann Du welchen Befehl verwendest.
-* Du kannst die Funktion der `package-lock.json` erklären und weißt, warum sie ins Repository gehört.
 * Du verstehst Semantic Versioning (SemVer) und die Bedeutung von `^`, `~` und exakten Versionsangaben.
 * Du kannst NPM-Scripts definieren und ausführen.
 
@@ -25,10 +26,8 @@ NPM ist das zentrale Werkzeug für die Verwaltung von JavaScript-Projekten und d
 
 ## 🪜 Arbeitsschritte
 
-1. Klone das Tutorial-Repository [npm-first-steps](https://github.com/ueberfuhr-tutorials/npm-first-steps) und lies die README. Arbeite die Schritte durch.
-2. Erstelle zusätzlich ein eigenes leeres Projekt mit `npm init`. Installiere ein Paket Deiner Wahl (z.B. `chalk` oder `lodash`) und beobachte, was sich in `package.json` und `node_modules` ändert.
-3. Lösche den `node_modules`-Ordner und stelle ihn einmal mit `npm install` und einmal mit `npm ci` wieder her. Beobachte die Unterschiede.
-4. Definiere in der `package.json` ein eigenes Script (z.B. `"hello": "echo Hallo Welt"`) und führe es mit `npm run hello` aus.
+1. Sieh Dir das Tutorial-Repository [npm-first-steps](https://github.com/ueberfuhr-tutorials/npm-first-steps) an und arbeite die Schritte durch.
+2. Recherchiere die Bedeutung der Befehle `npm i` (`npm install`) und `npm ci`.
 
 ## 📚 Selbstlernmaterial
 
