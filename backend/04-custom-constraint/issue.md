@@ -27,6 +27,12 @@ Das Feld `img` wird bislang mit einer Kombination aus `@Size` und `@Pattern` val
 2. Ersetze die bisherigen Annotationen am `img`-Feld durch `@ValidUrl`.
 3. Stelle sicher, dass alle Tests weiterhin grün sind.
 
+## 📚 Selbstlernmaterial
+
+* [Quarkus: Validation Guide](https://quarkus.io/guides/validation) — Validierung in Quarkus
+* [Baeldung: Creating a Custom Validator](https://www.baeldung.com/spring-mvc-custom-validator) — Custom Constraint erstellen
+* [Jakarta Bean Validation: Custom Constraints](https://jakarta.ee/specifications/bean-validation/3.0/jakarta-bean-validation-spec-3.0.html#constraintsdefinitionimplementation) — Spezifikation
+
 ## 🤔 Reflexionsfragen
 
 * Was ist der Unterschied zwischen einem Composed Constraint und einem Constraint mit eigenem Validator (`ConstraintValidator`)? Wann würdest Du welchen Ansatz wählen?

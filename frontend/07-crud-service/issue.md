@@ -29,6 +29,12 @@ Bisher kann unser Service nur Rezepte laden. Für eine vollständige Rezepteverw
 2. Implementiere Reverse-Mapping-Funktionen, die Domänenobjekte in DTOs umwandeln.
 3. Extrahiere eine `baseUrl`-Konstante und implementiere die fehlenden Service-Methoden mit den passenden HTTP-Methoden.
 
+## 📚 Selbstlernmaterial
+
+* [Angular: HttpClient](https://angular.dev/guide/http) — Offizielles HTTP-Guide
+* [Angular: Making HTTP Requests](https://angular.dev/guide/http/making-requests) — POST, PUT, DELETE
+* [MDN: HTTP Request Methods](https://developer.mozilla.org/de/docs/Web/HTTP/Methods) — Übersicht der HTTP-Methoden
+
 ## 🤔 Reflexionsfragen
 
 * Warum unterscheiden wir zwischen `RecipeDraft` (anlegen) und `RecipeUpdate` (aktualisieren)? Könnten wir nicht einfach `Recipe` für beides verwenden?

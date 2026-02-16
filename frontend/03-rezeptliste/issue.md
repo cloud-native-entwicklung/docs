@@ -29,6 +29,12 @@ Unsere App soll eine Übersicht aller Rezepte zeigen. Dazu erstellen wir eine Ko
 2. Erzeuge eine `RecipeListComponent` und implementiere die Darstellung mit Material Cards und Grid-CSS.
 3. Ersetze den Standardinhalt der `AppComponent` durch eine Toolbar und die Rezeptliste.
 
+## 📚 Selbstlernmaterial
+
+* [Angular: Components](https://angular.dev/guide/components) — Komponentengrundlagen
+* [Angular: Templates](https://angular.dev/guide/templates) — Template-Syntax
+* [Angular: Control Flow (@for, @if)](https://angular.dev/guide/templates/control-flow) — Kontrollfluss in Templates
+
 ## 🤔 Reflexionsfragen
 
 * Warum verwenden wir TypeScript-Interfaces statt Klassen für das Domänenmodell? In welchem Fall wären Klassen die bessere Wahl?

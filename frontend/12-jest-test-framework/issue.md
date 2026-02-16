@@ -30,6 +30,12 @@ Angular verwendet standardmässig Karma als Test-Runner und Jasmine als Assertio
 2. Erstelle eine `jest.config.ts` und passe die TypeScript-Konfiguration für Tests an.
 3. Passe bestehende Tests an und überprüfe, dass sie mit `ng test` bzw. `npm test` durchlaufen.
 
+## 📚 Selbstlernmaterial
+
+* [Jest Dokumentation](https://jestjs.io/docs/getting-started) — Offizielles Getting Started
+* [Jest: Matchers](https://jestjs.io/docs/using-matchers) — Assertions und Matcher
+* [Angular: Testing](https://angular.dev/guide/testing) — Angular Testing Guide
+
 ## 🤔 Reflexionsfragen
 
 * Was sind die wesentlichen Unterschiede zwischen Karma/Jasmine und Jest? Warum bevorzugen viele Teams Jest?

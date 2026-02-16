@@ -28,6 +28,13 @@ Bisher liegt die gesamte Geschäftslogik direkt in der REST-Ressource. Das ersch
 2. Passe die REST-Ressource an, sodass sie den Service per Constructor Injection nutzt.
 3. Schreibe mockbasierte Tests für die Ressource und eigenständige Tests für den Service.
 
+## 📚 Selbstlernmaterial
+
+* [Quarkus: CDI Reference](https://quarkus.io/guides/cdi-reference) — CDI in Quarkus
+* [Jakarta Contexts and Dependency Injection (CDI)](https://jakarta.ee/specifications/cdi/) — Spezifikation
+* [Baeldung: CDI Introduction](https://www.baeldung.com/java-ee-cdi) — Einführung in CDI
+* [Baeldung: Dependency Injection](https://www.baeldung.com/inversion-control-and-dependency-injection-in-spring) — Konzept der Dependency Injection
+
 ## 🤔 Reflexionsfragen
 
 * Warum sollte die REST-Ressource keine Geschäftslogik enthalten? Was wäre das Problem, wenn ein zweiter Zugangskanal (z.B. gRPC, Messaging) hinzukommt?

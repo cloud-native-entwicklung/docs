@@ -29,6 +29,12 @@ Damit unsere Rezepte-App ein professionelles Erscheinungsbild bekommt, binden wi
 2. Definiere ein eigenes Theme mit `mat.define-theme()` in den globalen Styles.
 3. Stelle sicher, dass Roboto, Material Icons und die Typografie-Klasse korrekt eingebunden sind.
 
+## 📚 Selbstlernmaterial
+
+* [Angular Material — Getting Started](https://material.angular.io/guide/getting-started) — Offizielle Anleitung
+* [Angular Material: Component Catalog](https://material.angular.io/components/categories) — Komponentenübersicht
+* [Material Design](https://m3.material.io/) — Material Design Richtlinien
+
 ## 🤔 Reflexionsfragen
 
 * Was ist der Unterschied zwischen `ng add` und `npm install`? Welche zusätzlichen Schritte führt `ng add` aus?

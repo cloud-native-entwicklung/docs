@@ -31,6 +31,12 @@ Nach der Migration auf Jest wollen wir unsere Anwendung mit aussagekräftigen Te
 2. Erstelle eine Mock-Factory für den `RecipeService` und schreibe Tests für die Komponenten.
 3. Teste den Service mit `HttpClientTestingModule` und ergänze Tests für Utility-Funktionen.
 
+## 📚 Selbstlernmaterial
+
+* [Spectator Dokumentation](https://ngneat.github.io/spectator/) — Spectator für Angular-Tests
+* [Angular: Component Testing](https://angular.dev/guide/testing/components-scenarios) — Komponenten testen
+* [Jest Dokumentation](https://jestjs.io/docs/getting-started) — Jest-Referenz
+
 ## 🤔 Reflexionsfragen
 
 * Welche Vorteile bietet Spectator gegenüber dem direkten Arbeiten mit `TestBed`? In welchen Fällen würdest Du trotzdem `TestBed` direkt verwenden?

@@ -29,6 +29,11 @@ Die Backend-URL ist aktuell fest im Service hinterlegt. Für einen professionell
 2. Konfiguriere die Dateiersetzung in `angular.json` und richte den TypeScript-Path-Alias ein.
 3. Ersetze im Service die hart kodierte URL durch den Wert aus dem Environment.
 
+## 📚 Selbstlernmaterial
+
+* [Angular: App Environments](https://angular.dev/tools/cli/environments) — Environment-Konfiguration
+* [Angular: Build Configuration](https://angular.dev/tools/cli/build) — Build-Optionen
+
 ## 🤔 Reflexionsfragen
 
 * Warum werden die Environment-Dateien zur Build-Zeit und nicht zur Laufzeit ersetzt? Welche Konsequenz hat das für das Deployment?

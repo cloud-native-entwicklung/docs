@@ -28,6 +28,12 @@ Unsere API liefert bei Fehlern bisher unstrukturierte oder inkonsistente Antwort
 2. Definiere eine wiederverwendbare `DefaultErrorResponse`-Komponente, die das Schema mit dem Media Type `application/problem+json` nutzt.
 3. Ersetze alle bestehenden Fehler-Responses in der Spezifikation durch Referenzen auf das neue Schema bzw. die Default-Response.
 
+## 📚 Selbstlernmaterial
+
+* [RFC 9457: Problem Details for HTTP APIs](https://www.rfc-editor.org/rfc/rfc9457) — Der Standard für strukturierte Fehlermeldungen
+* [Zalando Guidelines: Error Handling](https://opensource.zalando.com/restful-api-guidelines/#error-handling) — Fehlerbehandlung in REST-APIs
+* [OpenAPI Specification 3.1](https://spec.openapis.org/oas/v3.1.1.html) — Offizielle Spezifikation
+
 ## 🤔 Reflexionsfragen
 
 * Warum ist es problematisch, wenn verschiedene Endpunkte einer API unterschiedliche Fehlerformate zurückgeben? Wie wirkt sich das auf die Client-Entwicklung aus?

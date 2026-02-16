@@ -28,6 +28,12 @@ Die Rezeptsammlung wächst stetig. Aktuell liefert `GET /recipes` alle Rezepte a
 2. Erstelle das Schema `RecipePage` mit den Feldern `data` und `nextCursor` und verwende es als Response-Body.
 3. Definiere eine 400-Response für ungültige Parameter.
 
+## 📚 Selbstlernmaterial
+
+* [Zalando Guidelines: Pagination](https://opensource.zalando.com/restful-api-guidelines/#pagination) — Paginierungs-Patterns
+* [OpenAPI Specification 3.1](https://spec.openapis.org/oas/v3.1.1.html) — Offizielle Spezifikation
+* [Swagger Editor](https://editor.swagger.io/) — Online-Editor für OpenAPI-Definitionen
+
 ## 🤔 Reflexionsfragen
 
 * Welche Probleme entstehen, wenn eine API eine große Datenmenge ohne Pagination zurückgibt? Denke dabei an Client, Server und Netzwerk.

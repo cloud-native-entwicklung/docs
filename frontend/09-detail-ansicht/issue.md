@@ -30,6 +30,12 @@ Bisher zeigt unsere App nur die Listenübersicht. Jetzt wollen wir von einem Rez
 2. Erstelle die `RecipeDetailComponent` mit Unterkomponenten für die verschiedenen Bereiche der Detailansicht.
 3. Implementiere einen Löschen-Button mit Bestätigungsdialog und die Navigation per `RouterLink` von der Liste zur Detailseite.
 
+## 📚 Selbstlernmaterial
+
+* [Angular: Routing](https://angular.dev/guide/routing) — Offizielles Routing-Guide
+* [Angular: Route Parameters](https://angular.dev/guide/routing/common-router-tasks#route-parameters) — Route-Parameter
+* [Angular: Router API](https://angular.dev/api/router/Router) — API-Referenz
+
 ## 🤔 Reflexionsfragen
 
 * Was macht `withComponentInputBinding()` genau? Wie würdest Du ohne diese Option an den Routen-Parameter kommen?

@@ -29,6 +29,12 @@ Nach dem Anlegen eines Rezepts soll das System reagieren können -- z.B. für Lo
 3. Erstelle einen `RecipeEventsLogger`, der das Event mit `@Observes` empfängt und loggt.
 4. Schreibe Tests, die das Feuern des Events verifizieren.
 
+## 📚 Selbstlernmaterial
+
+* [Quarkus: CDI Reference — Events](https://quarkus.io/guides/cdi-reference#events-and-observers) — Events in Quarkus
+* [Jakarta CDI: Events](https://jakarta.ee/specifications/cdi/4.0/jakarta-cdi-spec-4.0.html#events) — Events in der CDI-Spezifikation
+* [Baeldung: CDI Events](https://www.baeldung.com/java-ee-cdi#events) — CDI Events Tutorial
+
 ## 🤔 Reflexionsfragen
 
 * Was ist der Vorteil von CDI Events gegenüber einem direkten Methodenaufruf vom Service zum Logger? Was ändert sich, wenn ein weiterer Observer hinzukommt?

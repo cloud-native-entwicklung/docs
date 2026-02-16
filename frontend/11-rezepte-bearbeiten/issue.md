@@ -31,6 +31,12 @@ Das Formular kann aktuell nur neue Rezepte anlegen. Jetzt erweitern wir es so, d
 2. Lade bei vorhandener `recipeId` das Rezept und befülle das Formular mit `patchValue()`. Passe Titel und Submit-Logik dynamisch an.
 3. Füge auf der Detail-Ansicht einen Bearbeiten-Button hinzu und implementiere die `isDefined()` Utility-Funktion.
 
+## 📚 Selbstlernmaterial
+
+* [Angular: Reactive Forms](https://angular.dev/guide/forms/reactive-forms) — Reactive Forms Guide
+* [Angular: Routing — Navigation](https://angular.dev/guide/routing/common-router-tasks) — Programmatische Navigation
+* [Angular Material: Dialog](https://material.angular.io/components/dialog/overview) — Dialoge (falls relevant)
+
 ## 🤔 Reflexionsfragen
 
 * Welche Vor- und Nachteile hat es, dieselbe Komponente für Anlegen und Bearbeiten zu verwenden, statt zwei separate Komponenten zu erstellen?

@@ -28,6 +28,12 @@ Wir bauen eine Rezepteverwaltung als Single-Page-Application mit Angular. Der er
 2. Wähle die passenden Optionen: Routing aktivieren, SCSS als Stylesheet-Format, kein SSR.
 3. Starte die Anwendung und überprüfe, ob die Startseite im Browser angezeigt wird.
 
+## 📚 Selbstlernmaterial
+
+* [Angular — Getting Started](https://angular.dev/tutorials/learn-angular) — Offizielles Tutorial
+* [Angular CLI Dokumentation](https://angular.dev/tools/cli) — CLI-Referenz
+* [Angular: Standalone Components](https://angular.dev/guide/components) — Standalone-Komponenten
+
 ## 🤔 Reflexionsfragen
 
 * Was ist der Unterschied zwischen `ng new` und `npm init`? Welche Dateien erzeugt die Angular CLI, die Du bei einem manuellen Setup selbst anlegen müsstest?

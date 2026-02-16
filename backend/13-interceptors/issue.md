@@ -30,6 +30,12 @@ In der vorherigen Übung haben wir Events manuell im Service-Code gefeuert. Das 
 3. Annotiere die Service-Methoden mit den neuen Bindings und entferne den manuellen Code.
 4. Stelle sicher, dass alle Tests weiterhin grün sind.
 
+## 📚 Selbstlernmaterial
+
+* [Quarkus: CDI Reference — Interceptors](https://quarkus.io/guides/cdi-reference#interceptors) — Interceptors in Quarkus
+* [Jakarta Interceptors](https://jakarta.ee/specifications/interceptors/) — Spezifikation
+* [Baeldung: CDI Interceptors](https://www.baeldung.com/java-ee-cdi#interceptors) — CDI Interceptors Tutorial
+
 ## 🤔 Reflexionsfragen
 
 * Was sind die Vor- und Nachteile von Interceptors gegenüber explizitem Code? Wann wird die "Magie" hinter Annotationen zum Problem?

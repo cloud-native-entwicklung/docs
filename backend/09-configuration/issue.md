@@ -29,6 +29,12 @@ Nicht jede Umgebung braucht eine echte Datenbank -- für Tests reicht eine In-Me
 2. Verwende `@IfBuildProperty` an der Hibernate-DAO-Implementierung, um sie nur bei bestimmter Konfiguration zu aktivieren.
 3. Konfiguriere die Profile in `application.properties` so, dass die richtige Implementierung pro Umgebung aktiv ist.
 
+## 📚 Selbstlernmaterial
+
+* [Quarkus: Configuration Reference](https://quarkus.io/guides/config-reference) — Konfiguration in Quarkus
+* [MicroProfile Config](https://microprofile.io/specifications/microprofile-config/) — MicroProfile Config Spezifikation
+* [Quarkus: Configuration Profiles](https://quarkus.io/guides/config-reference#profiles) — Profile-basierte Konfiguration
+
 ## 🤔 Reflexionsfragen
 
 * Was ist der Unterschied zwischen einem Build-Time-Property (`@IfBuildProperty`) und einem Runtime-Property? Warum ist diese Unterscheidung in Quarkus besonders relevant?

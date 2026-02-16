@@ -33,6 +33,14 @@ Bevor wir eine API implementieren, beschreiben wir sie zunächst formal. Die Ope
 4. Definiere die fünf CRUD-Endpunkte mit Request-Bodies, Responses und Statuscodes. Verwende `$ref`, um Schemas und Parameter wiederzuverwenden.
 5. Validiere die Spezifikation im [Swagger Editor](https://editor.swagger.io/).
 
+## 📚 Selbstlernmaterial
+
+* [OpenAPI Specification 3.0](https://spec.openapis.org/oas/v3.0.4.html) — Offizielle Spezifikation (3.0)
+* [OpenAPI Specification 3.1](https://spec.openapis.org/oas/v3.1.1.html) — Offizielle Spezifikation (3.1)
+* [Swagger Editor](https://editor.swagger.io/) — Online-Editor für OpenAPI-Definitionen
+* [Zalando RESTful API Guidelines](https://opensource.zalando.com/restful-api-guidelines/) — Best Practices für REST-APIs
+* [OpenAPI Guide: Getting Started](https://learn.openapis.org/) — Einstieg in die OpenAPI-Spezifikation
+
 ## 🤔 Reflexionsfragen
 
 * Was ist der Unterschied zwischen einer "Code-first"- und einer "API-first"-Strategie? Welche Vorteile hat es, die Spezifikation vor der Implementierung zu schreiben?

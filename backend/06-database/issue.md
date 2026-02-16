@@ -30,6 +30,13 @@ Bisher gehen alle Rezepte beim Neustart der Anwendung verloren. Wir ersetzen die
 3. Erstelle ein `PanacheRepository` und binde es im Service ein.
 4. Passe die Tests an und nutze `@TestTransaction`.
 
+## 📚 Selbstlernmaterial
+
+* [Quarkus: Hibernate ORM Guide](https://quarkus.io/guides/hibernate-orm) — Datenbankanbindung mit Hibernate
+* [Quarkus: Datasource Configuration](https://quarkus.io/guides/datasource) — Datenquellen konfigurieren
+* [Jakarta Persistence (JPA)](https://jakarta.ee/specifications/persistence/) — Spezifikation
+* [Baeldung: JPA Tutorial](https://www.baeldung.com/learn-jpa-hibernate) — Einstieg in JPA und Hibernate
+
 ## 🤔 Reflexionsfragen
 
 * Was ist der Unterschied zwischen dem Active-Record-Pattern und dem Repository-Pattern in Panache? Warum haben wir uns für das Repository-Pattern entschieden?

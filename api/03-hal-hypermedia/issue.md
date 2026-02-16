@@ -32,6 +32,12 @@ Unsere API liefert bisher reines JSON ohne Hinweise darauf, welche Aktionen oder
 3. Baue `RecipePage` um: Verwende `_embedded.recipes` für die Daten und `_links` (`self`, `next`) für die Pagination anstelle von `nextCursor`.
 4. Stelle alle Response-Media-Types auf `application/hal+json` um.
 
+## 📚 Selbstlernmaterial
+
+* [HAL — Hypertext Application Language (Draft)](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal) — HAL-Spezifikation
+* [Zalando Guidelines: Hypermedia](https://opensource.zalando.com/restful-api-guidelines/#hypermedia) — Hypermedia-Patterns
+* [OpenAPI Specification 3.1](https://spec.openapis.org/oas/v3.1.1.html) — Offizielle Spezifikation
+
 ## 🤔 Reflexionsfragen
 
 * Was bedeutet HATEOAS und warum wird es oft als höchste Reifestufe einer REST-API bezeichnet (Richardson Maturity Model, Level 3)?

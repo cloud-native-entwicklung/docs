@@ -10,6 +10,16 @@ Die Übungen sind nach Technologie gegliedert und bauen jeweils aufeinander auf.
 
 **[Präsentation Einführungstag](einfuehrungstag-praesentation.html)**
 
+## Einstieg
+
+| Nr. | Übung                                                              |
+|-----|--------------------------------------------------------------------|
+| 01  | [Cloud vs. On-Premise](einstieg/01-cloud-vs-onpremise/issue.md)   |
+| 02  | [Frontend-Technologien](einstieg/02-frontend-technologien/issue.md) |
+| 03  | [NPM-Einstieg](einstieg/03-npm-einstieg/issue.md)                 |
+| 04  | [TypeScript-Einstieg](einstieg/04-typescript-einstieg/issue.md)    |
+| 05  | [Angular CLI kennenlernen](einstieg/05-angular-cli/issue.md)       |
+
 ## REST-API (OpenAPI)
 
 | Nr. | Übung                                                              |

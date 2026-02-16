@@ -30,6 +30,12 @@ Aufbauend auf der Vitest-Migration wollen wir die Test-Ergonomie mit Spectator v
 2. Schreibe die Tests auf Spectator/Vitest um und richte Test-Fixtures mit Dummy-Daten ein.
 3. Ergänze Tests für Mapping-Utilities und Formular-Model-Factories.
 
+## 📚 Selbstlernmaterial
+
+* [Spectator Dokumentation](https://ngneat.github.io/spectator/) — Spectator für Angular-Tests
+* [Vitest Dokumentation](https://vitest.dev/guide/) — Offizielles Getting Started
+* [Angular: Component Testing](https://angular.dev/guide/testing/components-scenarios) — Komponenten testen
+
 ## 🤔 Reflexionsfragen
 
 * Warum gibt es verschiedene Varianten von Spectator (Jasmine, Jest, Vitest)? Was unterscheidet sie technisch?

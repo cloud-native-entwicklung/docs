@@ -32,6 +32,13 @@ Bisher sind Zutaten direkt im Rezept eingebettet. Das führt zu Problemen: Zutat
 3. Entferne das `ingredients`-Feld aus dem `Recipe`-Schema und erstelle die Pagination-Schemas `IngredientPage` und `RecipeIngredientAssignmentPage`.
 4. Führe Tags (`recipes`, `ingredients`, `ingredient assignments`) ein, um die Endpunkte in der Dokumentation übersichtlich zu gruppieren.
 
+## 📚 Selbstlernmaterial
+
+* [Zalando Guidelines: Resources](https://opensource.zalando.com/restful-api-guidelines/#resources) — Ressourcen-Design
+* [Zalando Guidelines: Sub-Resources](https://opensource.zalando.com/restful-api-guidelines/#143) — Sub-Ressourcen modellieren
+* [OpenAPI Specification 3.1](https://spec.openapis.org/oas/v3.1.1.html) — Offizielle Spezifikation
+* [Swagger Editor](https://editor.swagger.io/) — Online-Editor für OpenAPI-Definitionen
+
 ## 🤔 Reflexionsfragen
 
 * Welche Vorteile hat es, Zutaten als eigenständige Katalog-Ressource zu führen, anstatt sie direkt im Rezept einzubetten? Denke dabei an Datenqualität, Wiederverwendbarkeit und Konsistenz.

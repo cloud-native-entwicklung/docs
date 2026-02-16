@@ -30,6 +30,12 @@ Der Service hängt aktuell direkt vom Panache-Repository ab -- einer konkreten I
 3. Passe den Service an, sodass er das Interface statt des Repositories verwendet.
 4. Verschiebe `@Transactional` in die DAO-Implementierung.
 
+## 📚 Selbstlernmaterial
+
+* [Baeldung: Dependency Inversion Principle](https://www.baeldung.com/java-dependency-inversion-principle) — Das Dependency Inversion Principle
+* [Clean Architecture (Robert C. Martin)](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) — Clean Architecture Blogpost
+* [Quarkus: CDI Reference](https://quarkus.io/guides/cdi-reference) — CDI in Quarkus
+
 ## 🤔 Reflexionsfragen
 
 * Warum gehört das `RecipesDao`-Interface zur Domäne und nicht zur Infrastruktur? Was wäre der Nachteil, wenn das Interface im selben Paket wie die Hibernate-Implementierung läge?

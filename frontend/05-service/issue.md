@@ -29,6 +29,11 @@ Die Rezeptdaten liegen aktuell direkt in der Komponente. Um die Datenlogik von d
 2. Verschiebe die Dummy-Daten in den Service und stelle eine Methode `getAllRecipes()` bereit.
 3. Verwende `inject(RecipeService)` in der Komponente, um die Daten vom Service zu beziehen.
 
+## 📚 Selbstlernmaterial
+
+* [Angular: Services & Dependency Injection](https://angular.dev/guide/di) — Offizielles DI-Guide
+* [Angular: Injectable](https://angular.dev/api/core/Injectable) — API-Referenz
+
 ## 🤔 Reflexionsfragen
 
 * Was bedeutet `providedIn: 'root'`? Was wäre der Unterschied, wenn Du den Service stattdessen in `providers` einer Komponente registrierst?

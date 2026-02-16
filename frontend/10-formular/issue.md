@@ -30,6 +30,12 @@ Bisher können wir Rezepte nur anzeigen. Jetzt erstellen wir ein Formular, über
 2. Implementiere ein dynamisches `FormArray` für die Zutatenliste und eine Fehleranzeige-Komponente.
 3. Richte die Route `recipes/new` ein, implementiere die Submit-Logik (Service-Aufruf + Navigation) und ergänze die Navigation.
 
+## 📚 Selbstlernmaterial
+
+* [Angular: Reactive Forms](https://angular.dev/guide/forms/reactive-forms) — Reactive Forms Guide
+* [Angular: Form Validation](https://angular.dev/guide/forms/form-validation) — Validierung in Formularen
+* [Angular Material: Form Field](https://material.angular.io/components/form-field/overview) — Material Form-Komponenten
+
 ## 🤔 Reflexionsfragen
 
 * Was ist der Unterschied zwischen Template-Driven Forms und Reactive Forms? Warum eignen sich Reactive Forms besser für komplexe Formulare?

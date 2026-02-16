@@ -31,6 +31,13 @@ Bevor wir die Rezepte-API implementieren, brauchen wir ein lauffähiges Quarkus-
 3. Starte die Anwendung im Dev Mode mit `mvn quarkus:dev`. Öffne `http://localhost:8080` und `http://localhost:8080/q/dev-ui` im Browser. Erkunde die verfügbaren Funktionen der DevUI (z.B. Extensions, Configuration, Continuous Testing).
 4. Nimm eine kleine Änderung am generierten Code vor (z.B. den Rückgabewert eines Endpunkts) und beobachte, wie Quarkus den Code ohne Neustart neu kompiliert und bereitstellt.
 
+## 📚 Selbstlernmaterial
+
+* [Quarkus: Getting Started Guide](https://quarkus.io/guides/getting-started) — Offizieller Einstieg
+* [Quarkus: CLI Tooling](https://quarkus.io/guides/cli-tooling) — Quarkus CLI Dokumentation
+* [Quarkus Code Generator](https://code.quarkus.io/) — Projekt-Generator im Browser
+* [Quarkus: Dev Mode](https://quarkus.io/guides/maven-tooling#dev-mode) — Development Mode und Hot Reload
+
 ## 🤔 Reflexionsfragen
 
 * Was ist "Convention over Configuration"? Welche Konventionen wendet Quarkus an, die Dir bei der Projekterstellung auffallen (z.B. Portnummer, Verzeichnisstruktur, application.properties)?

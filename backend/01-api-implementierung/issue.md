@@ -30,6 +30,13 @@ Wir bauen eine Rezepteverwaltung als Backend-Service. Der erste Schritt ist eine
 2. Implementiere eine JAX-RS-Ressource mit den drei Endpunkten und einer `ConcurrentHashMap` als Speicher.
 3. Schreibe REST-Assured-Tests, die das korrekte Verhalten der API überprüfen.
 
+## 📚 Selbstlernmaterial
+
+* [Quarkus: Writing REST Services](https://quarkus.io/guides/rest) — Quarkus REST Guide
+* [Jakarta RESTful Web Services (JAX-RS)](https://jakarta.ee/specifications/restful-ws/) — Jakarta EE Spezifikation
+* [Baeldung: Introduction to JAX-RS](https://www.baeldung.com/jax-rs-spec-and-implementations) — Tutorial zu JAX-RS
+* [Quarkus: REST JSON Serialisation](https://quarkus.io/guides/rest#json-serialisation) — JSON-Serialisierung mit Jackson
+
 ## 🤔 Reflexionsfragen
 
 * Warum verwenden wir eine `ConcurrentHashMap` und nicht eine einfache `HashMap`? In welchen Situationen würde eine `HashMap` zu Problemen führen?

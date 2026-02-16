@@ -30,6 +30,12 @@ Aktuell werden dieselben Klassen für die REST-Schnittstelle, die Geschäftslogi
 3. Erstelle JPA-Entities im Persistence-Paket mit den Datenbank-Annotationen.
 4. Implementiere Mapper-Klassen für die Übergänge Boundary-Domain und Domain-Persistence.
 
+## 📚 Selbstlernmaterial
+
+* [Baeldung: DTO Pattern](https://www.baeldung.com/java-dto-pattern) — Das DTO-Pattern
+* [MapStruct](https://mapstruct.org/) — Framework für Object-Mapping
+* [Baeldung: MapStruct Guide](https://www.baeldung.com/mapstruct) — Einführung in MapStruct
+
 ## 🤔 Reflexionsfragen
 
 * Welche Probleme entstehen, wenn eine Klasse gleichzeitig `@Entity`, `@JsonProperty` und `@NotNull` trägt? Denke an Änderungen in einer Schicht.

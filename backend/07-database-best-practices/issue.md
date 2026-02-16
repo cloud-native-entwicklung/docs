@@ -27,6 +27,13 @@ Die bisherige JPA-Konfiguration funktioniert, nutzt aber einige Standardeinstell
 2. Ersetze `@Enumerated` durch `@Convert` mit den neuen Convertern.
 3. Setze `FetchType.EAGER` an der `@OneToMany`-Beziehung und prüfe, ob die Tests weiterhin grün sind.
 
+## 📚 Selbstlernmaterial
+
+* [Quarkus: Hibernate ORM Guide](https://quarkus.io/guides/hibernate-orm) — Datenbankanbindung mit Hibernate
+* [Baeldung: JPA Entity Lifecycle](https://www.baeldung.com/jpa-entity-lifecycle-events) — Entity Lifecycle
+* [Baeldung: JPA Cascade Types](https://www.baeldung.com/jpa-cascade-types) — Kaskadierung verstehen
+* [Vlad Mihalcea: Best JPA Practices](https://vladmihalcea.com/tutorials/hibernate/) — Hibernate Best Practices
+
 ## 🤔 Reflexionsfragen
 
 * Was passiert mit bestehenden Daten in der Datenbank, wenn Du eine Enum-Konstante umbenennst und `@Enumerated(STRING)` verwendest? Wie löst ein `AttributeConverter` dieses Problem?

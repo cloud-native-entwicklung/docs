@@ -27,6 +27,13 @@ Unsere API akzeptiert bislang jeden JSON-Body ohne Prüfung der Feldnamen. Ein C
 2. Markiere `id` und `lastEdited` als schreibgeschützt mit `@JsonProperty`.
 3. Schreibe Tests, die prüfen, dass sowohl unbekannte als auch schreibgeschützte Felder einen 400-Status liefern.
 
+## 📚 Selbstlernmaterial
+
+* [Quarkus: Validation Guide](https://quarkus.io/guides/validation) — Validierung in Quarkus
+* [Jakarta Bean Validation](https://jakarta.ee/specifications/bean-validation/) — Spezifikation
+* [Baeldung: Bean Validation](https://www.baeldung.com/java-validation) — Tutorial zu Bean Validation
+* [Baeldung: Ignoring Unknown Properties (Jackson)](https://www.baeldung.com/jackson-deserialize-json-unknown-properties) — Unbekannte JSON-Properties behandeln
+
 ## 🤔 Reflexionsfragen
 
 * Was könnte passieren, wenn die API unbekannte Felder stillschweigend ignoriert? Denke an Tippfehler in Feldnamen -- wie würde sich das aus Client-Sicht auswirken?

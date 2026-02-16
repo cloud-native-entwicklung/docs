@@ -31,6 +31,12 @@ Unsere App soll die Rezeptdaten nicht mehr aus Dummy-Daten beziehen, sondern von
 3. Ersetze im Service die Dummy-Daten durch einen `HttpClient.get()`-Aufruf mit anschließendem Mapping.
 4. Verwende in der Komponente `toSignal()`, um das Observable in ein Signal umzuwandeln.
 
+## 📚 Selbstlernmaterial
+
+* [Angular: HttpClient](https://angular.dev/guide/http) — Offizielles HTTP-Guide
+* [Angular: Making HTTP Requests](https://angular.dev/guide/http/making-requests) — HTTP-Requests im Detail
+* [RxJS: Observables](https://rxjs.dev/guide/observable) — Einführung in Observables
+
 ## 🤔 Reflexionsfragen
 
 * Warum führen wir separate DTO-Interfaces ein, statt die Backend-Datenstruktur direkt als Domänenmodell zu verwenden? Was passiert, wenn sich die Backend-API ändert?

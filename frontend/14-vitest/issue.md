@@ -30,6 +30,12 @@ Als Alternative zu Jest kann Vitest verwendet werden, das nativ auf dem Vite-Bui
 2. Stelle den Test-Builder in `angular.json` auf `@angular/build:unit-test` um und passe die TypeScript-Konfiguration an.
 3. Schreibe die Test-Dateien um: Ersetze Jest/Jasmine-spezifische API-Aufrufe durch Vitest-Äquivalente.
 
+## 📚 Selbstlernmaterial
+
+* [Vitest Dokumentation](https://vitest.dev/guide/) — Offizielles Getting Started
+* [Vitest: Features](https://vitest.dev/guide/features.html) — Features und Vergleich zu Jest
+* [Angular: Testing](https://angular.dev/guide/testing) — Angular Testing Guide
+
 ## 🤔 Reflexionsfragen
 
 * Was sind die Hauptunterschiede zwischen Jest und Vitest? Warum ist Vitest in Vite-basierten Projekten oft die bessere Wahl?

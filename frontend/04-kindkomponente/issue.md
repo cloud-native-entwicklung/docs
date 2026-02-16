@@ -28,6 +28,12 @@ Die `RecipeListComponent` enthält aktuell sowohl die Listenlogik als auch das R
 2. Definiere einen Signal-Input `input.required<Recipe>()` in der Kindkomponente.
 3. Passe die `RecipeListComponent` an, sodass sie die Kindkomponente innerhalb von `@for` verwendet.
 
+## 📚 Selbstlernmaterial
+
+* [Angular: Component Interaction](https://angular.dev/guide/components/inputs) — Input-Properties
+* [Angular: Component Output](https://angular.dev/guide/components/outputs) — Output-Events
+* [Angular: Content Projection](https://angular.dev/guide/components/content-projection) — ng-content
+
 ## 🤔 Reflexionsfragen
 
 * Was unterscheidet `input.required()` von `input()` (optional)? Wann würdest Du welches verwenden?

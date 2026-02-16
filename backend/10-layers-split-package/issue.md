@@ -27,6 +27,12 @@ Bisher liegen alle Klassen im selben Paket. Mit zunehmender Projektgröße wird 
 2. Verschiebe die Klassen in die jeweils passenden Pakete.
 3. Benenne Testklassen bei Bedarf um und stelle sicher, dass alle Tests grün sind.
 
+## 📚 Selbstlernmaterial
+
+* [Clean Architecture (Robert C. Martin)](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) — Clean Architecture Blogpost
+* [Baeldung: Hexagonal Architecture](https://www.baeldung.com/hexagonal-architecture-ddd-spring) — Hexagonale Architektur
+* [Quarkus: CDI Reference](https://quarkus.io/guides/cdi-reference) — CDI in Quarkus
+
 ## 🤔 Reflexionsfragen
 
 * Warum gehört das DAO-Interface in das `domain`-Paket und nicht in `persistence`? Was hat das mit der Abhängigkeitsrichtung zu tun?
