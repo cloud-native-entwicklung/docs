@@ -20,7 +20,7 @@ Wir bauen eine Rezepteverwaltung als Single-Page-Application mit Angular. Der er
 * [ ] Routing ist aktiviert, SCSS ist als Style-Präprozessor konfiguriert.
 * [ ] Server-Side Rendering (SSR) ist deaktiviert.
 * [ ] Die Anwendung startet fehlerfrei mit `ng serve` und ist im Browser erreichbar.
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

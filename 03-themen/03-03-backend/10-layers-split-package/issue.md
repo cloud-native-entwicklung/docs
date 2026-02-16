@@ -19,7 +19,7 @@ Bisher liegen alle Klassen im selben Paket. Mit zunehmender Projektgröße wird 
 * [ ] Alle Imports und Referenzen sind aktualisiert.
 * [ ] Testklassen sind entsprechend umbenannt und zugeordnet.
 * [ ] Alle Tests laufen weiterhin erfolgreich.
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

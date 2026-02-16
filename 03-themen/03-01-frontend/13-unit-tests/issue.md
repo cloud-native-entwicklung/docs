@@ -23,7 +23,7 @@ Nach der Migration auf Jest wollen wir unsere Anwendung mit aussagekräftigen Te
 * [ ] Ein Test-Path-Alias `@app/test` ist eingerichtet.
 * [ ] Utility-Funktionen (z.B. `isDefined`) sind mit eigenen Tests abgedeckt.
 * [ ] Alle Tests laufen erfolgreich.
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

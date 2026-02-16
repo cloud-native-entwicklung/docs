@@ -21,7 +21,7 @@ Unsere App soll eine Übersicht aller Rezepte zeigen. Dazu erstellen wir eine Ko
 * [ ] Mindestens 6 Beispielrezepte sind als Dummy-Daten hinterlegt.
 * [ ] Die Standard-Template-Inhalte von `app.component` sind durch eine Toolbar und die Rezeptliste ersetzt.
 * [ ] Rezeptbilder werden in den Karten angezeigt.
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

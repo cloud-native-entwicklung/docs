@@ -22,7 +22,7 @@ Bisher können wir Rezepte nur anzeigen. Jetzt erstellen wir ein Formular, über
 * [ ] Eine Fehleranzeige-Komponente (`FormErrorComponent`) zeigt kontextabhängige Fehlertexte.
 * [ ] Eine Route `recipes/new` führt zum Formular und ist über ein Navigationsmenü erreichbar.
 * [ ] Beim Absenden wird ein neues Rezept erstellt und zur Übersicht navigiert.
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

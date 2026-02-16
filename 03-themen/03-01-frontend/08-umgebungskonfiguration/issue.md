@@ -21,7 +21,7 @@ Die Backend-URL ist aktuell fest im Service hinterlegt. Für einen professionell
 * [ ] In `angular.json` ist die `fileReplacements`-Konfiguration für den Development-Build eingerichtet.
 * [ ] Ein TypeScript-Path-Alias `@app/environments` ermöglicht kurze Import-Pfade.
 * [ ] Der `RecipeService` verwendet `environment.apiBaseUrl` statt einer hart kodierten URL.
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

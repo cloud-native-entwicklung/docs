@@ -20,7 +20,7 @@ Bisher liegt die gesamte Geschäftslogik direkt in der REST-Ressource. Das ersch
 * [ ] Der Service wird per Constructor Injection in die Ressource injiziert.
 * [ ] Es gibt mockbasierte Tests für die Ressource (Service gemockt) und separate Tests für den Service.
 * [ ] Die Abhängigkeit `quarkus-junit5-mockito` ist eingebunden.
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

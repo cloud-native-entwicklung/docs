@@ -23,7 +23,7 @@ Das Formular kann aktuell nur neue Rezepte anlegen. Jetzt erweitern wir es so, d
 * [ ] Beim Absenden wird je nach Modus entweder `createRecipe()` oder `updateRecipe()` aufgerufen.
 * [ ] Auf der Detail-Ansicht gibt es einen Bearbeiten-Button.
 * [ ] Eine `isDefined()` Type-Guard-Utility-Funktion ist implementiert.
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

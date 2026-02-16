@@ -20,7 +20,7 @@ TypeScript erweitert JavaScript um ein statisches Typsystem. Angular-Projekte we
 * [ ] Du hast eine `.ts`-Datei geschrieben, die Typannotationen, ein Interface und eine typisierte Funktion enthält.
 * [ ] Du hast die Datei mit `tsc` transpiliert und die erzeugte `.js`-Datei untersucht.
 * [ ] Du hast einen absichtlichen Typfehler eingebaut und beobachtet, welche Fehlermeldung `tsc` liefert.
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

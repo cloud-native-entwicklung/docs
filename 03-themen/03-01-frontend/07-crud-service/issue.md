@@ -21,7 +21,7 @@ Bisher kann unser Service nur Rezepte laden. Für eine vollständige Rezepteverw
 * [ ] Reverse-Mapping-Funktionen (Domäne zu DTO) sind implementiert.
 * [ ] Eine gemeinsame `baseUrl` ist als Konstante im Service extrahiert.
 * [ ] Alle Methoden geben typisierte Observables zurück.
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

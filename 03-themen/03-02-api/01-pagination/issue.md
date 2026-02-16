@@ -20,7 +20,7 @@ Die Rezeptsammlung wächst stetig. Aktuell liefert `GET /recipes` alle Rezepte a
 * [ ] Die Response liefert ein `RecipePage`-Objekt mit `data` (Array von `Recipe`) und `nextCursor` (string, optional) zurück.
 * [ ] Bei ungültigen Query-Parametern wird ein 400-Fehler spezifiziert.
 * [ ] Die Spezifikation ist valide und kann fehlerfrei gerendert werden.
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

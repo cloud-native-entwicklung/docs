@@ -20,7 +20,7 @@ Die Angular CLI ist das zentrale Werkzeug, um Angular-Projekte zu erstellen, zu 
 * [ ] Du hast ein neues Projekt erzeugt und es startet fehlerfrei mit `ng serve`.
 * [ ] Du hast die Verzeichnisstruktur gesichtet und kannst die Rolle von `angular.json`, `tsconfig.json`, `package.json` und `src/app/` erklären.
 * [ ] Du hast eine kleine Änderung an `app.component.html` vorgenommen und die Live-Aktualisierung im Browser beobachtet.
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

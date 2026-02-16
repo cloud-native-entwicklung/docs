@@ -21,7 +21,7 @@ Bisher gehen alle Rezepte beim Neustart der Anwendung verloren. Wir ersetzen die
 * [ ] Ein `PanacheRepository` übernimmt die Datenbankzugriffe.
 * [ ] Der Service nutzt das Repository statt der `ConcurrentHashMap`.
 * [ ] Tests verwenden `@TestTransaction` für automatisches Rollback.
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

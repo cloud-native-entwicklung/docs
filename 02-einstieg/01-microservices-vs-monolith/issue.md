@@ -19,7 +19,7 @@ Was unterscheidet eine Anwendung, die als ein großes Ganzes gebaut und deployed
 * [ ] Ihr habt in der Gruppe eine Tabelle mit Vorteilen und Herausforderungen für Monolith und Microservices erarbeitet.
 * [ ] Ihr könnt den Unterschied zwischen beiden Ansätzen in eigenen Worten erklären.
 * [ ] Ihr habt Eure Ergebnisse den anderen Gruppen präsentiert (zu zweit: einer erklärt, einer zeigt).
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

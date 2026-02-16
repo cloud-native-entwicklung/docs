@@ -22,7 +22,7 @@ Als Alternative zu Jest kann Vitest verwendet werden, das nativ auf dem Vite-Bui
 * [ ] Alle Test-Dateien verwenden Vitest-Imports (`vi.fn()`, `describe`, `it`, `expect` aus `vitest`).
 * [ ] Die Tests verwenden `TestBed` direkt (ohne Spectator).
 * [ ] Alle Tests laufen erfolgreich mit `ng test`.
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

@@ -21,7 +21,7 @@ Der Service hängt aktuell direkt vom Panache-Repository ab -- einer konkreten I
 * [ ] `@Transactional` ist in der DAO-Implementierung platziert, nicht mehr im Service.
 * [ ] Der Service hängt nur noch vom Interface ab, nicht von der konkreten Implementierung.
 * [ ] Alle Tests laufen weiterhin erfolgreich.
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

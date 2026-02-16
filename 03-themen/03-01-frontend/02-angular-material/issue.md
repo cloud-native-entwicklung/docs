@@ -21,7 +21,7 @@ Damit unsere Rezepte-App ein professionelles Erscheinungsbild bekommt, binden wi
 * [ ] Ein Custom Theme ist mit `mat.define-theme()` definiert und in den globalen Styles eingebunden.
 * [ ] Die Schriftart Roboto und Material Icons sind eingebunden.
 * [ ] Die Klasse `mat-typography` wird global auf den `<body>` angewendet.
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

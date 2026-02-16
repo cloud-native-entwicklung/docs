@@ -20,7 +20,7 @@ Die `RecipeListComponent` enthält aktuell sowohl die Listenlogik als auch das R
 * [ ] Die Komponente erhält das Rezept als Input über `input.required<Recipe>()`.
 * [ ] Die `RecipeListComponent` iteriert mit `@for` über die Rezepte und rendert pro Eintrag die Kindkomponente.
 * [ ] Die Darstellung ist unverändert (kein visueller Unterschied zur vorherigen Version).
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

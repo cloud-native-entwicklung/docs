@@ -23,7 +23,7 @@ Bevor wir eine API implementieren, beschreiben wir sie zunächst formal. Die Ope
 * [ ] Der Pfadparameter `id` ist als wiederverwendbare Komponente unter `components/parameters` definiert.
 * [ ] Für jeden Endpunkt sind sinnvolle HTTP-Statuscodes mit Beschreibungen spezifiziert (z.B. 200, 201, 204, 400, 404).
 * [ ] Die Spezifikation ist valide und kann im Swagger Editor fehlerfrei gerendert werden.
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

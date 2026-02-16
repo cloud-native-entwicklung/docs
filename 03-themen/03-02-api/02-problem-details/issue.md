@@ -20,7 +20,7 @@ Unsere API liefert bei Fehlern bisher unstrukturierte oder inkonsistente Antwort
 * [ ] Alle Fehler-Responses (400, 404) verwenden den Content-Type `application/problem+json` und referenzieren das `ProblemDetails`-Schema.
 * [ ] Es gibt eine wiederverwendbare `DefaultErrorResponse`-Komponente, die in mehreren Endpunkten eingesetzt wird.
 * [ ] Die Spezifikation ist valide und kann fehlerfrei gerendert werden.
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

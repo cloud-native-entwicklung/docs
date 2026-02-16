@@ -21,7 +21,7 @@ Nicht jede Umgebung braucht eine echte Datenbank -- für Tests reicht eine In-Me
 * [ ] Die Hibernate-basierte DAO-Implementierung wird über `@IfBuildProperty` bedingt aktiviert.
 * [ ] Im `%dev`- und `%test`-Profil wird die In-Memory-Implementierung genutzt, im `%prod`-Profil die Datenbank.
 * [ ] Alle Tests laufen weiterhin erfolgreich.
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

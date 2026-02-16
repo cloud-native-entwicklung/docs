@@ -23,7 +23,7 @@ Unsere API liefert bisher reines JSON ohne Hinweise darauf, welche Aktionen oder
 * [ ] `RecipePage` verwendet `_embedded.recipes` für die Rezeptliste und `_links` (mit `self` und optional `next`) für die Navigation.
 * [ ] Das bisherige `nextCursor`-Feld in `RecipePage` ist durch den HAL-`next`-Link ersetzt.
 * [ ] Die Spezifikation ist valide und kann fehlerfrei gerendert werden.
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

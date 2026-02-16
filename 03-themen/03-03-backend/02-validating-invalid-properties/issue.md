@@ -19,7 +19,7 @@ Unsere API akzeptiert bislang jeden JSON-Body ohne Prüfung der Feldnamen. Ein C
 * [ ] Die Felder `id` und `lastEdited` sind als `READ_ONLY` markiert und können nicht per POST gesetzt werden.
 * [ ] Die Jackson-Konfiguration ist zentral aktiviert (z.B. über `application.properties` oder eine `JacksonConfig`-Klasse).
 * [ ] Es gibt Tests, die das Verhalten bei unbekannten und schreibgeschützten Properties prüfen.
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

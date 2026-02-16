@@ -21,7 +21,7 @@ Ein Rezept ohne Namen oder mit negativer Portionsanzahl sollte gar nicht erst an
 * [ ] Der REST-Endpunkt validiert eingehende Objekte mit `@Valid`.
 * [ ] Ungültige Requests liefern Status 400.
 * [ ] Es gibt parametrisierte Tests, die mindestens 10 verschiedene ungültige Eingaben prüfen.
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

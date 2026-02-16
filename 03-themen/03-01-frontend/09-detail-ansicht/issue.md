@@ -22,7 +22,7 @@ Bisher zeigt unsere App nur die Listenübersicht. Jetzt wollen wir von einem Rez
 * [ ] Unterkomponenten sind erstellt: Informationsliste, Zutatenliste, Zubereitungsbeschreibung.
 * [ ] Ein Löschen-Button mit Bestätigungsdialog ist implementiert.
 * [ ] Die Rezeptkarten in der Liste sind per `RouterLink` mit der Detailseite verknüpft.
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

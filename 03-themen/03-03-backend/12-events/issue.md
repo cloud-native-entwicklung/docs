@@ -20,7 +20,7 @@ Nach dem Anlegen eines Rezepts soll das System reagieren können -- z.B. für Lo
 * [ ] Es existieren ein Interface `RecipeEvent` und ein Record `RecipeCreatedEvent`.
 * [ ] Ein `RecipeEventsLogger` beobachtet das Event und protokolliert es.
 * [ ] Es gibt Tests, die prüfen, dass das Event nach dem Erstellen gefeuert wird.
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

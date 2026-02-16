@@ -23,7 +23,7 @@ Bisher sind Zutaten direkt im Rezept eingebettet. Das führt zu Problemen: Zutat
 * [ ] Es existieren neue Schemas: `IngredientPage`, `RecipeIngredientAssignment` und `RecipeIngredientAssignmentPage`.
 * [ ] Die Endpunkte sind über Tags (`recipes`, `ingredients`, `ingredient assignments`) logisch gruppiert.
 * [ ] Die Spezifikation ist valide und kann fehlerfrei gerendert werden.
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

@@ -22,7 +22,7 @@ Angular verwendet standardmässig Karma als Test-Runner und Jasmine als Assertio
 * [ ] Die `tsconfig.spec.json` verwendet Jest-Typen statt Jasmine-Typen.
 * [ ] Ein `test:watch`-Script ist in der `package.json` eingerichtet.
 * [ ] Die bestehenden Tests laufen erfolgreich mit Jest.
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

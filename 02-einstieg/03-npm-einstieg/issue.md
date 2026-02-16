@@ -21,7 +21,7 @@ NPM ist das zentrale Werkzeug für die Verwaltung von JavaScript-Projekten und d
 * [ ] Du kannst `npm init`, `npm install` und `npm ci` sicher anwenden.
 * [ ] Du kannst den Unterschied zwischen `dependencies` und `devDependencies` erklären.
 * [ ] Du hast eigene NPM-Scripts in der `package.json` definiert und ausgeführt.
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

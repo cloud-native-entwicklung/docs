@@ -22,7 +22,7 @@ Unsere App soll die Rezeptdaten nicht mehr aus Dummy-Daten beziehen, sondern von
 * [ ] Die Dummy-Daten sind entfernt.
 * [ ] Die Komponente verwendet `toSignal()`, um das Observable als Signal zu konsumieren.
 * [ ] Die Anwendung zeigt die Rezepte vom Backend an.
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

@@ -21,7 +21,7 @@ In der vorherigen Übung haben wir Events manuell im Service-Code gefeuert. Das 
 * [ ] Der Service verwendet `@LogPerformance` und `@FireEvent` statt manuellem Code.
 * [ ] Der manuelle Event-Feuer-Code ist aus dem Service entfernt.
 * [ ] Alle Tests laufen weiterhin erfolgreich.
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

@@ -21,7 +21,7 @@ Die Rezeptdaten liegen aktuell direkt in der Komponente. Um die Datenlogik von d
 * [ ] Die Dummy-Daten sind in den Service verschoben.
 * [ ] Die Komponente verwendet `inject(RecipeService)` statt eigener Daten.
 * [ ] Die Anwendung funktioniert wie zuvor.
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

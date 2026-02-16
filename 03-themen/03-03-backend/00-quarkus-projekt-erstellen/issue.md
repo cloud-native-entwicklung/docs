@@ -22,7 +22,7 @@ Bevor wir die Rezepte-API implementieren, brauchen wir ein lauffähiges Quarkus-
 * [ ] Die Anwendung startet im Dev Mode (`mvn quarkus:dev`) und ist unter `http://localhost:8080` erreichbar.
 * [ ] Du hast die DevUI unter `http://localhost:8080/q/dev-ui` geöffnet und ihre Funktionen erkundet.
 * [ ] Du hast eine Änderung am Code vorgenommen und beobachtet, dass Quarkus sie ohne Neustart übernimmt (Hot Reload).
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

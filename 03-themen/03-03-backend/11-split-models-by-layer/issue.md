@@ -21,7 +21,7 @@ Aktuell werden dieselben Klassen für die REST-Schnittstelle, die Geschäftslogi
 * [ ] JPA-Entities (`RecipeEntity`, `IngredientEntity`) im Persistence-Paket tragen nur Datenbank-Annotationen.
 * [ ] Für jeden Schichtübergang existieren Mapper-Klassen.
 * [ ] Alle Tests laufen weiterhin erfolgreich.
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

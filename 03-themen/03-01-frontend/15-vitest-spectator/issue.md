@@ -22,7 +22,7 @@ Aufbauend auf der Vitest-Migration wollen wir die Test-Ergonomie mit Spectator v
 * [ ] Dummy-Daten sind als Test-Fixtures für die Specs wiedereingeführt.
 * [ ] Mapping-Utilities und Formular-Model-Factories sind mit Tests abgedeckt.
 * [ ] Alle Tests laufen erfolgreich.
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

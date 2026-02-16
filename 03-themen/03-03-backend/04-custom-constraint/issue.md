@@ -19,7 +19,7 @@ Das Feld `img` wird bislang mit einer Kombination aus `@Size` und `@Pattern` val
 * [ ] Die Annotation verwendet `@ReportAsSingleViolation`, sodass nur eine Fehlermeldung ausgegeben wird.
 * [ ] Das Feld `img` in `Recipe` verwendet die neue Annotation.
 * [ ] Alle bisherigen Tests laufen weiterhin erfolgreich.
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

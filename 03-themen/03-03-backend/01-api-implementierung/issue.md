@@ -22,7 +22,7 @@ Wir bauen eine Rezepteverwaltung als Backend-Service. Der erste Schritt ist eine
 * [ ] POST liefert Status 201 mit Location-Header zurück.
 * [ ] GET nach ID liefert 404, wenn das Rezept nicht existiert.
 * [ ] Es existieren REST-Assured-Tests für alle Endpunkte.
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

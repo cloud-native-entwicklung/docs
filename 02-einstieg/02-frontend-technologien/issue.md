@@ -21,7 +21,7 @@ Bevor wir mit einem Framework wie Angular arbeiten, schauen wir uns die Grundlag
 * [ ] Du hast die Seite mit CSS gestaltet (eigene Farben, Schriftart, ein einfaches Flexbox-Layout).
 * [ ] Du hast mit JavaScript eine kleine Interaktion umgesetzt (z.B. ein Button, der Text auf der Seite ändert, oder ein Zähler).
 * [ ] Du hast die Browser-DevTools geöffnet und im Elements-Tab die DOM-Struktur inspiziert.
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 

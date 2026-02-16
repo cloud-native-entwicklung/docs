@@ -19,7 +19,7 @@ Die bisherige JPA-Konfiguration funktioniert, nutzt aber einige Standardeinstell
 * [ ] Die Enum-Mappings verwenden nicht mehr `@Enumerated`, sondern die neuen Converter.
 * [ ] Die `ingredients`-Beziehung ist explizit mit `FetchType.EAGER` konfiguriert.
 * [ ] Alle Tests laufen weiterhin erfolgreich.
-* [ ] Du hast die Reflexionsfragen schriftlich beantwortet.
+* [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 
