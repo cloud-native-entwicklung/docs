@@ -10,11 +10,12 @@ Die Übungen sind nach Technologie gegliedert und bauen jeweils aufeinander auf.
 
 **[Präsentation Einführungstag](einfuehrungstag-praesentation.html)**
 
-<!-- ## Einstieg -->
-<!--  -->
-<!-- | Nr. | Übung                                                              | -->
-<!-- |-----|--------------------------------------------------------------------|-->
-<!-- | 01  | [Microservices vs. Monolith](02-einstieg/01-microservices-vs-monolith/issue.md) | -->
+## Einstieg
+
+| Nr. | Übung                                                                           |
+|-----|---------------------------------------------------------------------------------|
+| 01  | [Microservices vs. Monolith](02-einstieg/01-microservices-vs-monolith/issue.md) |
+
 <!-- | 02  | [Frontend-Technologien](02-einstieg/02-frontend-technologien/issue.md) | -->
 <!-- | 03  | [NPM-Einstieg](02-einstieg/03-npm-einstieg/issue.md)                 | -->
 <!-- | 04  | [TypeScript-Einstieg](02-einstieg/04-typescript-einstieg/issue.md)    | -->
