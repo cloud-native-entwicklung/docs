@@ -1,4 +1,4 @@
 root = true
 
-[.md]
+[*.md]
 ij_formatter_enabled = false
