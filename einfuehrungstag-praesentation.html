@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud-Native Entwicklung</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #1a1a1e;
+            --bg-card: #242428;
+            --bg-elevated: #2e2e33;
+            --bg-hover: #38383e;
+            --huk-gold: #FFD700;
+            --huk-gold-soft: #FFC107;
+            --huk-gold-dim: rgba(255, 215, 0, 0.15);
+            --white: #FFFFFF;
+            --text: #E8E8EC;
+            --text-muted: #9999A3;
+            --text-dim: rgba(255, 255, 255, 0.5);
+            --border: rgba(255, 255, 255, 0.1);
+            --border-light: rgba(255, 255, 255, 0.06);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .deck {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem 5rem;
+            opacity: 0;
+            transform: translateX(60px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            pointer-events: none;
+            background: var(--bg-dark);
+            color: var(--text);
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+        }
+
+        .slide.prev {
+            opacity: 0;
+            transform: translateX(-60px);
+        }
+
+        .slide.accent {
+            background: linear-gradient(135deg, #1a1a1e 0%, #222228 50%, #1e1e24 100%);
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--huk-gold);
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .block-label {
+            display: inline-block;
+            background: var(--huk-gold);
+            color: var(--bg-dark);
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 0.3rem 0.9rem;
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+        }
+
+        ul.items {
+            list-style: none;
+            max-width: 750px;
+            width: 100%;
+        }
+
+        ul.items li {
+            font-size: 1.25rem;
+            padding: 0.7rem 0;
+            padding-left: 2rem;
+            position: relative;
+            line-height: 1.5;
+            color: var(--text);
+        }
+
+        ul.items li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 1.05rem;
+            width: 10px;
+            height: 10px;
+            background: var(--huk-gold);
+            border-radius: 50%;
+        }
+
+        ul.items li strong {
+            color: var(--huk-gold);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.5rem;
+            max-width: 950px;
+            width: 100%;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+
+        .card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.4rem;
+            text-align: center;
+            color: var(--huk-gold);
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* Compact card for Spielregeln */
+        .card-sm {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 1.1rem 1rem;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+
+        .card-sm .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+        .card-sm h3 { font-size: 0.95rem; margin-bottom: 0.3rem; text-align: center; color: var(--huk-gold); }
+        .card-sm p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.3; }
+
+        /* Compass */
+        .compass-container {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            max-width: 900px;
+        }
+
+        .compass {
+            flex-shrink: 0;
+            width: 300px;
+            height: 280px;
+        }
+
+        .compass-legend {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .compass-legend .axis-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1.05rem;
+        }
+
+        .axis-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* Tech icons */
+        .tech-badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tech-badge .icon-circle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tech-badge .badge-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Timeline */
+        .timeline {
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0.9rem;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--huk-gold), var(--bg-elevated));
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 0.8rem 0;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.35rem;
+            top: 1.15rem;
+            width: 14px;
+            height: 14px;
+            background: var(--huk-gold);
+            border-radius: 50%;
+            border: 3px solid var(--bg-dark);
+        }
+
+        .timeline-item .time {
+            font-weight: 700;
+            color: var(--huk-gold);
+            font-size: 1.1rem;
+        }
+
+        .timeline-item .desc {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* Week calendar */
+        .week-cal {
+            width: 100%;
+            max-width: 920px;
+            border-collapse: separate;
+            border-spacing: 4px;
+            font-size: 0.82rem;
+        }
+
+        .week-cal th {
+            color: var(--huk-gold);
+            padding: 0.4rem 0.3rem;
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .week-cal td {
+            padding: 0.55rem 0.3rem;
+            border-radius: 6px;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 1.3;
+        }
+
+        .week-cal td:first-child {
+            font-weight: 600;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            width: 7%;
+        }
+
+        .week-cal .wc-train {
+            background: var(--bg-elevated);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .week-cal .wc-special {
+            background: rgba(255, 215, 0, 0.12);
+            color: var(--huk-gold);
+            border: 1px solid rgba(255, 215, 0, 0.25);
+        }
+
+        .week-cal .wc-free {
+            background: rgba(255, 255, 255, 0.03);
+            color: #666;
+            font-style: italic;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .week-cal .wc-blocked {
+            background: rgba(255, 255, 255, 0.02);
+            color: #555;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .week-cal .wc-final {
+            background: rgba(255, 215, 0, 0.18);
+            color: var(--huk-gold);
+            font-weight: 700;
+            border: 1px solid rgba(255, 215, 0, 0.4);
+        }
+
+        .week-cal em { font-size: 0.75rem; }
+
+        /* Navigation */
+        .nav-bar {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 100;
+            background: rgba(36, 36, 40, 0.9);
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--border);
+        }
+
+        .nav-bar button {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.4rem;
+            cursor: pointer;
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+
+        .nav-bar button:hover { background: var(--bg-hover); }
+        .nav-bar button:disabled { opacity: 0.3; cursor: default; }
+        .nav-bar button:disabled:hover { background: none; }
+
+        .nav-counter {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--huk-gold);
+            transition: width 0.3s ease;
+            z-index: 100;
+        }
+
+        .gold-line {
+            width: 60px;
+            height: 3px;
+            background: var(--huk-gold);
+            border-radius: 2px;
+            margin: 1rem auto;
+        }
+
+        /* Flex card layout for 5 cards */
+        .card-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            max-width: 960px;
+            justify-content: center;
+        }
+
+        .card-flex > .card-sm {
+            flex: 0 1 280px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<div class="deck" id="deck">
+
+    <!-- 1: Title -->
+    <div class="slide accent active">
+        <h1 style="font-size:3.5rem;">Cloud-Native Entwicklung</h1>
+        <div class="gold-line"></div>
+        <p class="subtitle" style="color:var(--huk-gold);font-size:1.5rem;margin-top:0.5rem;">Einf&uuml;hrungstag</p>
+        <div style="margin-top:3rem;display:flex;gap:2rem;">
+            <div class="tech-badge">
+                <div class="icon-circle" style="background:var(--huk-gold-dim);color:var(--huk-gold);">
+                    <svg viewBox="0 0 40 40" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="8" y="5" width="24" height="30" rx="3"/><path d="M14 14l4 4-4 4"/><line x1="22" y1="22" x2="28" y2="22"/>
+                    </svg>
+                </div>
+                <span class="badge-label" style="color:var(--text-muted);">API</span>
+            </div>
+            <div class="tech-badge">
+                <div class="icon-circle" style="background:var(--huk-gold-dim);color:var(--huk-gold);">
+                    <svg viewBox="0 0 40 40" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="7" y="6" width="26" height="12" rx="2"/><rect x="7" y="22" width="26" height="12" rx="2"/><circle cx="13" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="13" cy="28" r="1.5" fill="currentColor" stroke="none"/><line x1="19" y1="12" x2="27" y2="12"/><line x1="19" y1="28" x2="27" y2="28"/>
+                    </svg>
+                </div>
+                <span class="badge-label" style="color:var(--text-muted);">Backend</span>
+            </div>
+            <div class="tech-badge">
+                <div class="icon-circle" style="background:var(--huk-gold-dim);color:var(--huk-gold);">
+                    <svg viewBox="0 0 40 40" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="4" y="6" width="32" height="24" rx="3"/><line x1="4" y1="14" x2="36" y2="14"/><circle cx="9" cy="10" r="1.3" fill="currentColor" stroke="none"/><circle cx="14" cy="10" r="1.3" fill="currentColor" stroke="none"/><circle cx="19" cy="10" r="1.3" fill="currentColor" stroke="none"/><line x1="12" y1="34" x2="28" y2="34"/>
+                    </svg>
+                </div>
+                <span class="badge-label" style="color:var(--text-muted);">Frontend</span>
+            </div>
+            <div class="tech-badge">
+                <div class="icon-circle" style="background:var(--huk-gold-dim);color:var(--huk-gold);">
+                    <svg viewBox="0 0 40 40" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M8 28c-3 0-5.5-2.5-5.5-5.5 0-2.7 2-5 4.5-5.4C7.5 12.5 11.8 9 17 9c5 0 9.2 3.3 10.3 7.8A6 6 0 0 1 33 22.5c0 3-2.5 5.5-5.5 5.5H8z"/>
+                    </svg>
+                </div>
+                <span class="badge-label" style="color:var(--text-muted);">Cloud</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2: Überblick -->
+    <div class="slide">
+        <h2>Was erwartet Euch?</h2>
+        <div class="grid-3">
+            <div class="card">
+                <div class="icon">&#128197;</div>
+                <h3>5 Wochen</h3>
+                <p>Intensive Praxis in Gruppenarbeit</p>
+            </div>
+            <div class="card">
+                <div class="icon">&#128101;</div>
+                <h3>3 Teams</h3>
+                <p>Gemischte Gruppen, die sich gegenseitig unterst&uuml;tzen</p>
+            </div>
+            <div class="card">
+                <div class="icon">&#127760;</div>
+                <h3>Full-Stack</h3>
+                <p>Von der API &uuml;ber das Backend bis zum Frontend</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3: Block 1 Header -->
+    <div class="slide accent">
+        <span class="block-label">Block 1</span>
+        <h1 style="font-size:2.8rem;">Kennenlernen &amp; Selbsteinsch&auml;tzung</h1>
+        <div class="gold-line"></div>
+        <p class="subtitle">Wer seid Ihr? Was bringt Ihr mit?</p>
+    </div>
+
+    <!-- 4: 4 Achsen = Lernziele (compass fixed) -->
+    <div class="slide">
+        <span class="block-label">Block 1</span>
+        <h2>Eure Lernziele &mdash; Unsere 4 Achsen</h2>
+        <div class="compass-container">
+            <svg class="compass" viewBox="-55 0 390 290">
+                <!-- Axes -->
+                <line x1="140" y1="30" x2="140" y2="250" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
+                <line x1="30" y1="140" x2="250" y2="140" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
+                <!-- Center -->
+                <circle cx="140" cy="140" r="6" fill="var(--huk-gold)"/>
+                <!-- Arrows & Labels -->
+                <polygon points="140,30 134,45 146,45" fill="#FF6B6B"/>
+                <text x="140" y="18" text-anchor="middle" font-size="13" font-weight="700" fill="#FF6B6B">Programmierung</text>
+                <polygon points="250,140 235,134 235,146" fill="#74B3E0"/>
+                <text x="260" y="144" text-anchor="start" font-size="13" font-weight="700" fill="#74B3E0">Web</text>
+                <polygon points="140,250 134,235 146,235" fill="#4ECDC4"/>
+                <text x="140" y="272" text-anchor="middle" font-size="13" font-weight="700" fill="#4ECDC4">Cloud</text>
+                <polygon points="30,140 45,134 45,146" fill="#F0D264"/>
+                <text x="20" y="144" text-anchor="end" font-size="13" font-weight="700" fill="#F0D264">Tools</text>
+                <!-- Decorative radar shape -->
+                <polygon points="140,60 210,140 140,210 80,140" fill="rgba(255,215,0,0.06)" stroke="var(--huk-gold)" stroke-width="1" stroke-dasharray="4"/>
+            </svg>
+            <div class="compass-legend">
+                <div class="axis-item">
+                    <div class="axis-dot" style="background:#FF6B6B;"></div>
+                    <div><strong style="color:var(--white);">Programmiererfahrung</strong><br><span style="color:var(--text-muted);font-size:0.9rem;">Java, Algorithmen, eigene Projekte</span></div>
+                </div>
+                <div class="axis-item">
+                    <div class="axis-dot" style="background:#74B3E0;"></div>
+                    <div><strong style="color:var(--white);">Web-Technologien</strong><br><span style="color:var(--text-muted);font-size:0.9rem;">HTML, CSS, JavaScript, REST-APIs</span></div>
+                </div>
+                <div class="axis-item">
+                    <div class="axis-dot" style="background:#4ECDC4;"></div>
+                    <div><strong style="color:var(--white);">Cloud &amp; Deployment</strong><br><span style="color:var(--text-muted);font-size:0.9rem;">Container, AWS, CI/CD</span></div>
+                </div>
+                <div class="axis-item">
+                    <div class="axis-dot" style="background:#F0D264;"></div>
+                    <div><strong style="color:var(--white);">Kommandozeile &amp; Tools</strong><br><span style="color:var(--text-muted);font-size:0.9rem;">Git, Maven, npm, Terminal</span></div>
+                </div>
+            </div>
+        </div>
+        <p style="margin-top:1.5rem;color:var(--text-muted);font-size:1rem;text-align:center;">Kenntnisse <em>oder</em> Interesse &mdash; beides z&auml;hlt.</p>
+    </div>
+
+    <!-- 5: Weitere Lernziele -->
+    <div class="slide">
+        <h2>Was Ihr am Ende k&ouml;nnt</h2>
+        <div class="grid-2">
+            <div>
+                <h3>Technisch</h3>
+                <ul class="items" style="max-width:100%;">
+                    <li>REST-APIs konzipieren &amp; mit <strong>OpenAPI</strong> dokumentieren</li>
+                    <li>Backend als API-Provider mit <strong>Quarkus</strong> implementieren</li>
+                    <li>Frontend als API-Consumer mit <strong>Angular</strong> bauen</li>
+                    <li>Anwendung in <strong>AWS</strong> deployen</li>
+                    <li><strong>CI/CD</strong>-Pipelines aufsetzen</li>
+                </ul>
+            </div>
+            <div>
+                <h3>Fachlich &amp; Methodisch</h3>
+                <ul class="items" style="max-width:100%;">
+                    <li><strong>Microservices</strong> &amp; verteilte Architekturen verstehen</li>
+                    <li><strong>Clean Code</strong> &amp; Clean Architecture anwenden</li>
+                    <li><strong>TDD</strong> &amp; Pull Requests als Arbeitsweise</li>
+                    <li><strong>Eigenrecherche</strong> &amp; KI-Tools bewerten</li>
+                    <li>Ergebnisse <strong>pr&auml;sentieren</strong> &amp; diskutieren</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6: Block 2 Header -->
+    <div class="slide accent">
+        <span class="block-label">Block 2</span>
+        <h1 style="font-size:2.8rem;">Erwartungen &amp; Bef&uuml;rchtungen</h1>
+        <div class="gold-line"></div>
+        <p class="subtitle">Was w&uuml;nscht Ihr Euch? Was erwarten wir?</p>
+    </div>
+
+    <!-- 7: Block 3 Header -->
+    <div class="slide accent">
+        <span class="block-label">Block 3</span>
+        <h1 style="font-size:2.8rem;">Durchf&uuml;hrungsmodus</h1>
+        <div class="gold-line"></div>
+        <p class="subtitle">So arbeiten wir in den n&auml;chsten 5 Wochen</p>
+    </div>
+
+    <!-- 8: Tagesablauf -->
+    <div class="slide">
+        <span class="block-label">Block 3</span>
+        <h2>Tagesablauf</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="time">09:00 &mdash; Plenum &#x1F534;</div>
+                <div class="desc">Gemeinsamer Start, Tagesziel, offene Fragen</div>
+            </div>
+            <div class="timeline-item">
+                <div class="time">Vormittag</div>
+                <div class="desc">Gruppenarbeit an den &Uuml;bungen</div>
+            </div>
+            <div class="timeline-item">
+                <div class="time">Mittagspause</div>
+                <div class="desc"></div>
+            </div>
+            <div class="timeline-item">
+                <div class="time">14:00 &mdash; Plenum &#x1F534;</div>
+                <div class="desc">Statusupdate, Pr&auml;sentation einer &Uuml;bung</div>
+            </div>
+            <div class="timeline-item">
+                <div class="time">Nachmittag</div>
+                <div class="desc">Gruppenarbeit, ggf. Theorie-Input</div>
+            </div>
+        </div>
+        <p style="margin-top:1.5rem;color:var(--huk-gold);font-weight:600;font-size:1.05rem;">
+            Fr&uuml;her anfangen = fr&uuml;her Schluss. Aufgaben m&uuml;ssen gel&ouml;st sein.
+        </p>
+    </div>
+
+    <!-- 9: Wochenablauf (Kalender) -->
+    <div class="slide">
+        <span class="block-label">Block 3</span>
+        <h2>Wochenablauf</h2>
+        <table class="week-cal">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Montag</th>
+                    <th>Dienstag</th>
+                    <th>Mittwoch</th>
+                    <th>Donnerstag</th>
+                    <th>Freitag</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>W1</td>
+                    <td class="wc-special">16.02.<br><em>Einf&uuml;hrung<br>ab 13h</em></td>
+                    <td class="wc-train">17.02.</td>
+                    <td class="wc-train">18.02.</td>
+                    <td class="wc-train">19.02.</td>
+                    <td class="wc-train">20.02.</td>
+                </tr>
+                <tr>
+                    <td>W2</td>
+                    <td class="wc-train">23.02.</td>
+                    <td class="wc-train">24.02.</td>
+                    <td class="wc-special">25.02.<br><em>bis 15h</em></td>
+                    <td class="wc-free">26.02.<br><em>ohne Trainer</em></td>
+                    <td class="wc-free">27.02.<br><em>ohne Trainer</em></td>
+                </tr>
+                <tr>
+                    <td>W3</td>
+                    <td class="wc-train">02.03.</td>
+                    <td class="wc-train">03.03.</td>
+                    <td class="wc-train">04.03.</td>
+                    <td class="wc-blocked">05.03.<br><em>keine Schulung</em></td>
+                    <td class="wc-blocked">06.03.<br><em>keine Schulung</em></td>
+                </tr>
+                <tr>
+                    <td>W4</td>
+                    <td class="wc-special">09.03.<br><em>ab 13h</em></td>
+                    <td class="wc-train">10.03.</td>
+                    <td class="wc-train">11.03.</td>
+                    <td class="wc-train">12.03.</td>
+                    <td class="wc-train">13.03.</td>
+                </tr>
+                <tr>
+                    <td>W5</td>
+                    <td class="wc-train">16.03.</td>
+                    <td class="wc-train">17.03.</td>
+                    <td class="wc-train">18.03.</td>
+                    <td class="wc-train">19.03.</td>
+                    <td class="wc-final">20.03.<br>&#127941; Abschluss</td>
+                </tr>
+            </tbody>
+        </table>
+        <div style="display:flex;gap:1.5rem;margin-top:0.8rem;font-size:0.8rem;color:var(--text-muted);">
+            <span><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--bg-elevated);border:1px solid var(--border);vertical-align:middle;margin-right:4px;"></span> Schulungstag</span>
+            <span><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:rgba(255,215,0,0.12);border:1px solid rgba(255,215,0,0.25);vertical-align:middle;margin-right:4px;"></span> Besondere Zeit</span>
+            <span><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);vertical-align:middle;margin-right:4px;"></span> Ohne Trainer</span>
+            <span><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);vertical-align:middle;margin-right:4px;"></span> Keine Schulung</span>
+        </div>
+        <div style="margin-top:1rem;display:flex;gap:1.2rem;font-size:0.8rem;flex-wrap:wrap;justify-content:center;">
+            <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:0.5rem 0.8rem;text-align:center;">
+                <div style="color:var(--huk-gold);font-weight:600;font-size:0.75rem;margin-bottom:0.2rem;">Kreuzwehrstra&szlig;e</div>
+                <div style="color:var(--text);">K.01 <span style="color:var(--text-muted);">(Hauptraum)</span></div>
+                <div style="color:var(--text-muted);font-size:0.7rem;">durchg&auml;ngig</div>
+            </div>
+            <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:0.5rem 0.8rem;text-align:center;">
+                <div style="color:var(--huk-gold);font-weight:600;font-size:0.75rem;margin-bottom:0.2rem;">Kreuzwehrstra&szlig;e</div>
+                <div style="color:var(--text);">KW.180</div>
+                <div style="color:var(--text-muted);font-size:0.7rem;">durchg&auml;ngig</div>
+            </div>
+            <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:0.5rem 0.8rem;text-align:center;">
+                <div style="color:var(--huk-gold);font-weight:600;font-size:0.75rem;margin-bottom:0.2rem;">Br&uuml;ckenstra&szlig;e</div>
+                <div style="color:var(--text);">BR-B06</div>
+                <div style="color:var(--text-muted);font-size:0.7rem;">W1 + W3 + W5</div>
+            </div>
+            <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:0.5rem 0.8rem;text-align:center;">
+                <div style="color:var(--huk-gold);font-weight:600;font-size:0.75rem;margin-bottom:0.2rem;">Br&uuml;ckenstra&szlig;e</div>
+                <div style="color:var(--text);">BR-B03</div>
+                <div style="color:var(--text-muted);font-size:0.7rem;">W2 + W4</div>
+            </div>
+        </div>
+        <p style="margin-top:0.8rem;color:var(--huk-gold);font-weight:600;font-size:0.95rem;">
+            &#127941; Am 20.03. pr&auml;sentiert jede Gruppe ihre Ergebnisse der letzten 5 Wochen. Details folgen.
+        </p>
+    </div>
+
+    <!-- 10: Spielregeln -->
+    <div class="slide">
+        <span class="block-label">Block 3</span>
+        <h2>Spielregeln</h2>
+        <div class="card-flex">
+            <div class="card-sm">
+                <div class="icon">&#129302;</div>
+                <h3>KI &amp; Musterl&ouml;sungen</h3>
+                <p style="font-weight:600;color:var(--huk-gold);">Wer kopiert, ist verantwortlich.</p>
+                <p>Verstehen &amp; erkl&auml;ren k&ouml;nnen ist Pflicht.</p>
+            </div>
+            <div class="card-sm">
+                <div class="icon">&#128161;</div>
+                <h3>Reflexion &gt; Detailwissen</h3>
+                <p>Zusammenh&auml;nge verstehen. Verschiedene L&ouml;sungen bewerten.</p>
+            </div>
+            <div class="card-sm">
+                <div class="icon">&#128564;</div>
+                <h3>Langeweile ist gewollt</h3>
+                <p>Eigenverantwortlichkeit &amp; Neugierde sind wichtige F&auml;higkeiten. <strong style="color:var(--huk-gold);">Zeigt, was Ihr k&ouml;nnt.</strong></p>
+            </div>
+            <div class="card-sm">
+                <div class="icon">&#128101;</div>
+                <h3>Feste Gruppen</h3>
+                <p>3 Teams, 5 Wochen, jeder leistet einen Beitrag. Eigener Raum pro Gruppe.</p>
+            </div>
+            <div class="card-sm">
+                <div class="icon">&#127908;</div>
+                <h3>Pr&auml;sentationen</h3>
+                <p>Immer zu zweit. Einer erkl&auml;rt, einer zeigt. Rotierende Rollen.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 11: Gruppen -->
+    <div class="slide accent">
+        <span class="block-label">Block 3</span>
+        <h2>Eure Teams</h2>
+        <div style="display:flex;gap:2rem;margin-top:1rem;">
+            <div class="card" style="min-width:200px;">
+                <div class="icon">&#128640;</div>
+                <h3>Team 1</h3>
+                <p>6&ndash;7 Personen</p>
+            </div>
+            <div class="card" style="min-width:200px;">
+                <div class="icon">&#9889;</div>
+                <h3>Team 2</h3>
+                <p>6&ndash;7 Personen</p>
+            </div>
+            <div class="card" style="min-width:200px;">
+                <div class="icon">&#127775;</div>
+                <h3>Team 3</h3>
+                <p>6&ndash;7 Personen</p>
+            </div>
+        </div>
+        <p class="subtitle" style="margin-top:2rem;font-size:1.2rem;">Gemischt nach Erfahrungsprofil &mdash; jeder bringt etwas anderes mit.</p>
+    </div>
+
+    <!-- 12: Ausblick -->
+    <div class="slide accent">
+        <h2 style="font-size:2.8rem;">Los geht&rsquo;s!</h2>
+        <div class="gold-line"></div>
+        <div style="margin-top:2rem;text-align:center;">
+            <div style="font-size:1.3rem;color:var(--text);line-height:1.8;">
+                Viel <strong style="color:var(--huk-gold);">Erfolg</strong> &amp; Viel <strong style="color:var(--huk-gold);">Spa&szlig;</strong>!
+            </div>
+            <div style="font-size:3rem;margin-top:1.5rem;">&#128170; &#127881;</div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Navigation -->
+<div class="nav-bar">
+    <button id="btn-prev" aria-label="Zur&uuml;ck">&#x276E;</button>
+    <span class="nav-counter" id="counter"></span>
+    <button id="btn-next" aria-label="Weiter">&#x276F;</button>
+</div>
+
+<script>
+    (function () {
+        var slides = document.querySelectorAll('.slide');
+        var current = 0;
+        var total = slides.length;
+        var counter = document.getElementById('counter');
+        var progress = document.getElementById('progress');
+        var btnPrev = document.getElementById('btn-prev');
+        var btnNext = document.getElementById('btn-next');
+
+        function show(index, direction) {
+            if (index < 0 || index >= total) return;
+            var prev = current;
+            current = index;
+            slides.forEach(function (s, i) {
+                s.classList.remove('active', 'prev');
+                if (i === current) {
+                    s.classList.add('active');
+                } else if (i === prev && direction === 'next') {
+                    s.classList.add('prev');
+                }
+            });
+            counter.textContent = (current + 1) + ' / ' + total;
+            progress.style.width = ((current + 1) / total * 100) + '%';
+            btnPrev.disabled = current === 0;
+            btnNext.disabled = current === total - 1;
+        }
+
+        function next() { show(current + 1, 'next'); }
+        function prev() { show(current - 1, 'prev'); }
+
+        btnNext.addEventListener('click', next);
+        btnPrev.addEventListener('click', prev);
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
+            if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+        });
+
+        show(0, 'next');
+    })();
+</script>
+
+</body>
+</html>

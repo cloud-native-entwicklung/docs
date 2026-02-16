@@ -8,6 +8,8 @@ Willkommen bei den Übungen zur Schulung "Cloud-Native Entwicklung für Auszubil
 
 Die Übungen sind nach Technologie gegliedert und bauen jeweils aufeinander auf.
 
+**[Präsentation Einführungstag](einfuehrungstag-praesentation.html)**
+
 ## REST-API (OpenAPI)
 
 | Nr. | Übung                                                              |
