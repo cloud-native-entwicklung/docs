@@ -66,6 +66,11 @@ sichert Eure bisherigen Sourcen in einem Git-Repository.
 6. Nimm eine kleine Änderung an einer Datei vor. Durchlaufe den Zyklus erneut: `git status` → `git add` →
    `git status` → `git commit` → `git push`. Beobachte, wie Git die Änderungen als Diff darstellt.
 
+## 💡 Visualisierung
+
+→ [Dezentrale Versionsverwaltung](dezentrale-versionsverwaltung.html) — Wie Git als dezentrales System funktioniert
+  und warum wir trotzdem einen zentralen Server verwenden.
+
 ## 📚 Selbstlernmaterial
 
 * [Learn Git Branching](https://learngitbranching.js.org/) — Interaktives Tutorial zum Lernen von Git-Branching

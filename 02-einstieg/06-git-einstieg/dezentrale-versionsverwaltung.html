@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git: Dezentrale Versionsverwaltung</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #1a1a1e;
+            --bg-card: #242428;
+            --bg-elevated: #2e2e33;
+            --bg-hover: #38383e;
+            --huk-gold: #FFD700;
+            --white: #FFFFFF;
+            --text: #E8E8EC;
+            --text-muted: #9999A3;
+            --border: rgba(255, 255, 255, 0.1);
+            --melina: #FF6B6B;
+            --niklas: #74B3E0;
+            --gregor: #4ECDC4;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .deck { position: relative; width: 100vw; height: 100vh; }
+
+        .slide {
+            position: absolute; inset: 0;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            padding: 2.5rem 4rem;
+            opacity: 0; transform: translateX(60px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            pointer-events: none; background: var(--bg-dark);
+        }
+        .slide.active { opacity: 1; transform: translateX(0); pointer-events: auto; }
+        .slide.prev { opacity: 0; transform: translateX(-60px); }
+
+        h1 { font-size: 3rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; text-align: center; }
+        h2 { font-size: 2rem; font-weight: 700; color: var(--white); margin-bottom: 1.2rem; text-align: center; }
+
+        .subtitle { font-size: 1.2rem; color: var(--text-muted); text-align: center; margin-bottom: 1.5rem; }
+        .gold-line { width: 60px; height: 3px; background: var(--huk-gold); border-radius: 2px; margin: 1rem auto; }
+        .caption { color: var(--text-muted); font-size: 0.95rem; margin-top: 1rem; text-align: center; max-width: 700px; line-height: 1.5; }
+        .caption strong { color: var(--white); }
+        .cmd { font-family: 'SF Mono', 'Fira Code', monospace; background: var(--bg-elevated); padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.85rem; color: var(--huk-gold); }
+
+        .diagram { width: 100%; max-width: 820px; }
+        .diagram svg { width: 100%; height: auto; }
+        .diagram text { font-family: 'Inter', system-ui, sans-serif; }
+
+        .problem-list { list-style: none; max-width: 600px; }
+        .problem-list li { font-size: 1.1rem; padding: 0.5rem 0; padding-left: 2rem; position: relative; color: var(--text); line-height: 1.5; }
+        .problem-list li::before { content: ''; position: absolute; left: 0; top: 0.85rem; width: 10px; height: 10px; background: #FF6B6B; border-radius: 50%; }
+
+        .nav-bar {
+            position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+            display: flex; align-items: center; gap: 1rem; z-index: 100;
+            background: rgba(36, 36, 40, 0.9); padding: 0.5rem 1.2rem;
+            border-radius: 30px; backdrop-filter: blur(8px); border: 1px solid var(--border);
+        }
+        .nav-bar button { background: none; border: none; color: var(--white); font-size: 1.4rem; cursor: pointer; padding: 0.3rem 0.6rem; border-radius: 6px; transition: background 0.2s; }
+        .nav-bar button:hover { background: var(--bg-hover); }
+        .nav-bar button:disabled { opacity: 0.3; cursor: default; }
+        .nav-bar button:disabled:hover { background: none; }
+        .nav-counter { color: var(--text-muted); font-size: 0.85rem; min-width: 50px; text-align: center; }
+        .progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: var(--huk-gold); transition: width 0.3s ease; z-index: 100; }
+    </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<!-- Shared SVG defs -->
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden;">
+    <defs>
+        <marker id="arr" viewBox="0 0 10 6" refX="9" refY="3" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,3 L0,6" fill="#FFD700"/>
+        </marker>
+        <marker id="arr-mut" viewBox="0 0 10 6" refX="9" refY="3" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,3 L0,6" fill="#9999A3"/>
+        </marker>
+    </defs>
+</svg>
+
+<div class="deck" id="deck">
+
+    <!-- 1: Title -->
+    <div class="slide active" style="background:linear-gradient(135deg,#1a1a1e 0%,#222228 50%,#1e1e24 100%);">
+        <h1 style="font-size:3.2rem;">Dezentrale Versionsverwaltung</h1>
+        <div class="gold-line"></div>
+        <p class="subtitle" style="color:var(--huk-gold);font-size:1.4rem;margin-top:0.5rem;">mit Git</p>
+        <p style="margin-top:2.5rem;color:var(--text-muted);font-size:1.1rem;">Warum Git dezentral ist &mdash; und warum wir trotzdem einen Server brauchen</p>
+    </div>
+
+    <!-- 2: Melina's Workflow -->
+    <div class="slide">
+        <h2>Melina arbeitet lokal</h2>
+        <div class="diagram">
+            <svg viewBox="0 0 800 230">
+                <!-- Melina avatar -->
+                <circle cx="400" cy="28" r="20" fill="rgba(255,107,107,0.2)" stroke="var(--melina)" stroke-width="2"/>
+                <text x="400" y="28" dy="0.35em" text-anchor="middle" fill="var(--melina)" font-size="15" font-weight="700">M</text>
+                <text x="400" y="60" text-anchor="middle" fill="var(--melina)" font-size="13" font-weight="600">Melina</text>
+                <!-- Box 1: Working Directory -->
+                <rect x="20" y="90" width="200" height="65" rx="10" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+                <text x="120" y="118" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="600">Working Directory</text>
+                <text x="120" y="138" text-anchor="middle" fill="var(--text-muted)" font-size="10">Dateien bearbeiten</text>
+                <!-- Arrow 1 -->
+                <line x1="225" y1="122" x2="275" y2="122" stroke="var(--huk-gold)" stroke-width="2" marker-end="url(#arr)"/>
+                <text x="250" y="112" text-anchor="middle" fill="var(--huk-gold)" font-size="11" font-weight="600">git add</text>
+                <!-- Box 2: Staging Area -->
+                <rect x="280" y="90" width="200" height="65" rx="10" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+                <text x="380" y="118" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="600">Staging Area</text>
+                <text x="380" y="138" text-anchor="middle" fill="var(--text-muted)" font-size="10">&Auml;nderungen vormerken</text>
+                <!-- Arrow 2 -->
+                <line x1="485" y1="122" x2="555" y2="122" stroke="var(--huk-gold)" stroke-width="2" marker-end="url(#arr)"/>
+                <text x="520" y="112" text-anchor="middle" fill="var(--huk-gold)" font-size="11" font-weight="600">git commit</text>
+                <!-- Box 3: Lokales Repository -->
+                <rect x="560" y="90" width="220" height="65" rx="10" fill="var(--bg-card)" stroke="rgba(255,215,0,0.3)" stroke-width="2"/>
+                <text x="670" y="118" text-anchor="middle" fill="var(--white)" font-size="13" font-weight="600">Lokales Repository</text>
+                <text x="670" y="138" text-anchor="middle" fill="var(--text-muted)" font-size="10">Commit gespeichert</text>
+                <!-- git status hint -->
+                <text x="400" y="195" text-anchor="middle" fill="var(--text-muted)" font-size="11">Tipp: <tspan font-family="'SF Mono','Fira Code',monospace" fill="var(--huk-gold)">git status</tspan> zeigt jederzeit den aktuellen Zustand</text>
+            </svg>
+        </div>
+    </div>
+
+    <!-- 3: Melina's Commits -->
+    <div class="slide">
+        <h2>Melinas erste Commits</h2>
+        <div class="diagram">
+            <svg viewBox="0 0 800 220">
+                <!-- Melina -->
+                <circle cx="400" cy="30" r="22" fill="rgba(255,107,107,0.2)" stroke="var(--melina)" stroke-width="2"/>
+                <text x="400" y="30" dy="0.35em" text-anchor="middle" fill="var(--melina)" font-size="16" font-weight="700">M</text>
+                <text x="400" y="64" text-anchor="middle" fill="var(--melina)" font-size="14" font-weight="600">Melina</text>
+                <!-- Repo box -->
+                <rect x="300" y="82" width="200" height="75" rx="10" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+                <text x="400" y="100" text-anchor="middle" fill="var(--text-muted)" font-size="10">Lokales Repository</text>
+                <!-- Commit line -->
+                <line x1="355" y1="132" x2="445" y2="132" stroke="#555" stroke-width="2"/>
+                <!-- C1 -->
+                <circle cx="370" cy="132" r="11" fill="var(--huk-gold)"/>
+                <text x="370" y="132" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="9" font-weight="700">C1</text>
+                <!-- C2 -->
+                <circle cx="430" cy="132" r="11" fill="var(--huk-gold)"/>
+                <text x="430" y="132" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="9" font-weight="700">C2</text>
+            </svg>
+        </div>
+        <p class="caption">Melina hat zwei Commits erstellt. Alles passiert <strong>lokal</strong> &mdash; kein Server n&ouml;tig.</p>
+    </div>
+
+    <!-- 4: Niklas klont -->
+    <div class="slide">
+        <h2>Niklas klont Melinas Repository</h2>
+        <div class="diagram">
+            <svg viewBox="0 0 800 240">
+                <!-- Melina -->
+                <circle cx="200" cy="30" r="20" fill="rgba(255,107,107,0.2)" stroke="var(--melina)" stroke-width="2"/>
+                <text x="200" y="30" dy="0.35em" text-anchor="middle" fill="var(--melina)" font-size="15" font-weight="700">M</text>
+                <text x="200" y="60" text-anchor="middle" fill="var(--melina)" font-size="13" font-weight="600">Melina</text>
+                <rect x="115" y="78" width="170" height="70" rx="10" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+                <text x="200" y="95" text-anchor="middle" fill="var(--text-muted)" font-size="9">Lokales Repository</text>
+                <line x1="155" y1="125" x2="245" y2="125" stroke="#555" stroke-width="2"/>
+                <circle cx="170" cy="125" r="10" fill="var(--huk-gold)"/><text x="170" y="125" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="8" font-weight="700">C1</text>
+                <circle cx="200" cy="125" r="10" fill="var(--huk-gold)"/><text x="200" y="125" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="8" font-weight="700">C2</text>
+                <!-- Niklas -->
+                <circle cx="600" cy="30" r="20" fill="rgba(116,179,224,0.2)" stroke="var(--niklas)" stroke-width="2"/>
+                <text x="600" y="30" dy="0.35em" text-anchor="middle" fill="var(--niklas)" font-size="15" font-weight="700">N</text>
+                <text x="600" y="60" text-anchor="middle" fill="var(--niklas)" font-size="13" font-weight="600">Niklas</text>
+                <rect x="515" y="78" width="170" height="70" rx="10" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+                <text x="600" y="95" text-anchor="middle" fill="var(--text-muted)" font-size="9">Lokales Repository</text>
+                <line x1="555" y1="125" x2="645" y2="125" stroke="#555" stroke-width="2"/>
+                <circle cx="570" cy="125" r="10" fill="var(--huk-gold)"/><text x="570" y="125" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="8" font-weight="700">C1</text>
+                <circle cx="600" cy="125" r="10" fill="var(--huk-gold)"/><text x="600" y="125" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="8" font-weight="700">C2</text>
+                <!-- Clone arrow -->
+                <line x1="290" y1="108" x2="510" y2="108" stroke="var(--huk-gold)" stroke-width="2" stroke-dasharray="8,5" marker-end="url(#arr)"/>
+                <text x="400" y="98" text-anchor="middle" fill="var(--huk-gold)" font-size="12" font-weight="600">git clone</text>
+                <!-- Origin label -->
+                <text x="600" y="168" text-anchor="middle" fill="var(--text-muted)" font-size="11">origin &rarr; Melina</text>
+            </svg>
+        </div>
+        <p class="caption">Niklas erh&auml;lt eine <strong>vollst&auml;ndige Kopie</strong> inklusive der gesamten Historie. <span class="cmd">origin</span> zeigt auf Melinas Repo.</p>
+    </div>
+
+    <!-- 5: Niklas pusht -->
+    <div class="slide">
+        <h2>Niklas erstellt einen Commit und pusht</h2>
+        <div class="diagram">
+            <svg viewBox="0 0 800 240">
+                <!-- Melina -->
+                <circle cx="200" cy="30" r="20" fill="rgba(255,107,107,0.2)" stroke="var(--melina)" stroke-width="2"/>
+                <text x="200" y="30" dy="0.35em" text-anchor="middle" fill="var(--melina)" font-size="15" font-weight="700">M</text>
+                <text x="200" y="60" text-anchor="middle" fill="var(--melina)" font-size="13" font-weight="600">Melina</text>
+                <rect x="105" y="78" width="190" height="70" rx="10" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+                <text x="200" y="95" text-anchor="middle" fill="var(--text-muted)" font-size="9">Lokales Repository</text>
+                <line x1="140" y1="125" x2="260" y2="125" stroke="#555" stroke-width="2"/>
+                <circle cx="155" cy="125" r="10" fill="var(--huk-gold)"/><text x="155" y="125" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="8" font-weight="700">C1</text>
+                <circle cx="185" cy="125" r="10" fill="var(--huk-gold)"/><text x="185" y="125" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="8" font-weight="700">C2</text>
+                <circle cx="215" cy="125" r="10" fill="var(--huk-gold)"/><text x="215" y="125" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="8" font-weight="700">C3</text>
+                <!-- C3 highlight ring -->
+                <circle cx="215" cy="125" r="14" fill="none" stroke="var(--huk-gold)" stroke-width="1.5" opacity="0.4"/>
+                <!-- Niklas -->
+                <circle cx="600" cy="30" r="20" fill="rgba(116,179,224,0.2)" stroke="var(--niklas)" stroke-width="2"/>
+                <text x="600" y="30" dy="0.35em" text-anchor="middle" fill="var(--niklas)" font-size="15" font-weight="700">N</text>
+                <text x="600" y="60" text-anchor="middle" fill="var(--niklas)" font-size="13" font-weight="600">Niklas</text>
+                <rect x="505" y="78" width="190" height="70" rx="10" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+                <text x="600" y="95" text-anchor="middle" fill="var(--text-muted)" font-size="9">Lokales Repository</text>
+                <line x1="540" y1="125" x2="660" y2="125" stroke="#555" stroke-width="2"/>
+                <circle cx="555" cy="125" r="10" fill="var(--huk-gold)"/><text x="555" y="125" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="8" font-weight="700">C1</text>
+                <circle cx="585" cy="125" r="10" fill="var(--huk-gold)"/><text x="585" y="125" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="8" font-weight="700">C2</text>
+                <circle cx="615" cy="125" r="10" fill="var(--huk-gold)"/><text x="615" y="125" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="8" font-weight="700">C3</text>
+                <circle cx="615" cy="125" r="14" fill="none" stroke="var(--huk-gold)" stroke-width="1.5" opacity="0.4"/>
+                <!-- Push arrow -->
+                <line x1="510" y1="100" x2="300" y2="100" stroke="var(--huk-gold)" stroke-width="2" marker-end="url(#arr)"/>
+                <text x="400" y="90" text-anchor="middle" fill="var(--huk-gold)" font-size="12" font-weight="600">git push</text>
+            </svg>
+        </div>
+        <p class="caption">Niklas erstellt <strong>C3</strong> und pusht zu Melinas Repository (origin). Beide haben jetzt den gleichen Stand.</p>
+    </div>
+
+    <!-- 6: Melina committet, Niklas pullt -->
+    <div class="slide">
+        <h2>Melina committet, Niklas pullt</h2>
+        <div class="diagram">
+            <svg viewBox="0 0 800 240">
+                <!-- Melina -->
+                <circle cx="200" cy="30" r="20" fill="rgba(255,107,107,0.2)" stroke="var(--melina)" stroke-width="2"/>
+                <text x="200" y="30" dy="0.35em" text-anchor="middle" fill="var(--melina)" font-size="15" font-weight="700">M</text>
+                <text x="200" y="60" text-anchor="middle" fill="var(--melina)" font-size="13" font-weight="600">Melina</text>
+                <rect x="95" y="78" width="210" height="70" rx="10" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+                <text x="200" y="95" text-anchor="middle" fill="var(--text-muted)" font-size="9">Lokales Repository</text>
+                <line x1="125" y1="125" x2="275" y2="125" stroke="#555" stroke-width="2"/>
+                <circle cx="140" cy="125" r="10" fill="var(--huk-gold)"/><text x="140" y="125" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="8" font-weight="700">C1</text>
+                <circle cx="170" cy="125" r="10" fill="var(--huk-gold)"/><text x="170" y="125" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="8" font-weight="700">C2</text>
+                <circle cx="200" cy="125" r="10" fill="var(--huk-gold)"/><text x="200" y="125" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="8" font-weight="700">C3</text>
+                <circle cx="230" cy="125" r="10" fill="var(--huk-gold)"/><text x="230" y="125" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="8" font-weight="700">C4</text>
+                <circle cx="230" cy="125" r="14" fill="none" stroke="var(--melina)" stroke-width="1.5" opacity="0.5"/>
+                <!-- Niklas -->
+                <circle cx="600" cy="30" r="20" fill="rgba(116,179,224,0.2)" stroke="var(--niklas)" stroke-width="2"/>
+                <text x="600" y="30" dy="0.35em" text-anchor="middle" fill="var(--niklas)" font-size="15" font-weight="700">N</text>
+                <text x="600" y="60" text-anchor="middle" fill="var(--niklas)" font-size="13" font-weight="600">Niklas</text>
+                <rect x="495" y="78" width="210" height="70" rx="10" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+                <text x="600" y="95" text-anchor="middle" fill="var(--text-muted)" font-size="9">Lokales Repository</text>
+                <line x1="525" y1="125" x2="675" y2="125" stroke="#555" stroke-width="2"/>
+                <circle cx="540" cy="125" r="10" fill="var(--huk-gold)"/><text x="540" y="125" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="8" font-weight="700">C1</text>
+                <circle cx="570" cy="125" r="10" fill="var(--huk-gold)"/><text x="570" y="125" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="8" font-weight="700">C2</text>
+                <circle cx="600" cy="125" r="10" fill="var(--huk-gold)"/><text x="600" y="125" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="8" font-weight="700">C3</text>
+                <circle cx="630" cy="125" r="10" fill="var(--huk-gold)"/><text x="630" y="125" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="8" font-weight="700">C4</text>
+                <circle cx="630" cy="125" r="14" fill="none" stroke="var(--niklas)" stroke-width="1.5" opacity="0.5"/>
+                <!-- Pull arrow -->
+                <line x1="300" y1="100" x2="500" y2="100" stroke="var(--huk-gold)" stroke-width="2" marker-end="url(#arr)"/>
+                <text x="400" y="90" text-anchor="middle" fill="var(--huk-gold)" font-size="12" font-weight="600">git pull</text>
+            </svg>
+        </div>
+        <p class="caption">Melina erstellt <strong>C4</strong>. Niklas holt sich die &Auml;nderung mit <span class="cmd">git pull</span>. Beide sind wieder synchron.</p>
+    </div>
+
+    <!-- 7: Gregor kommt dazu -->
+    <div class="slide">
+        <h2>Gregor kommt dazu</h2>
+        <div class="diagram">
+            <svg viewBox="0 0 800 370">
+                <!-- Melina (top) -->
+                <circle cx="400" cy="25" r="18" fill="rgba(255,107,107,0.2)" stroke="var(--melina)" stroke-width="2"/>
+                <text x="400" y="25" dy="0.35em" text-anchor="middle" fill="var(--melina)" font-size="14" font-weight="700">M</text>
+                <text x="400" y="52" text-anchor="middle" fill="var(--melina)" font-size="12" font-weight="600">Melina</text>
+                <rect x="315" y="65" width="170" height="65" rx="10" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+                <text x="400" y="80" text-anchor="middle" fill="var(--text-muted)" font-size="9">Lokales Repository</text>
+                <line x1="338" y1="108" x2="462" y2="108" stroke="#555" stroke-width="2"/>
+                <circle cx="350" cy="108" r="8" fill="var(--huk-gold)"/><text x="350" y="108" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="7" font-weight="700">C1</text>
+                <circle cx="374" cy="108" r="8" fill="var(--huk-gold)"/><text x="374" y="108" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="7" font-weight="700">C2</text>
+                <circle cx="398" cy="108" r="8" fill="var(--huk-gold)"/><text x="398" y="108" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="7" font-weight="700">C3</text>
+                <circle cx="422" cy="108" r="8" fill="var(--huk-gold)"/><text x="422" y="108" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="7" font-weight="700">C4</text>
+                <circle cx="446" cy="108" r="8" fill="var(--huk-gold)"/><text x="446" y="108" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="7" font-weight="700">C5</text>
+                <circle cx="446" cy="108" r="12" fill="none" stroke="var(--melina)" stroke-width="1.5" opacity="0.5"/>
+                <!-- Niklas (bottom-left) -->
+                <circle cx="160" cy="215" r="18" fill="rgba(116,179,224,0.2)" stroke="var(--niklas)" stroke-width="2"/>
+                <text x="160" y="215" dy="0.35em" text-anchor="middle" fill="var(--niklas)" font-size="14" font-weight="700">N</text>
+                <text x="160" y="242" text-anchor="middle" fill="var(--niklas)" font-size="12" font-weight="600">Niklas</text>
+                <rect x="75" y="255" width="170" height="65" rx="10" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+                <text x="160" y="270" text-anchor="middle" fill="var(--text-muted)" font-size="9">Lokales Repository</text>
+                <line x1="103" y1="298" x2="217" y2="298" stroke="#555" stroke-width="2"/>
+                <circle cx="115" cy="298" r="8" fill="var(--huk-gold)"/><text x="115" y="298" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="7" font-weight="700">C1</text>
+                <circle cx="139" cy="298" r="8" fill="var(--huk-gold)"/><text x="139" y="298" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="7" font-weight="700">C2</text>
+                <circle cx="163" cy="298" r="8" fill="var(--huk-gold)"/><text x="163" y="298" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="7" font-weight="700">C3</text>
+                <circle cx="187" cy="298" r="8" fill="var(--huk-gold)"/><text x="187" y="298" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="7" font-weight="700">C4</text>
+                <!-- Gregor (bottom-right) -->
+                <circle cx="640" cy="215" r="18" fill="rgba(78,205,196,0.2)" stroke="var(--gregor)" stroke-width="2"/>
+                <text x="640" y="215" dy="0.35em" text-anchor="middle" fill="var(--gregor)" font-size="14" font-weight="700">G</text>
+                <text x="640" y="242" text-anchor="middle" fill="var(--gregor)" font-size="12" font-weight="600">Gregor</text>
+                <rect x="555" y="255" width="170" height="65" rx="10" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+                <text x="640" y="270" text-anchor="middle" fill="var(--text-muted)" font-size="9">Lokales Repository</text>
+                <line x1="583" y1="298" x2="697" y2="298" stroke="#555" stroke-width="2"/>
+                <circle cx="595" cy="298" r="8" fill="var(--huk-gold)"/><text x="595" y="298" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="7" font-weight="700">C1</text>
+                <circle cx="619" cy="298" r="8" fill="var(--huk-gold)"/><text x="619" y="298" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="7" font-weight="700">C2</text>
+                <circle cx="643" cy="298" r="8" fill="var(--huk-gold)"/><text x="643" y="298" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="7" font-weight="700">C3</text>
+                <circle cx="667" cy="298" r="8" fill="var(--huk-gold)"/><text x="667" y="298" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="7" font-weight="700">C4</text>
+                <!-- Connection lines -->
+                <line x1="345" y1="130" x2="210" y2="250" stroke="var(--text-muted)" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.5"/>
+                <text x="255" y="182" text-anchor="middle" fill="var(--text-muted)" font-size="10" transform="rotate(-30,255,182)">origin</text>
+                <line x1="455" y1="130" x2="590" y2="250" stroke="var(--text-muted)" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.5"/>
+                <text x="540" y="182" text-anchor="middle" fill="var(--gregor)" font-size="10" transform="rotate(30,540,182)">melina</text>
+                <line x1="250" y1="288" x2="550" y2="288" stroke="var(--text-muted)" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.5"/>
+                <text x="400" y="280" text-anchor="middle" fill="var(--gregor)" font-size="10">origin (niklas)</text>
+            </svg>
+        </div>
+        <p class="caption">Gregor klont von Niklas und f&uuml;gt Melina als zweiten Remote hinzu:<br><span class="cmd">git remote add melina &lt;url&gt;</span></p>
+    </div>
+
+    <!-- 8: Gregor vermittelt -->
+    <div class="slide">
+        <h2>Gregor pullt von Melina, pusht zu Niklas</h2>
+        <div class="diagram">
+            <svg viewBox="0 0 800 370">
+                <!-- Melina (top) -->
+                <circle cx="400" cy="25" r="18" fill="rgba(255,107,107,0.2)" stroke="var(--melina)" stroke-width="2"/>
+                <text x="400" y="25" dy="0.35em" text-anchor="middle" fill="var(--melina)" font-size="14" font-weight="700">M</text>
+                <text x="400" y="52" text-anchor="middle" fill="var(--melina)" font-size="12" font-weight="600">Melina</text>
+                <rect x="315" y="65" width="170" height="65" rx="10" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+                <text x="400" y="80" text-anchor="middle" fill="var(--text-muted)" font-size="9">Lokales Repository</text>
+                <line x1="338" y1="108" x2="462" y2="108" stroke="#555" stroke-width="2"/>
+                <circle cx="350" cy="108" r="8" fill="var(--huk-gold)"/><text x="350" y="108" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="7" font-weight="700">C1</text>
+                <circle cx="374" cy="108" r="8" fill="var(--huk-gold)"/><text x="374" y="108" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="7" font-weight="700">C2</text>
+                <circle cx="398" cy="108" r="8" fill="var(--huk-gold)"/><text x="398" y="108" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="7" font-weight="700">C3</text>
+                <circle cx="422" cy="108" r="8" fill="var(--huk-gold)"/><text x="422" y="108" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="7" font-weight="700">C4</text>
+                <circle cx="446" cy="108" r="8" fill="var(--huk-gold)"/><text x="446" y="108" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="7" font-weight="700">C5</text>
+                <!-- Niklas (bottom-left) - now has C5 -->
+                <circle cx="160" cy="215" r="18" fill="rgba(116,179,224,0.2)" stroke="var(--niklas)" stroke-width="2"/>
+                <text x="160" y="215" dy="0.35em" text-anchor="middle" fill="var(--niklas)" font-size="14" font-weight="700">N</text>
+                <text x="160" y="242" text-anchor="middle" fill="var(--niklas)" font-size="12" font-weight="600">Niklas</text>
+                <rect x="65" y="255" width="190" height="65" rx="10" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+                <text x="160" y="270" text-anchor="middle" fill="var(--text-muted)" font-size="9">Lokales Repository</text>
+                <line x1="88" y1="298" x2="232" y2="298" stroke="#555" stroke-width="2"/>
+                <circle cx="100" cy="298" r="8" fill="var(--huk-gold)"/><text x="100" y="298" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="7" font-weight="700">C1</text>
+                <circle cx="124" cy="298" r="8" fill="var(--huk-gold)"/><text x="124" y="298" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="7" font-weight="700">C2</text>
+                <circle cx="148" cy="298" r="8" fill="var(--huk-gold)"/><text x="148" y="298" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="7" font-weight="700">C3</text>
+                <circle cx="172" cy="298" r="8" fill="var(--huk-gold)"/><text x="172" y="298" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="7" font-weight="700">C4</text>
+                <circle cx="196" cy="298" r="8" fill="var(--huk-gold)"/><text x="196" y="298" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="7" font-weight="700">C5</text>
+                <circle cx="196" cy="298" r="12" fill="none" stroke="var(--niklas)" stroke-width="1.5" opacity="0.5"/>
+                <!-- Gregor (bottom-right) - has C5 -->
+                <circle cx="640" cy="215" r="18" fill="rgba(78,205,196,0.2)" stroke="var(--gregor)" stroke-width="2"/>
+                <text x="640" y="215" dy="0.35em" text-anchor="middle" fill="var(--gregor)" font-size="14" font-weight="700">G</text>
+                <text x="640" y="242" text-anchor="middle" fill="var(--gregor)" font-size="12" font-weight="600">Gregor</text>
+                <rect x="545" y="255" width="190" height="65" rx="10" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+                <text x="640" y="270" text-anchor="middle" fill="var(--text-muted)" font-size="9">Lokales Repository</text>
+                <line x1="568" y1="298" x2="712" y2="298" stroke="#555" stroke-width="2"/>
+                <circle cx="580" cy="298" r="8" fill="var(--huk-gold)"/><text x="580" y="298" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="7" font-weight="700">C1</text>
+                <circle cx="604" cy="298" r="8" fill="var(--huk-gold)"/><text x="604" y="298" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="7" font-weight="700">C2</text>
+                <circle cx="628" cy="298" r="8" fill="var(--huk-gold)"/><text x="628" y="298" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="7" font-weight="700">C3</text>
+                <circle cx="652" cy="298" r="8" fill="var(--huk-gold)"/><text x="652" y="298" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="7" font-weight="700">C4</text>
+                <circle cx="676" cy="298" r="8" fill="var(--huk-gold)"/><text x="676" y="298" dy="0.35em" text-anchor="middle" fill="var(--bg-dark)" font-size="7" font-weight="700">C5</text>
+                <circle cx="676" cy="298" r="12" fill="none" stroke="var(--gregor)" stroke-width="1.5" opacity="0.5"/>
+                <!-- Pull arrow: Melina → Gregor -->
+                <path d="M475,115 Q600,160 610,250" fill="none" stroke="var(--huk-gold)" stroke-width="2" marker-end="url(#arr)"/>
+                <text x="570" y="165" text-anchor="middle" fill="var(--huk-gold)" font-size="11" font-weight="600">git pull melina</text>
+                <!-- Push arrow: Gregor → Niklas -->
+                <line x1="545" y1="288" x2="260" y2="288" stroke="var(--huk-gold)" stroke-width="2" marker-end="url(#arr)"/>
+                <text x="400" y="278" text-anchor="middle" fill="var(--huk-gold)" font-size="11" font-weight="600">git push origin</text>
+            </svg>
+        </div>
+        <p class="caption">Gregor holt <strong>C5</strong> von Melina und gibt ihn an Niklas weiter. Git ist ein <strong>Peer-to-Peer</strong>-System!</p>
+    </div>
+
+    <!-- 9: Warum funktioniert das nicht? -->
+    <div class="slide">
+        <h2 style="color:#FF6B6B;">Warum funktioniert das so nicht?</h2>
+        <div class="diagram" style="max-width:700px;">
+            <svg viewBox="0 0 700 180">
+                <!-- Simplified triangle with warning -->
+                <circle cx="350" cy="25" r="15" fill="rgba(255,107,107,0.2)" stroke="var(--melina)" stroke-width="2"/>
+                <text x="350" y="25" dy="0.35em" text-anchor="middle" fill="var(--melina)" font-size="12" font-weight="700">M</text>
+                <rect x="280" y="48" width="140" height="40" rx="8" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+
+                <circle cx="140" cy="115" r="15" fill="rgba(116,179,224,0.2)" stroke="var(--niklas)" stroke-width="2"/>
+                <text x="140" y="115" dy="0.35em" text-anchor="middle" fill="var(--niklas)" font-size="12" font-weight="700">N</text>
+                <rect x="70" y="138" width="140" height="40" rx="8" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+
+                <circle cx="560" cy="115" r="15" fill="rgba(78,205,196,0.2)" stroke="var(--gregor)" stroke-width="2"/>
+                <text x="560" y="115" dy="0.35em" text-anchor="middle" fill="var(--gregor)" font-size="12" font-weight="700">G</text>
+                <rect x="490" y="138" width="140" height="40" rx="8" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+
+                <!-- Crossed-out connections -->
+                <line x1="280" y1="68" x2="210" y2="138" stroke="#FF6B6B" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.4"/>
+                <line x1="420" y1="68" x2="490" y2="138" stroke="#FF6B6B" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.4"/>
+                <line x1="215" y1="158" x2="485" y2="158" stroke="#FF6B6B" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.4"/>
+
+                <!-- Warning icon -->
+                <text x="350" y="110" text-anchor="middle" font-size="28">&#9888;&#65039;</text>
+            </svg>
+        </div>
+        <ul class="problem-list">
+            <li>Jeder m&uuml;sste seinen Rechner als <strong>Server</strong> bereitstellen (Firewall, dynamische IPs)</li>
+            <li>Wer hat die <strong>&bdquo;Wahrheit&ldquo;</strong>? Welches Repository ist der aktuelle Stand?</li>
+            <li>Was passiert, wenn jemand <strong>offline</strong> geht oder den Laptop zuklappt?</li>
+            <li>Bei mehr als 3 Personen wird es <strong>un&uuml;bersichtlich</strong> &mdash; wer hat welche Commits?</li>
+        </ul>
+    </div>
+
+    <!-- 10: Lösung: Zentraler Server -->
+    <div class="slide" style="background:linear-gradient(135deg,#1a1a1e 0%,#222228 50%,#1e1e24 100%);">
+        <h2>Die L&ouml;sung: Zentraler Git-Server</h2>
+        <div class="diagram">
+            <svg viewBox="0 0 800 380">
+                <!-- Central Server -->
+                <rect x="325" y="145" width="150" height="65" rx="12" fill="rgba(255,215,0,0.12)" stroke="var(--huk-gold)" stroke-width="2"/>
+                <text x="400" y="170" text-anchor="middle" fill="var(--huk-gold)" font-size="14" font-weight="700">Git-Server</text>
+                <text x="400" y="190" text-anchor="middle" fill="var(--text-muted)" font-size="10">(GitHub, GitLab, ...)</text>
+                <!-- Server commit line -->
+                <line x1="348" y1="220" x2="452" y2="220" stroke="var(--huk-gold)" stroke-width="0" opacity="0"/>
+                <!-- Melina (top-left) -->
+                <circle cx="130" cy="30" r="18" fill="rgba(255,107,107,0.2)" stroke="var(--melina)" stroke-width="2"/>
+                <text x="130" y="30" dy="0.35em" text-anchor="middle" fill="var(--melina)" font-size="14" font-weight="700">M</text>
+                <text x="130" y="56" text-anchor="middle" fill="var(--melina)" font-size="12" font-weight="600">Melina</text>
+                <rect x="45" y="70" width="170" height="50" rx="10" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+                <text x="130" y="100" text-anchor="middle" fill="var(--text-muted)" font-size="10">Lokales Repository</text>
+                <!-- Niklas (top-right) -->
+                <circle cx="670" cy="30" r="18" fill="rgba(116,179,224,0.2)" stroke="var(--niklas)" stroke-width="2"/>
+                <text x="670" y="30" dy="0.35em" text-anchor="middle" fill="var(--niklas)" font-size="14" font-weight="700">N</text>
+                <text x="670" y="56" text-anchor="middle" fill="var(--niklas)" font-size="12" font-weight="600">Niklas</text>
+                <rect x="585" y="70" width="170" height="50" rx="10" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+                <text x="670" y="100" text-anchor="middle" fill="var(--text-muted)" font-size="10">Lokales Repository</text>
+                <!-- Gregor (bottom) -->
+                <circle cx="400" cy="290" r="18" fill="rgba(78,205,196,0.2)" stroke="var(--gregor)" stroke-width="2"/>
+                <text x="400" y="290" dy="0.35em" text-anchor="middle" fill="var(--gregor)" font-size="14" font-weight="700">G</text>
+                <text x="400" y="316" text-anchor="middle" fill="var(--gregor)" font-size="12" font-weight="600">Gregor</text>
+                <rect x="315" y="328" width="170" height="50" rx="10" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+                <text x="400" y="358" text-anchor="middle" fill="var(--text-muted)" font-size="10">Lokales Repository</text>
+                <!-- Arrows: Melina ↔ Server -->
+                <line x1="190" y1="120" x2="330" y2="155" stroke="var(--huk-gold)" stroke-width="2" marker-end="url(#arr)"/>
+                <text x="240" y="125" text-anchor="middle" fill="var(--text-muted)" font-size="10">push</text>
+                <line x1="330" y1="170" x2="190" y2="120" stroke="var(--huk-gold)" stroke-width="2" marker-end="url(#arr)" opacity="0"/>
+                <line x1="325" y1="175" x2="215" y2="120" stroke="var(--text-muted)" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arr-mut)"/>
+                <text x="248" y="158" text-anchor="middle" fill="var(--text-muted)" font-size="10">pull</text>
+                <!-- Arrows: Niklas ↔ Server -->
+                <line x1="610" y1="120" x2="470" y2="155" stroke="var(--huk-gold)" stroke-width="2" marker-end="url(#arr)"/>
+                <text x="560" y="125" text-anchor="middle" fill="var(--text-muted)" font-size="10">push</text>
+                <line x1="475" y1="175" x2="585" y2="120" stroke="var(--text-muted)" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arr-mut)"/>
+                <text x="552" y="158" text-anchor="middle" fill="var(--text-muted)" font-size="10">pull</text>
+                <!-- Arrows: Gregor ↔ Server -->
+                <line x1="380" y1="328" x2="370" y2="215" stroke="var(--huk-gold)" stroke-width="2" marker-end="url(#arr)"/>
+                <text x="356" y="270" text-anchor="middle" fill="var(--text-muted)" font-size="10">push</text>
+                <line x1="430" y1="215" x2="420" y2="328" stroke="var(--text-muted)" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arr-mut)"/>
+                <text x="444" y="270" text-anchor="middle" fill="var(--text-muted)" font-size="10">pull</text>
+                <!-- Origin labels -->
+                <text x="130" y="135" text-anchor="middle" fill="var(--huk-gold)" font-size="10" font-weight="600">origin</text>
+                <text x="670" y="135" text-anchor="middle" fill="var(--huk-gold)" font-size="10" font-weight="600">origin</text>
+                <text x="470" y="340" text-anchor="start" fill="var(--huk-gold)" font-size="10" font-weight="600">origin</text>
+            </svg>
+        </div>
+        <p class="caption">Alle arbeiten gegen <strong>einen</strong> zentralen Server. <span class="cmd">origin</span> zeigt immer dorthin.<br>Dezentral in der <strong>Technik</strong>, zentral in der <strong>Organisation</strong>.</p>
+    </div>
+
+</div>
+
+<!-- Navigation -->
+<div class="nav-bar">
+    <button id="btn-prev" aria-label="Zur&uuml;ck">&#x276E;</button>
+    <span class="nav-counter" id="counter"></span>
+    <button id="btn-next" aria-label="Weiter">&#x276F;</button>
+</div>
+
+<script>
+    (function () {
+        var slides = document.querySelectorAll('.slide');
+        var current = 0;
+        var total = slides.length;
+        var counter = document.getElementById('counter');
+        var progress = document.getElementById('progress');
+        var btnPrev = document.getElementById('btn-prev');
+        var btnNext = document.getElementById('btn-next');
+
+        function show(index, direction) {
+            if (index < 0 || index >= total) return;
+            var prev = current;
+            current = index;
+            slides.forEach(function (s, i) {
+                s.classList.remove('active', 'prev');
+                if (i === current) s.classList.add('active');
+                else if (i === prev && direction === 'next') s.classList.add('prev');
+            });
+            counter.textContent = (current + 1) + ' / ' + total;
+            progress.style.width = ((current + 1) / total * 100) + '%';
+            btnPrev.disabled = current === 0;
+            btnNext.disabled = current === total - 1;
+        }
+
+        function next() { show(current + 1, 'next'); }
+        function prev() { show(current - 1, 'prev'); }
+
+        btnNext.addEventListener('click', next);
+        btnPrev.addEventListener('click', prev);
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
+            if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+        });
+
+        show(0, 'next');
+    })();
+</script>
+
+</body>
+</html>
