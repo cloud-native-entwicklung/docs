@@ -79,6 +79,7 @@ sichert Eure bisherigen Sourcen in einem Git-Repository.
 * [Atlassian Git Tutorial](https://www.atlassian.com/git/tutorials) — Umfangreiche Git-Tutorials mit Visualisierungen
 * [Git Cheat Sheet (GitHub)](https://education.github.com/git-cheat-sheet-education.pdf) — Übersicht der wichtigsten
   Git-Befehle
+* [How to Write a Git Commit Message](https://cbea.ms/git-commit/) — Die 7 Regeln für gute Commit-Messages
 
 ## 🤔 Reflexionsfragen
 
