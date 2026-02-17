@@ -20,6 +20,7 @@ Die Übungen sind nach Technologie gegliedert und bauen jeweils aufeinander auf.
 
 <!-- | 04  | [TypeScript-Einstieg](02-einstieg/04-typescript-einstieg/issue.md)    | -->
 <!-- | 05  | [Angular CLI kennenlernen](02-einstieg/05-angular-cli/issue.md)       | -->
+<!-- | 06  | [Git-Einstieg](02-einstieg/06-git-einstieg/issue.md)                 | -->
 <!--  -->
 <!-- ## REST-API (OpenAPI) -->
 <!--  -->

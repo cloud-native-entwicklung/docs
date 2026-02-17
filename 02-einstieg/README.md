@@ -15,3 +15,4 @@ bearbeitet.
 | 03  | [NPM-Einstieg](03-npm-einstieg/issue.md)                        | Node Package Manager & SemVer      |
 | 04  | [TypeScript-Einstieg](04-typescript-einstieg/issue.md)           | Typsystem, Transpiling, tsc        |
 | 05  | [Angular CLI kennenlernen](05-angular-cli/issue.md)              | Projekterstellung & Dateistruktur  |
+| 06  | [Git-Einstieg](06-git-einstieg/issue.md)                         | Versionsverwaltung & Remote Push   |
