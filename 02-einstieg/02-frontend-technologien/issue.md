@@ -73,6 +73,7 @@ Browser.
   Flexbox-Guide
 * [Chrome DevTools Dokumentation](https://developer.chrome.com/docs/devtools/) — Offizielle Anleitung zu den
   Browser-Entwicklertools
+* [Javascript30 - Tutorials](https://javascript30.com/)
 
 ## 🤔 Reflexionsfragen
 
