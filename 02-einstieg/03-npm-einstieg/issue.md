@@ -26,7 +26,7 @@ arbeitet Ihr ein Tutorial durch und versteht die Grundkonzepte, die wir für Ang
 
 ## 🪜 Arbeitsschritte
 
-1. Sieh Dir das Tutorial-Repository [npm-first-steps](https://github.com/ueberfuhr-tutorials/npm-first-steps) an und arbeite die Schritte durch.
+1. Sieh Dir das Tutorial-Repository [npm-first-steps](https://github.com/ueberfuhr-tutorials/npm-first-steps) an und arbeite die Schritte durch. Bei Unklarheiten ist die Musterlösung ebenfalls in diesem Repository zu finden.
 2. Recherchiere die Bedeutung der Befehle `npm i` (`npm install`) und `npm ci`.
 
 ## 📚 Selbstlernmaterial
