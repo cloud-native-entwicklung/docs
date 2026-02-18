@@ -29,11 +29,38 @@ Damit unsere Rezepte-App ein professionelles Erscheinungsbild bekommt, binden wi
 2. Definiere ein eigenes Theme mit `mat.define-theme()` in den globalen Styles.
 3. Stelle sicher, dass Roboto, Material Icons und die Typografie-Klasse korrekt eingebunden sind.
 
+## 🔒 Optional: Fonts lokal einbinden (Self-Hosting)
+
+Standardmäßig werden Roboto und Material Icons per `<link>`-Tag von Google Fonts geladen. Dabei werden bei jedem
+Seitenaufruf Daten an Google übertragen — das ist aus Datenschutzsicht (DSGVO) problematisch und kann in
+Unternehmensumgebungen unerwünscht sein.
+
+Eine bessere Alternative ist das **Self-Hosting** über [Fontsource](https://fontsource.org/). Dabei werden die Fonts
+als NPM-Pakete installiert und direkt aus der Anwendung ausgeliefert:
+
+1. Installiere die Pakete:
+   ```bash
+   npm install @fontsource/roboto @fontsource/material-icons
+   ```
+
+2. Importiere die Fonts in `styles.scss`:
+   ```scss
+   @import '@fontsource/roboto/400.css';
+   @import '@fontsource/roboto/500.css';
+   @import '@fontsource/material-icons';
+   ```
+
+3. Entferne die `<link>`-Tags für Roboto und Material Icons aus `index.html`.
+
+Damit werden keine externen Requests an Google-Server mehr gesendet.
+
 ## 📚 Selbstlernmaterial
 
 * [Angular Material — Getting Started](https://material.angular.io/guide/getting-started) — Offizielle Anleitung
 * [Angular Material: Component Catalog](https://material.angular.io/components/categories) — Komponentenübersicht
 * [Material Design](https://m3.material.io/) — Material Design Richtlinien
+* [Fontsource](https://fontsource.org/) — Self-Hosting von Open-Source-Fonts als NPM-Pakete
+* [Why and how to self host Google Fonts & Icons in your Angular app](https://medium.com/medialesson/why-and-how-to-self-host-google-fonts-icons-in-your-angular-app-5f9fef0349ef) — Hintergrund und Anleitung zum Self-Hosting
 
 ## 🤔 Reflexionsfragen
 
