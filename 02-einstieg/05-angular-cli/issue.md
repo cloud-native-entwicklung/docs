@@ -13,6 +13,7 @@ Die Angular CLI ist das zentrale Werkzeug, um Angular-Projekte zu erstellen, zu 
 * Du kannst ein neues Angular-Projekt mit `ng new` erzeugen und verstehst die wichtigsten Optionen (Routing, Styles, SSR).
 * Du kannst die Anwendung mit `ng serve` starten und im Browser aufrufen.
 * Du verstehst die grundlegende Verzeichnisstruktur eines Angular-Projekts und die Rolle der zentralen Konfigurationsdateien.
+* Du kannst das Projekt mit `ng build` bauen und verstehst, was im `dist/`-Ordner erzeugt wird.
 
 ## ✅ Definition of Done
 
@@ -20,14 +21,18 @@ Die Angular CLI ist das zentrale Werkzeug, um Angular-Projekte zu erstellen, zu 
 * [ ] Du hast ein neues Projekt erzeugt und es startet fehlerfrei mit `ng serve`.
 * [ ] Du hast die Verzeichnisstruktur gesichtet und kannst die Rolle von `angular.json`, `tsconfig.json`, `package.json` und `src/app/` erklären.
 * [ ] Du hast eine kleine Änderung an `app.component.html` vorgenommen und die Live-Aktualisierung im Browser beobachtet.
+* [ ] Du hast das Projekt mit `ng build` gebaut und den Inhalt des `dist/`-Ordners untersucht.
 * [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 
 1. Installiere die Angular CLI global: `npm install -g @angular/cli`. Prüfe mit `ng version`, ob die Installation erfolgreich war.
-2. Erzeuge ein neues Projekt: `ng new test-app`. Wähle die Optionen aus, die Dir sinnvoll erscheinen (Routing, Stylesheet-Format). Öffne das Projekt in Deiner IDE.
-3. Starte die Anwendung mit `ng serve` und öffne `http://localhost:4200` im Browser. Ändere den Text in `src/app/app.component.html` und beobachte die automatische Aktualisierung.
-4. Erkunde die generierten Dateien: Was steht in `angular.json`? Was in `tsconfig.json`? Welche Dateien liegen unter `src/app/`? Was ist die Rolle von `app.config.ts` und `app.routes.ts`?
+2. Erzeuge in einem Ordner Deiner Wahl ein neues Angular-Projekt: `ng new test-app`. Wähle auf Rückfragen folgende Optionen:
+   - Routing: ja
+   - Stylesheets mit SCSS
+3. Starte die Anwendung mit `ng serve` und öffne `http://localhost:4200` im Browser. Führe eine kleine Änderung in der Datei `src/app/app.component.html` durch und beobachte die automatische Aktualisierung im Browser.
+4. Erkunde die generierten Dateien: Was steht in `angular.json`? Was in `tsconfig.json`? Welche Dateien liegen unter `src/app/`?
+5. Baue das Projekt mit `ng build`. Untersuche den erzeugten `dist/`-Ordner: Welche Dateien wurden generiert? Wie unterscheiden sich diese von den Quelldateien unter `src/`?
 
 ## 📚 Selbstlernmaterial
 
@@ -38,7 +43,8 @@ Die Angular CLI ist das zentrale Werkzeug, um Angular-Projekte zu erstellen, zu 
 ## 🤔 Reflexionsfragen
 
 * Welche Dateien erzeugt `ng new`? Welche davon kennst Du schon aus den vorherigen Übungen (NPM, TypeScript)?
-* Was ist der Unterschied zwischen `ng new` und `npm init`? Was erzeugt die Angular CLI zusätzlich?
-* Warum startet Angular einen eigenen Development Server (`ng serve`) statt die Dateien direkt im Browser zu öffnen? Was passiert dabei im Hintergrund?
+* Was ist der Unterschied zwischen `ng new` und `npm init`?
 * Was ist der Unterschied zwischen `app.component.ts`, `app.component.html` und `app.component.css`? Welches Muster steckt dahinter?
-* Was macht die Datei `app.config.ts` und warum gibt es kein `AppModule` mehr? Recherchiere den Begriff "Standalone Components".
+* Welche Informationen stehen in der Datei `app.config.ts`?
+* Warum enthalten die Dateinamen im `dist/`-Ordner scheinbar zufällige Hashwerte (z.B. `main-A1B2C3D4.js`)?
+* Was macht der Befehl `npx -p @angular/cli@20 ng new mein-projekt`?
