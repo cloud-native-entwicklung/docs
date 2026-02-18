@@ -8,7 +8,7 @@ Willkommen bei den Übungen zur Schulung "Cloud-Native Entwicklung für Auszubil
 
 Die Übungen sind nach Technologie gegliedert und bauen jeweils aufeinander auf.
 
-**[Präsentation Einführungstag](einfuehrungstag-praesentation.html)**
+**[Präsentation Einführungstag](einfuehrungstag-praesentation.html)** · **[Lastenheft: Rezepte-App](03-themen/lastenheft.md)**
 
 ## Einstieg
 
