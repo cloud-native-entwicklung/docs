@@ -51,12 +51,13 @@ Die Übungen sind nach Technologie gegliedert und bauen jeweils aufeinander auf.
 <!-- | 12  | [Domain Events](03-themen/03-03-backend/12-events/issue.md)                                          | -->
 <!-- | 13  | [Interceptors](03-themen/03-03-backend/13-interceptors/issue.md)                                     | -->
 <!--  -->
-<!-- ## Frontend (Angular / NPM) -->
-<!--  -->
-<!-- | Nr. | Übung                                                                       | -->
-<!-- |-----|-----------------------------------------------------------------------------|-->
-<!-- | 01  | [Projekt aufsetzen](03-themen/03-01-frontend/01-projekt-aufsetzen/issue.md)                 | -->
-<!-- | 02  | [Angular Material](03-themen/03-01-frontend/02-angular-material/issue.md)                   | -->
+## Frontend (Angular / NPM)
+
+| Nr. | Übung                                                                     |
+|-----|---------------------------------------------------------------------------|
+| 01  | Projekt aufsetzen (siehe Git-Einstieg)                                    |
+| 02  | [Angular Material](03-themen/03-01-frontend/02-angular-material/issue.md) |
+
 <!-- | 03  | [Rezeptliste](03-themen/03-01-frontend/03-rezeptliste/issue.md)                             | -->
 <!-- | 04  | [Kindkomponente](03-themen/03-01-frontend/04-kindkomponente/issue.md)                       | -->
 <!-- | 05  | [Service](03-themen/03-01-frontend/05-service/issue.md)                                     | -->
