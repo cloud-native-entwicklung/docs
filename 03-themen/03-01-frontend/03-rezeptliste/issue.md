@@ -37,4 +37,5 @@ Unsere App soll eine Übersicht aller Rezepte zeigen. (siehe [Lastenheft](../../
 
 * Warum verwenden wir TypeScript-Interfaces statt Klassen für das Domänenmodell?
 * Was passiert im Template, wenn die Rezeptliste leer ist?
+* Was bedeutet bei `@for` das `track $index`?
 * Wie hängen Angular-Komponenten und das DOM im Browser zusammen?
