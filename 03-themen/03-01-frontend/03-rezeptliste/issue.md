@@ -5,7 +5,7 @@ title: Rezeptliste anzeigen
 
 # Rezeptliste mit Material Cards anzeigen
 
-Unsere App soll eine Übersicht aller Rezepte zeigen. (siehe [Lastenheft](../lastenheft.md)) Dazu erstellen wir eine Komponente, die Rezeptdaten als ansprechende Karten in einem Grid-Layout darstellt. Zunächst arbeiten wir mit Dummy-Daten direkt in der Komponente.
+Unsere App soll eine Übersicht aller Rezepte zeigen. (siehe [Lastenheft](../../lastenheft.md)) Dazu erstellen wir eine Komponente, die Rezeptdaten als ansprechende Karten in einem Grid-Layout darstellt. Zunächst arbeiten wir mit Dummy-Daten direkt in der Komponente.
 
 ## 🎯 Lernziele
 
