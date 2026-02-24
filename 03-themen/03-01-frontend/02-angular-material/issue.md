@@ -41,11 +41,36 @@ als NPM-Pakete installiert und direkt aus der Anwendung ausgeliefert:
    npm install @fontsource/roboto @fontsource/material-icons
    ```
 
-2. Importiere die Fonts in `styles.scss`:
+2. Importiere die Fonts in `styles.scss` (Infos siehe [offizielle Dokumentation](https://developers.google.com/fonts/docs/material_icons?hl=de#setup_method_2_self_hosting)):
    ```scss
    @import '@fontsource/roboto/400.css';
    @import '@fontsource/roboto/500.css';
    @import '@fontsource/material-icons';
+
+   .material-icons {
+     font-family: 'Material Icons';
+     font-weight: normal;
+     font-style: normal;
+     font-size: 24px;  /* Bevorzugte Icon-Größe */
+     display: inline-block;
+     line-height: 1;
+     text-transform: none;
+     letter-spacing: normal;
+     word-wrap: normal;
+     white-space: nowrap;
+     direction: ltr;
+
+     /* Unterstützung für alle WebKit-Browser. */
+     -webkit-font-smoothing: antialiased;
+     /* Unterstützung für Safari und Chrome. */
+     text-rendering: optimizeLegibility;
+
+     /* Unterstützung für Firefox. */
+     -moz-osx-font-smoothing: grayscale;
+
+     /* Unterstützung für IE. */
+     font-feature-settings: 'liga';
+   }
    ```
 
 3. Entferne die `<link>`-Tags für Roboto und Material Icons aus `index.html`.
