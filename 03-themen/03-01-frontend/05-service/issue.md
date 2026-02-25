@@ -23,6 +23,8 @@ Die Rezeptdaten liegen aktuell direkt in der Komponente. Um die Datenlogik von d
 
 ## 🪜 Arbeitsschritte
 
+** Hinweis:** Wenn Dir die objektorientierte Programmierung mit Typescript schwer fällt, kannst Du vor der Bearbeitung dieser Aufgabe diese kleine [Einführung](../../../02-einstieg/07-objektorientierung-typescript/issue.md) ansehen.
+
 1. Erzeuge einen `RecipeService` mit der Angular CLI.
 2. Verschiebe die Dummy-Daten in den Service und stelle eine Methode `getAllRecipes()` bereit.
 3. Verwende `inject(RecipeService)` in der Komponente, um die Daten vom Service zu beziehen.

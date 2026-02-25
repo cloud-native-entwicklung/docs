@@ -126,13 +126,16 @@ export class Library {
 
   // --- Attribute ---
   // 'private' bedeutet: Nur die Klasse selbst kann auf dieses Attribut zugreifen.
-  // Von außen ist 'books' nicht sichtbar.
-  private books: Book[] = [];
+  // Von außen ist '_books' nicht sichtbar.
+  // 'readonly' verhindert, dass die Variable neu zugewiesen wird (z.B. this._books = [...]).
+  // Das Array selbst kann aber weiterhin verändert werden (push, splice etc.) —
+  // readonly schützt nur die Referenz, nicht den Inhalt.
+  private readonly _books: Book[] = [];
 
   // --- Konstruktor ---
   // Wird aufgerufen, wenn ein neues Objekt erzeugt wird: new Library("Stadtbibliothek")
-  // 'readonly' im Konstruktor-Parameter ist eine TypeScript-Kurzschreibweise:
-  // Der Parameter wird automatisch als Attribut der Klasse angelegt und zugewiesen.
+  // Mit Sichtbarkeitsbereich oder 'readonly' wird der Parameter automatisch als Attribut der
+  // Klasse angelegt und zugewiesen.
   // Das erspart die manuelle Deklaration und Zuweisung (this.name = name).
   constructor(public readonly name: string) {}
 
@@ -140,17 +143,17 @@ export class Library {
   // In TypeScript ist 'public' der Standard-Sichtbarkeitsbereich.
   // Man kann 'public' also weglassen — die folgenden Methoden sind alle öffentlich.
   addBook(book: Book): void {
-    this.books.push(book);
+    this._books.push(book);
     console.log(`"${book.title}" wurde zur ${this.name} hinzugefügt.`);
   }
 
   listBooks(): void {
-    if (this.books.length === 0) {
+    if (this._books.length === 0) {
       console.log(`Die ${this.name} ist leer.`);
       return;
     }
     console.log(`Bücher in der ${this.name}:`);
-    for (const book of this.books) {
+    for (const book of this._books) {
       // '?.' (Optional Chaining) greift nur auf 'name' zu, wenn 'author' gesetzt ist.
       // '??' (Nullish Coalescing) liefert den Ersatzwert, wenn das Ergebnis null/undefined ist.
       const authorName = book.author?.name ?? 'unbekannt';
@@ -159,11 +162,22 @@ export class Library {
   }
 
   findByAuthor(author: string): Book[] {
-    return this.books.filter(book => book.author?.name === author);
+    return this._books.filter(book => book.author?.name === author);
+  }
+
+  // --- Getter ---
+  // Ein Getter sieht von außen aus wie ein Attribut, ist aber eine Methode.
+  // Aufruf: library.books (ohne Klammern, wie ein Attribut)
+  // Der Getter heißt 'books' — nach außen sieht es aus wie die Property 'books',
+  // intern greift er aber auf das private '_books' zu.
+  // Mit '[...this._books]' geben wir eine Kopie des Arrays zurück (Spread-Operator).
+  // So kann niemand von außen das Original-Array verändern.
+  get books(): Book[] {
+    return [...this._books];
   }
 
   getBookCount(): number {
-    return this.books.length;
+    return this._books.length;
   }
 }
 ```
@@ -179,7 +193,7 @@ TypeScript kennt drei Sichtbarkeitsbereiche:
 | `private` | ✅ | ❌ | ❌ |
 
 In unserem Beispiel:
-- `books` ist `private` — niemand außer der `Library`-Klasse kann die Liste direkt verändern.
+- `_books` ist `private readonly` — niemand außer der `Library`-Klasse kann auf das Array zugreifen, und die Referenz kann nicht neu zugewiesen werden. Der Getter `books` gibt eine Kopie nach außen.
 - `name` ist `readonly` und `public` (Standard) — jeder kann den Namen lesen, aber niemand kann ihn ändern.
 - Die Methoden haben keinen Modifier — sie sind automatisch `public` und bilden die **öffentliche Schnittstelle** der Klasse.
 
@@ -232,8 +246,11 @@ console.log(`\nBücher von Robert C. Martin: ${martinBooks.length}`);
 console.log(`Bibliotheksname: ${library.name}`);
 
 // Das hier würde NICHT funktionieren (Kommentar entfernen zum Testen):
-// library.books.push(book1);  // Fehler: 'books' is private
+// library._books.push(book1);  // Fehler: '_books' is private
 // library.name = 'Neuer Name'; // Fehler: Cannot assign to 'name' because it is a read-only property
+
+// library.books.push(book1) würde kompilieren, aber wirkungslos sein —
+// der Getter gibt eine Kopie zurück, das Original bleibt unverändert.
 ```
 
 ### 6. Ausführen und experimentieren
