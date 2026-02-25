@@ -87,7 +87,8 @@ In TypeScript verwenden wir **Interfaces** für reine Datenmodelle (Objekte ohne
 // book.ts
 
 // Ein Interface beschreibt die Struktur eines Objekts.
-// Es erzeugt KEINEN JavaScript-Code — es existiert nur zur Entwicklungszeit.
+// Es erzeugt KEINEN JavaScript-Code —
+// es existiert nur zur Entwicklungszeit.
 
 // 'export' macht das Interface für andere Dateien sichtbar.
 // Ohne 'export' kann es nur innerhalb dieser Datei verwendet werden.
@@ -95,7 +96,8 @@ In TypeScript verwenden wir **Interfaces** für reine Datenmodelle (Objekte ohne
 // Elemente können mit 'import' in anderen Dateien genutzt werden.
 
 // Ein Interface kann ein anderes Interface als Typ verwenden.
-// So können wir komplexe Datenmodelle aus kleinen Bausteinen zusammensetzen.
+// So können wir komplexe Datenmodelle
+// aus kleinen Bausteinen zusammensetzen.
 export interface Author {
   name: string;
   birthYear: number;
@@ -125,23 +127,29 @@ import { Book } from './book';
 export class Library {
 
   // --- Attribute ---
-  // 'private' bedeutet: Nur die Klasse selbst kann auf dieses Attribut zugreifen.
+  // 'private' bedeutet: Nur die Klasse selbst
+  // kann auf dieses Attribut zugreifen.
   // Von außen ist '_books' nicht sichtbar.
-  // 'readonly' verhindert, dass die Variable neu zugewiesen wird (z.B. this._books = [...]).
-  // Das Array selbst kann aber weiterhin verändert werden (push, splice etc.) —
-  // readonly schützt nur die Referenz, nicht den Inhalt.
+  // 'readonly' verhindert, dass die Variable
+  // neu zugewiesen wird (this._books = [...]).
+  // Das Array kann aber weiterhin verändert
+  // werden (push, splice etc.) — readonly
+  // schützt nur die Referenz, nicht den Inhalt.
   private readonly _books: Book[] = [];
 
   // --- Konstruktor ---
-  // Wird aufgerufen, wenn ein neues Objekt erzeugt wird: new Library("Stadtbibliothek")
-  // Mit Sichtbarkeitsbereich oder 'readonly' wird der Parameter automatisch als Attribut der
-  // Klasse angelegt und zugewiesen.
+  // Wird aufgerufen, wenn ein neues Objekt
+  // erzeugt wird: new Library("Stadtbibliothek")
+  // Mit Sichtbarkeitsbereich oder 'readonly'
+  // wird der Parameter automatisch als Attribut
+  // der Klasse angelegt und zugewiesen.
   // Das erspart die manuelle Deklaration und Zuweisung (this.name = name).
   constructor(public readonly name: string) {}
 
   // --- Methoden ---
   // In TypeScript ist 'public' der Standard-Sichtbarkeitsbereich.
-  // Man kann 'public' also weglassen — die folgenden Methoden sind alle öffentlich.
+  // Man kann 'public' also weglassen —
+  // die folgenden Methoden sind alle öffentlich.
   addBook(book: Book): void {
     this._books.push(book);
     console.log(`"${book.title}" wurde zur ${this.name} hinzugefügt.`);
@@ -154,8 +162,11 @@ export class Library {
     }
     console.log(`Bücher in der ${this.name}:`);
     for (const book of this._books) {
-      // '?.' (Optional Chaining) greift nur auf 'name' zu, wenn 'author' gesetzt ist.
-      // '??' (Nullish Coalescing) liefert den Ersatzwert, wenn das Ergebnis null/undefined ist.
+      // '?.' (Optional Chaining) greift nur auf
+      // 'name' zu, wenn 'author' gesetzt ist.
+      // '??' (Nullish Coalescing) liefert den
+      // Ersatzwert, wenn das Ergebnis
+      // null/undefined ist.
       const authorName = book.author?.name ?? 'unbekannt';
       console.log(`  - "${book.title}" von ${authorName} (${book.year})`);
     }
@@ -168,13 +179,20 @@ export class Library {
   // --- Getter ---
   // Ein Getter sieht von außen aus wie ein Attribut, ist aber eine Methode.
   // Aufruf: library.books (ohne Klammern, wie ein Attribut)
-  // Der Getter heißt 'books' — nach außen sieht es aus wie die Property 'books',
-  // intern greift er aber auf das private '_books' zu.
+  // Der Getter heißt 'books' — nach außen
+  // sieht es aus wie die Property 'books',
+  // intern greift er aber auf das private
+  // '_books' zu.
   // Zwei Schutzebenen:
-  // 1. 'readonly Book[]' schützt zur Compile-Zeit — push(), splice() etc. erzeugen einen Fehler.
-  // 2. '[...this._books]' (Spread-Operator - kopiert das Array) schützt zur Laufzeit —
-  // selbst wenn jemand den Compiler austrickst (z.B. per 'as Book[]'), verändert er nur die
-  // Kopie, nicht das Original.
+  // 1. 'readonly Book[]' schützt zur
+  //    Compile-Zeit — push(), splice() etc.
+  //    erzeugen einen Fehler.
+  // 2. '[...this._books]' (Spread-Operator -
+  //    kopiert das Array) schützt zur Laufzeit
+  //    — selbst wenn jemand den Compiler
+  //    austrickst (z.B. per 'as Book[]'),
+  //    verändert er nur die Kopie, nicht
+  //    das Original.
   get books(): readonly Book[] {
     return [...this._books];
   }
@@ -250,7 +268,9 @@ console.log(`Bibliotheksname: ${library.name}`);
 
 // Das hier würde NICHT funktionieren (Kommentar entfernen zum Testen):
 // library._books.push(book1);  // Fehler: '_books' is private
-// library.name = 'Neuer Name'; // Fehler: Cannot assign to 'name' because it is a read-only property
+// library.name = 'Neuer Name';
+//   Fehler: Cannot assign to 'name'
+//   because it is a read-only property
 
 // library.books.push(book1) würde kompilieren, aber wirkungslos sein —
 // der Getter gibt eine Kopie zurück, das Original bleibt unverändert.
@@ -301,7 +321,8 @@ Falls Du bereits Java kennst, hilft Dir diese Übersicht, die Unterschiede einzu
 >
 > ```typescript
 > interface Book { title: string; }
-> // Dieses Objekt erfüllt das Interface, ohne es explizit zu implementieren:
+> // Dieses Objekt erfüllt das Interface,
+> // ohne es explizit zu implementieren:
 > const myBook = { title: 'Clean Code', author: 'Robert C. Martin' };
 > const b: Book = myBook; // ✅ Funktioniert — 'title' ist vorhanden
 > ```
