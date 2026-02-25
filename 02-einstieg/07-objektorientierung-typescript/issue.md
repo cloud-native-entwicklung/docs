@@ -170,9 +170,12 @@ export class Library {
   // Aufruf: library.books (ohne Klammern, wie ein Attribut)
   // Der Getter heißt 'books' — nach außen sieht es aus wie die Property 'books',
   // intern greift er aber auf das private '_books' zu.
-  // Mit '[...this._books]' geben wir eine Kopie des Arrays zurück (Spread-Operator).
-  // So kann niemand von außen das Original-Array verändern.
-  get books(): Book[] {
+  // Zwei Schutzebenen:
+  // 1. 'readonly Book[]' schützt zur Compile-Zeit — push(), splice() etc. erzeugen einen Fehler.
+  // 2. '[...this._books]' (Spread-Operator - kopiert das Array) schützt zur Laufzeit —
+  // selbst wenn jemand den Compiler austrickst (z.B. per 'as Book[]'), verändert er nur die
+  // Kopie, nicht das Original.
+  get books(): readonly Book[] {
     return [...this._books];
   }
 

@@ -47,4 +47,4 @@ Diese Aufgabe ist nicht in der Musterlösung enthalten und verlangt eigenständi
 * Warum verwenden wir `inject()` statt Constructor Injection? Welche Vor- und Nachteile hat jeder Ansatz?
 * Welchen Vorteil hat es, die Daten im Service statt in der Komponente zu halten? Was würde passieren, wenn mehrere Komponenten denselben Service nutzen?
 * Wie erleichtert der Service-Ansatz das spätere Austauschen der Datenquelle (z.B. von Dummy-Daten auf ein HTTP-Backend)?
-* Wie kann im Service sichergestellt werden, dass beim Auslesen des Arrays eine Kopie herausgegeben wird, sodass Änderungen am Array an anderen Stellen (z.B. in der Komponente) nicht die Daten im Service beeinflussen?
+* Wie kann im Service sichergestellt werden, dass beim Auslesen des Arrays dieses von außen (z.B. in der Komponente) nicht verändert (Hinzufügen und Löschen eines Rezeptes) werden kann?
