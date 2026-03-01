@@ -26,10 +26,28 @@ Bevor wir die Rezepte-API implementieren, brauchen wir ein lauffähiges Quarkus-
 
 ## 🪜 Arbeitsschritte
 
-1. Erstelle ein neues Quarkus-Projekt. Orientiere Dich am offiziellen [Quarkus Getting Started Guide](https://quarkus.io/guides/getting-started). Alternativ kannst Du den [Quarkus Code Generator](https://code.quarkus.io/) verwenden und dort die benötigten Extensions auswählen.
-2. Öffne das Projekt in Deiner IDE, sichte die Projektstruktur und das `pom.xml`. Baue das Projekt mit `mvn compile`, um sicherzustellen, dass alles korrekt eingerichtet ist.
-3. Starte die Anwendung im Dev Mode mit `mvn quarkus:dev`. Öffne `http://localhost:8080` und `http://localhost:8080/q/dev-ui` im Browser. Erkunde die verfügbaren Funktionen der DevUI (z.B. Extensions, Configuration, Continuous Testing).
-4. Nimm eine kleine Änderung am generierten Code vor (z.B. den Rückgabewert eines Endpunkts) und beobachte, wie Quarkus den Code ohne Neustart neu kompiliert und bereitstellt.
+1. Lies den [Quarkus Getting Started Guide](https://quarkus.io/guides/getting-started) und achte besonders auf die **Prerequisites** (Java-Version, Maven-Version etc.). Prüfe Deine installierte Maven-Version mit:
+
+   ```bash
+   mvn -v
+   ```
+
+   Falls Deine Maven-Version nicht zu den Anforderungen der aktuellen Quarkus-Version passt, kannst Du im Guide oben rechts über die **Versionsauswahlbox** eine ältere Quarkus-Version wählen. Prüfe dann erneut die Prerequisites dieser Version.
+
+2. Erstelle ein neues Quarkus-Projekt mit folgendem Maven-Befehl (passe ggf. die Versionsnummer an):
+
+   ```bash
+   mvn io.quarkus.platform:quarkus-maven-plugin:3.32.1:create \
+       -DprojectGroupId=de.huk.schulung \
+       -DprojectArtifactId=recipes-api-provider \
+       -Dextensions="rest,rest-jackson"
+   ```
+
+   Die Extension `quarkus-arc` ist standardmäßig in jedem Quarkus-Projekt enthalten und muss nicht explizit angegeben werden. Alternativ kannst Du den [Quarkus Code Generator](https://code.quarkus.io/) verwenden und dort die Extensions auswählen.
+3. Öffne das Projekt in Deiner IDE, sichte die Projektstruktur und die generierten Dateien, v.a die `pom.xml`. Baue das Projekt mit `mvn compile`, um sicherzustellen, dass alles korrekt eingerichtet ist.
+4. Starte die Anwendung im Dev Mode mit `mvn quarkus:dev`. Öffne `http://localhost:8080` und `http://localhost:8080/q/dev-ui` im Browser. Erkunde die verfügbaren Funktionen der DevUI (z.B. Extensions, Configuration, Continuous Testing).
+5. Nimm eine kleine Änderung am generierten Code vor (z.B. den Rückgabewert eines Endpunkts) und beobachte, wie Quarkus den Code ohne Neustart neu kompiliert und bereitstellt.
+6. Lege ein Git-Repository an und sichere den aktuellen Stand.
 
 ## 📚 Selbstlernmaterial
 
@@ -43,6 +61,7 @@ Bevor wir die Rezepte-API implementieren, brauchen wir ein lauffähiges Quarkus-
 * Was ist "Convention over Configuration"? Welche Konventionen wendet Quarkus an, die Dir bei der Projekterstellung auffallen (z.B. Portnummer, Verzeichnisstruktur, application.properties)?
 * Welche Funktionen bietet der Quarkus Dev Mode? Warum ist Hot Reload für die Entwicklungsproduktivität wichtig? Wie unterscheidet sich das von einem klassischen Java-Deployment?
 * Was ist der Unterschied zwischen `quarkus-rest` und `quarkus-rest-jackson`? Warum werden beide benötigt?
-* Warum ist `quarkus-arc` (CDI) standardmäßig im Projekt enthalten? Was würde fehlen, wenn Du es entfernst?
 * Was zeigt die DevUI an und wie kann sie beim Entwickeln helfen? Welche Informationen findest Du dort, die Dir bei der Fehlersuche nützlich sein könnten?
-* Vergleiche den Quarkus-Projektstart mit dem eines Spring-Boot-Projekts (z.B. über [start.spring.io](https://start.spring.io)). Welche Gemeinsamkeiten und Unterschiede fallen Dir auf?
+* Was ist die Quarkus BOM (Bill of Materials) im `pom.xml`? Welchen Zweck hat sie?
+* Was sollen die generierten Tests sicherstellen? Wofür benötigen wir Tests?
+* Was ist Test Driven Development (TDD)? Welche Vorteile und Herausforderungen sind damit verbunden?
