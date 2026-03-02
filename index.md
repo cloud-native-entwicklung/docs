@@ -12,15 +12,16 @@ Die Übungen sind nach Technologie gegliedert und bauen jeweils aufeinander auf.
 
 ## Einstieg
 
-| Nr. | Übung                                                                           |
-|-----|---------------------------------------------------------------------------------|
-| 01  | [Microservices vs. Monolith](02-einstieg/01-microservices-vs-monolith/issue.md) |
-| 02  | [Frontend-Technologien](02-einstieg/02-frontend-technologien/issue.md)          |
-| 03  | [NPM-Einstieg](02-einstieg/03-npm-einstieg/issue.md)                            |
-| 04  | [TypeScript-Einstieg](02-einstieg/04-typescript-einstieg/issue.md)              |
-| 05  | [Angular CLI kennenlernen](02-einstieg/05-angular-cli/issue.md)                 |
-| 06  | [Git-Einstieg](02-einstieg/06-git-einstieg/issue.md)                            |
+| Nr. | Übung                                                                                      |
+|-----|--------------------------------------------------------------------------------------------|
+| 01  | [Microservices vs. Monolith](02-einstieg/01-microservices-vs-monolith/issue.md)            |
+| 02  | [Frontend-Technologien](02-einstieg/02-frontend-technologien/issue.md)                     |
+| 03  | [NPM-Einstieg](02-einstieg/03-npm-einstieg/issue.md)                                       |
+| 04  | [TypeScript-Einstieg](02-einstieg/04-typescript-einstieg/issue.md)                         |
+| 05  | [Angular CLI kennenlernen](02-einstieg/05-angular-cli/issue.md)                            |
+| 06  | [Git-Einstieg](02-einstieg/06-git-einstieg/issue.md)                                       |
 | 07  | [Objektorientierung mit TypeScript](02-einstieg/07-objektorientierung-typescript/issue.md) |
+| 08  | [HTTP verstehen](02-einstieg/08-http/issue.md)                                             |
 
 <!-- ## REST-API (OpenAPI) -->
 <!--  -->
@@ -33,26 +34,6 @@ Die Übungen sind nach Technologie gegliedert und bauen jeweils aufeinander auf.
 <!-- | 04  | [Ingredients Subresource](03-themen/03-02-api/04-ingredients-subresource/issue.md) | -->
 <!--  -->
 
-## Backend (Quarkus / Maven)
-
-| Nr. | Übung                                                                                      |
-|-----|--------------------------------------------------------------------------------------------|
-| 00  | [Quarkus-Projekt erstellen](03-themen/03-03-backend/00-quarkus-projekt-erstellen/issue.md) |
-
-<!-- | 01  | [API-Implementierung](03-themen/03-03-backend/01-api-implementierung/issue.md)                       | -->
-<!-- | 02  | [Read-Only Properties validieren](03-themen/03-03-backend/02-validating-invalid-properties/issue.md) | -->
-<!-- | 03  | [Bean Validation](03-themen/03-03-backend/03-validate-recipes/issue.md)                              | -->
-<!-- | 04  | [Custom Constraint](03-themen/03-03-backend/04-custom-constraint/issue.md)                           | -->
-<!-- | 05  | [Service Layer](03-themen/03-03-backend/05-service/issue.md)                                         | -->
-<!-- | 06  | [Datenbankanbindung](03-themen/03-03-backend/06-database/issue.md)                                   | -->
-<!-- | 07  | [JPA Best Practices](03-themen/03-03-backend/07-database-best-practices/issue.md)                    | -->
-<!-- | 08  | [Dependency Inversion](03-themen/03-03-backend/08-inverse-database-dependency/issue.md)              | -->
-<!-- | 09  | [Konfiguration](03-themen/03-03-backend/09-configuration/issue.md)                                   | -->
-<!-- | 10  | [Schichtenarchitektur](03-themen/03-03-backend/10-layers-split-package/issue.md)                     | -->
-<!-- | 11  | [Modelle pro Schicht](03-themen/03-03-backend/11-split-models-by-layer/issue.md)                     | -->
-<!-- | 12  | [Domain Events](03-themen/03-03-backend/12-events/issue.md)                                          | -->
-<!-- | 13  | [Interceptors](03-themen/03-03-backend/13-interceptors/issue.md)                                     | -->
-<!--  -->
 ## Frontend (Angular / NPM)
 
 | Nr. | Übung                                                                     |
@@ -74,3 +55,24 @@ Die Übungen sind nach Technologie gegliedert und bauen jeweils aufeinander auf.
 <!-- | 13  | [Unit-Tests mit Spectator](03-themen/03-01-frontend/13-unit-tests/issue.md)                 | -->
 <!-- | 14  | [Vitest einrichten (Alternative)](03-themen/03-01-frontend/14-vitest/issue.md)              | -->
 <!-- | 15  | [Spectator mit Vitest (Alternative)](03-themen/03-01-frontend/15-vitest-spectator/issue.md) | -->
+
+## Backend (Quarkus / Maven)
+
+| Nr. | Übung                                                                                      |
+|-----|--------------------------------------------------------------------------------------------|
+| 00  | [Quarkus-Projekt erstellen](03-themen/03-03-backend/00-quarkus-projekt-erstellen/issue.md) |
+
+<!-- | 01  | [API-Implementierung](03-themen/03-03-backend/01-api-implementierung/issue.md)                       | -->
+<!-- | 02  | [Read-Only Properties validieren](03-themen/03-03-backend/02-validating-invalid-properties/issue.md) | -->
+<!-- | 03  | [Bean Validation](03-themen/03-03-backend/03-validate-recipes/issue.md)                              | -->
+<!-- | 04  | [Custom Constraint](03-themen/03-03-backend/04-custom-constraint/issue.md)                           | -->
+<!-- | 05  | [Service Layer](03-themen/03-03-backend/05-service/issue.md)                                         | -->
+<!-- | 06  | [Datenbankanbindung](03-themen/03-03-backend/06-database/issue.md)                                   | -->
+<!-- | 07  | [JPA Best Practices](03-themen/03-03-backend/07-database-best-practices/issue.md)                    | -->
+<!-- | 08  | [Dependency Inversion](03-themen/03-03-backend/08-inverse-database-dependency/issue.md)              | -->
+<!-- | 09  | [Konfiguration](03-themen/03-03-backend/09-configuration/issue.md)                                   | -->
+<!-- | 10  | [Schichtenarchitektur](03-themen/03-03-backend/10-layers-split-package/issue.md)                     | -->
+<!-- | 11  | [Modelle pro Schicht](03-themen/03-03-backend/11-split-models-by-layer/issue.md)                     | -->
+<!-- | 12  | [Domain Events](03-themen/03-03-backend/12-events/issue.md)                                          | -->
+<!-- | 13  | [Interceptors](03-themen/03-03-backend/13-interceptors/issue.md)                                     | -->
+<!--  -->
