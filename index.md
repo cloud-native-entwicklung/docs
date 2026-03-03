@@ -23,16 +23,16 @@ Die Übungen sind nach Technologie gegliedert und bauen jeweils aufeinander auf.
 | 07  | [Objektorientierung mit TypeScript](02-einstieg/07-objektorientierung-typescript/issue.md) |
 | 08  | [HTTP verstehen](02-einstieg/08-http/issue.md)                                             |
 
-<!-- ## REST-API (OpenAPI) -->
-<!--  -->
-<!-- | Nr. | Übung                                                              | -->
-<!-- |-----|--------------------------------------------------------------------|-->
-<!-- | 00  | [OpenAPI-Spezifikation erstellen](03-themen/03-02-api/00-openapi-erstellen/issue.md) | -->
+## REST-API (OpenAPI)
+
+| Nr. | Übung                                                                                |
+|-----|--------------------------------------------------------------------------------------|
+| 00  | [OpenAPI-Spezifikation erstellen](03-themen/03-02-api/00-openapi-erstellen/issue.md) |
+
 <!-- | 01  | [Pagination](03-themen/03-02-api/01-pagination/issue.md)                             | -->
-<!-- | 02  | [Problem Details](03-themen/03-02-api/02-problem-details/issue.md)                 | -->
-<!-- | 03  | [HAL Hypermedia](03-themen/03-02-api/03-hal-hypermedia/issue.md)                   | -->
-<!-- | 04  | [Ingredients Subresource](03-themen/03-02-api/04-ingredients-subresource/issue.md) | -->
-<!--  -->
+<!-- | 02  | [Problem Details](03-themen/03-02-api/02-problem-details/issue.md)                   | -->
+<!-- | 03  | [HAL Hypermedia](03-themen/03-02-api/03-hal-hypermedia/issue.md)                     | -->
+<!-- | 04  | [Ingredients Subresource](03-themen/03-02-api/04-ingredients-subresource/issue.md)   | -->
 
 ## Frontend (Angular / NPM)
 

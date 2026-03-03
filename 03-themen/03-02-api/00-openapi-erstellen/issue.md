@@ -17,10 +17,7 @@ Bevor wir eine API implementieren, beschreiben wir sie zunächst formal. Die Ope
 
 ## ✅ Definition of Done
 
-* [ ] Es existiert eine Datei `openapi.yml` im Repository.
-* [ ] Die Spezifikation beschreibt die Endpunkte `GET /recipes`, `POST /recipes`, `GET /recipes/{id}`, `PUT /recipes/{id}` und `DELETE /recipes/{id}`.
-* [ ] Es gibt Schemas für `Recipe`, `Ingredient`, `Difficulty` (Enum) und `IngredientUnit` (Enum) unter `components/schemas`.
-* [ ] Der Pfadparameter `id` ist als wiederverwendbare Komponente unter `components/parameters` definiert.
+* [ ] Es existiert eine Datei `openapi.yml` im Repository. Diese beschreibt die API für die Verwaltung von Rezepten.
 * [ ] Für jeden Endpunkt sind sinnvolle HTTP-Statuscodes mit Beschreibungen spezifiziert (z.B. 200, 201, 204, 400, 404).
 * [ ] Die Spezifikation ist valide und kann im Swagger Editor fehlerfrei gerendert werden.
 * [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
@@ -44,7 +41,6 @@ Bevor wir eine API implementieren, beschreiben wir sie zunächst formal. Die Ope
 ## 🤔 Reflexionsfragen
 
 * Was ist der Unterschied zwischen einer "Code-first"- und einer "API-first"-Strategie? Welche Vorteile hat es, die Spezifikation vor der Implementierung zu schreiben?
-* Warum verwendet man `$ref` statt die Schemas direkt in den Endpunkten zu definieren? Was passiert, wenn sich ein Schema ändert?
-* Warum liefert `POST /recipes` den Statuscode `201 Created` und nicht `200 OK`? Warum liefert `DELETE /recipes/{id}` den Statuscode `204 No Content`?
-* Was bedeutet `readOnly: true` bei einem Feld (z.B. `id`, `lastEdited`)? Wie wirkt sich das auf Request- und Response-Bodies aus?
-* Welche Rolle spielen die `servers`-Einträge in der Spezifikation? Warum können dort mehrere URLs stehen?
+* Was ist der Zweck von OpenAPI?
+* Welche Ziele verfolgt REST?
+* Was bedeutet `readOnly: true` bei einem Feld (z.B. `id`, `lastEdited`)?
