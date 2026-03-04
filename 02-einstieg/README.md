@@ -16,3 +16,6 @@ bearbeitet.
 | 04  | [TypeScript-Einstieg](04-typescript-einstieg/issue.md)           | Typsystem, Transpiling, tsc        |
 | 05  | [Angular CLI kennenlernen](05-angular-cli/issue.md)              | Projekterstellung & Dateistruktur  |
 | 06  | [Git-Einstieg](06-git-einstieg/issue.md)                         | Versionsverwaltung & Remote Push   |
+| 07  | [Objektorientierung mit TypeScript](07-objektorientierung-typescript/issue.md) | Klassen, Interfaces, Sichtbarkeit |
+| 08  | [HTTP verstehen](08-http/issue.md)                               | Request, Response, Header, Status-Codes |
+| 09  | [REST verstehen](09-rest/issue.md)                               | Ressourcen, Methoden, Statuscodes  |
