@@ -44,3 +44,4 @@ Bevor wir eine API implementieren, beschreiben wir sie zunächst formal. Die Ope
 * Was ist der Zweck von OpenAPI?
 * Welche Ziele verfolgt REST?
 * Was bedeutet `readOnly: true` bei einem Feld (z.B. `id`, `lastEdited`)?
+* Was ist CORS?
