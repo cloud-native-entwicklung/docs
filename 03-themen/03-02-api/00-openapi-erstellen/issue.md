@@ -37,6 +37,8 @@ Bevor wir eine API implementieren, beschreiben wir sie zunächst formal. Die Ope
 * [Swagger Editor](https://editor.swagger.io/) — Online-Editor für OpenAPI-Definitionen
 * [Zalando RESTful API Guidelines](https://opensource.zalando.com/restful-api-guidelines/) — Best Practices für REST-APIs
 * [OpenAPI Guide: Getting Started](https://learn.openapis.org/) — Einstieg in die OpenAPI-Spezifikation
+* [REST-API-Sample](https://api.predic8.de/api-docs/ui/fruit-shop-api-v2-2-0)
+* [API-Portal des Bundes](https://bund.dev/)
 
 ## 🤔 Reflexionsfragen
 
