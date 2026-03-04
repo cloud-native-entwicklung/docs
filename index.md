@@ -22,6 +22,7 @@ Die Übungen sind nach Technologie gegliedert und bauen jeweils aufeinander auf.
 | 06  | [Git-Einstieg](02-einstieg/06-git-einstieg/issue.md)                                       |
 | 07  | [Objektorientierung mit TypeScript](02-einstieg/07-objektorientierung-typescript/issue.md) |
 | 08  | [HTTP verstehen](02-einstieg/08-http/issue.md)                                             |
+| 09  | [REST verstehen](02-einstieg/09-rest/issue.md)                                             |
 
 ## REST-API (OpenAPI)
 
