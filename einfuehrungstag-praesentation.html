@@ -833,6 +833,7 @@
             progress.style.width = ((current + 1) / total * 100) + '%';
             btnPrev.disabled = current === 0;
             btnNext.disabled = current === total - 1;
+            history.replaceState(null, '', '#' + (current + 1));
         }
 
         function next() { show(current + 1, 'next'); }
@@ -846,7 +847,13 @@
             if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
         });
 
-        show(0, 'next');
+        var initialSlide = 0;
+        var hash = window.location.hash.replace('#', '');
+        if (hash && !isNaN(hash)) {
+            var n = parseInt(hash, 10) - 1;
+            if (n >= 0 && n < total) initialSlide = n;
+        }
+        show(initialSlide, 'next');
     })();
 </script>
 
