@@ -25,20 +25,17 @@ Ein Rezept ohne Namen oder mit negativer Portionsanzahl sollte gar nicht erst an
 
 ## 🪜 Arbeitsschritte
 
-1. Füge `quarkus-hibernate-validator` als Abhängigkeit hinzu.
-2. Annotiere die Felder von `Recipe` und `Ingredient` mit passenden Validation-Constraints.
-3. Ergänze `@Valid` am Resource-Method-Parameter und an verschachtelten Feldern.
-4. Schreibe parametrisierte Tests für verschiedene ungültige Eingaben.
+1. Schreibe parametrisierte Tests für verschiedene ungültige Eingaben, z.B. ein fehlender oder zu langer Name beim Anlegen eines Rezepts.
+2. Füge `quarkus-hibernate-validator` als Abhängigkeit hinzu.
+3. Annotiere die Felder von `Recipe` und `Ingredient` mit passenden Validation-Constraints.
 
 ## 📚 Selbstlernmaterial
 
 * [Quarkus: Validation Guide](https://quarkus.io/guides/validation) — Validierung in Quarkus
-* [Jakarta Bean Validation: Constraints](https://jakarta.ee/specifications/bean-validation/3.0/jakarta-bean-validation-spec-3.0.html#builtinconstraints) — Eingebaute Constraints
+* [Jakarta Bean Validation](https://jakarta.ee/specifications/bean-validation/) — Spezifikation
 * [Baeldung: Bean Validation Basics](https://www.baeldung.com/java-validation) — Einstieg in Bean Validation
 
 ## 🤔 Reflexionsfragen
 
 * Warum ist deklarative Validierung (Annotationen) besser wartbar als imperative Validierung (if-else im Code)?
-* Was passiert, wenn Du `@Valid` an der `ingredients`-Liste vergisst? Werden die Zutaten trotzdem validiert?
-* Wie würdest Du eine Validierungsregel umsetzen, die sich nicht durch Standard-Annotationen ausdrücken lässt -- z.B. "mindestens eine Zutat muss vorhanden sein"?
 * Warum sind parametrisierte Tests für Validierung besonders geeignet? Welchen Vorteil haben sie gegenüber einzelnen Testmethoden?
