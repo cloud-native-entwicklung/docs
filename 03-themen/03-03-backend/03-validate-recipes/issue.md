@@ -25,7 +25,7 @@ Ein Rezept ohne Namen oder mit negativer Portionsanzahl sollte gar nicht erst an
 
 ## 🪜 Arbeitsschritte
 
-1. Schreibe parametrisierte Tests für verschiedene ungültige Eingaben, z.B. ein fehlender oder zu langer Name beim Anlegen eines Rezepts.
+1. Schreibe Tests für verschiedene ungültige Eingaben, z.B. ein fehlender oder zu langer Name beim Anlegen eines Rezepts.
 2. Füge `quarkus-hibernate-validator` als Abhängigkeit hinzu.
 3. Annotiere die Felder von `Recipe` und `Ingredient` mit passenden Validation-Constraints.
 
@@ -38,4 +38,4 @@ Ein Rezept ohne Namen oder mit negativer Portionsanzahl sollte gar nicht erst an
 ## 🤔 Reflexionsfragen
 
 * Warum ist deklarative Validierung (Annotationen) besser wartbar als imperative Validierung (if-else im Code)?
-* Warum sind parametrisierte Tests für Validierung besonders geeignet? Welchen Vorteil haben sie gegenüber einzelnen Testmethoden?
+* Warum sind parametrisierte Tests für Validierung besonders geeignet?
