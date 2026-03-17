@@ -25,8 +25,8 @@ Bisher liegt die gesamte Geschäftslogik direkt in der REST-Ressource. Das ersch
 ## 🪜 Arbeitsschritte
 
 1. Erstelle einen `RecipesService` als `@ApplicationScoped` CDI-Bean und verschiebe die Geschäftslogik dorthin.
-2. Passe die REST-Ressource an, sodass sie den Service per Constructor Injection nutzt.
-3. Schreibe mockbasierte Tests für die Ressource und eigenständige Tests für den Service.
+2. Passe die REST-Ressource an, sodass sie den Service injiziert bekommt und verwendet.
+3. (Optional) Schreibe API-Tests mit gemocktem Service, wenn sinnvoll.
 
 ## 📚 Selbstlernmaterial
 
@@ -39,5 +39,4 @@ Bisher liegt die gesamte Geschäftslogik direkt in der REST-Ressource. Das ersch
 
 * Warum sollte die REST-Ressource keine Geschäftslogik enthalten? Was wäre das Problem, wenn ein zweiter Zugangskanal (z.B. gRPC, Messaging) hinzukommt?
 * Was ist der Unterschied zwischen `@ApplicationScoped` und `@RequestScoped`? Wann würdest Du welches Scope verwenden?
-* Warum verwenden wir Constructor Injection statt Field Injection (`@Inject` auf Feldern)? Welche Vorteile hat das für die Testbarkeit?
-* Welchen Zweck erfüllen Mocks in Tests? Was wäre die Alternative, und warum ist sie problematisch?
+* Welchen Mehrwert bieten API-Tests mit gemocktem Service gegenüber den bisherigen Blackbox-Tests?
