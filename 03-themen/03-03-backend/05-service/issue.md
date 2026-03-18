@@ -40,3 +40,4 @@ Bisher liegt die gesamte Geschäftslogik direkt in der REST-Ressource. Das ersch
 * Warum sollte die REST-Ressource keine Geschäftslogik enthalten? Was wäre das Problem, wenn ein zweiter Zugangskanal (z.B. gRPC, Messaging) hinzukommt?
 * Was ist der Unterschied zwischen `@ApplicationScoped` und `@RequestScoped`? Wann würdest Du welches Scope verwenden?
 * Welchen Mehrwert bieten API-Tests mit gemocktem Service gegenüber den bisherigen Blackbox-Tests?
+* Wo sollte die Validierung des Rezeptes stattfinden -- in der Resource, im Service oder in beiden?
