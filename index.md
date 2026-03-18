@@ -65,9 +65,9 @@ Die Übungen sind nach Technologie gegliedert und bauen jeweils aufeinander auf.
 | 01  | [API-Implementierung](03-themen/03-03-backend/01-api-implementierung/issue.md)                       |
 | 02  | [Read-Only Properties validieren](03-themen/03-03-backend/02-validating-invalid-properties/issue.md) |
 | 03  | [Bean Validation](03-themen/03-03-backend/03-validate-recipes/issue.md)                              |
-
 | 04  | [Custom Constraint](03-themen/03-03-backend/04-custom-constraint/issue.md)                           |
 | 05  | [Service Layer](03-themen/03-03-backend/05-service/issue.md)                                         |
+
 <!-- | 06  | [Datenbankanbindung](03-themen/03-03-backend/06-database/issue.md)                                   | -->
 <!-- | 07  | [JPA Best Practices](03-themen/03-03-backend/07-database-best-practices/issue.md)                    | -->
 <!-- | 08  | [Dependency Inversion](03-themen/03-03-backend/08-inverse-database-dependency/issue.md)              | -->
