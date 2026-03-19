@@ -3,15 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interaktiver Kreuzworträtsel-Generator (Dark Mode)</title>
+    <title>Kreuzworträtsel Generator - ATVANTAGE Academy</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0f172a;
-            color: #f1f5f9;
+            background-color: #111111; /* Tiefer neutraler Hintergrund */
+            color: #eeeeee;
+        }
+
+        /* Top Bar Style mit dem spezifischen Orange #ff5401 */
+        .academy-header {
+            background-color: #1e1e1e;
+            border-bottom: 3px solid #ff5401;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
         }
 
         .grid-cell {
@@ -20,8 +27,8 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            border: 1px solid #475569;
-            background: #334155;
+            border: 1px solid #333333;
+            background: #2a2a2a;
             transition: all 0.2s;
             min-width: 38px;
             min-height: 38px;
@@ -33,12 +40,19 @@
             border: none;
         }
 
+        /* Dunkles Kästchen für Leerzeichen */
+        .grid-cell.space-separator {
+            background: #000000 !important;
+            border: 1px solid #222222;
+            cursor: default;
+        }
+
         .grid-cell input {
             width: 100%;
             height: 100%;
             text-align: center;
             text-transform: uppercase;
-            font-weight: 800;
+            font-weight: 700;
             font-size: 1.2rem;
             border: none;
             outline: none;
@@ -53,13 +67,13 @@
             bottom: 1px;
             right: 2px;
             font-size: 0.6rem;
-            color: #93c5fd;
+            color: #ff5401;
             font-weight: bold;
         }
 
         .grid-cell.solution-cell {
-            background-color: #1e40af;
-            box-shadow: inset 0 0 0 1px #3b82f6;
+            background-color: #262626;
+            box-shadow: inset 0 0 0 2px #ff5401;
         }
 
         .clue-number {
@@ -67,41 +81,45 @@
             top: 1px;
             left: 2px;
             font-size: 0.55rem;
-            color: #cbd5e1;
+            color: #aaaaaa;
             pointer-events: none;
             font-weight: 700;
             line-height: 1;
             display: flex;
             flex-direction: column;
             gap: 1px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
         }
 
+        /* Status-Farben */
         .word-correct {
-            background-color: #065f46 !important;
-            border-color: #34d399 !important;
+            background-color: #14532d !important;
+            border-color: #22c55e !important;
         }
 
         .word-correct input {
-            color: #a7f3d0;
+            color: #dcfce7;
         }
 
         .word-incorrect {
-            background-color: #854d0e !important;
-            border-color: #facc15 !important;
+            background-color: #431407 !important;
+            border-color: #ff5401 !important;
         }
 
         .word-incorrect input {
-            color: #fef08a;
+            color: #ff5401;
         }
 
         .focused-cell {
-            background-color: #475569 !important;
-            box-shadow: 0 0 0 3px #3b82f6;
+            background-color: #404040 !important;
+            box-shadow: 0 0 0 3px #ff5401;
             z-index: 20;
         }
 
         .highlight-word {
-            background-color: #3f4e64 !important;
+            background-color: #262626 !important;
+            border-color: #444444 !important;
+            box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5);
         }
 
         #crossword-container {
@@ -113,100 +131,163 @@
         }
 
         kbd {
-            background: #1e293b;
-            border: 1px solid #475569;
+            background: #262626;
+            border: 1px solid #444444;
             border-radius: 4px;
             padding: 2px 4px;
             font-size: 0.75rem;
+            color: #cccccc;
         }
 
-        /* Modal Styles */
         .modal-overlay {
-            background-color: rgba(15, 23, 42, 0.9);
+            background-color: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(8px);
+        }
+
+        .btn-primary {
+            background-color: #ff5401;
+            color: #ffffff;
+            transition: all 0.2s;
+        }
+
+        .btn-primary:hover {
+            background-color: #e64a00;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background-color: #333333;
+            color: #eeeeee;
+            border: 1px solid #444444;
+        }
+
+        .btn-secondary:hover {
+            background-color: #444444;
+        }
+
+        .custom-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scroll::-webkit-scrollbar-track {
+            background: #111111;
+        }
+
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: #333333;
+            border-radius: 10px;
+        }
+
+        .solution-space-divider {
+            width: 38px;
+            height: 48px;
+            background: #000000;
+            border: 1px solid #222222;
+            border-radius: 4px;
+        }
+
+        .sol-input-prefilled {
+            background-color: #111111 !important;
+            color: #666666 !important;
+            border-color: #222222 !important;
+            cursor: not-allowed;
         }
     </style>
 </head>
-<body class="p-4 md:p-8">
+<body>
 
-<div class="max-w-6xl mx-auto">
-    <header class="mb-8 text-center">
-        <h1 class="text-4xl font-extrabold text-white mb-2">Kreuzworträtsel <span class="text-blue-500">Master</span>
+<!-- Academy Top Bar -->
+<nav class="academy-header sticky top-0 z-40 w-full px-6 h-16 flex items-center justify-between">
+    <div class="flex items-center gap-2">
+        <span class="text-xl font-black tracking-tighter text-[#ff5401]">ATVANTAGE</span>
+        <span class="text-xl font-light text-neutral-500">Academy</span>
+    </div>
+    <div class="flex items-center gap-4">
+        <button id="email-btn" class="p-2 text-neutral-400 hover:text-[#ff5401] transition-colors"
+                title="E-Mail Kontakt">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                 stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+        </button>
+    </div>
+</nav>
+
+<div class="max-w-6xl mx-auto p-4 md:p-8">
+    <header class="mb-10 text-center">
+        <h1 class="text-4xl font-extrabold text-white mb-2 tracking-tight">Crossword <span class="text-[#ff5401]">Challenge</span>
         </h1>
-        <p id="direction-hint" class="text-slate-400 font-semibold tracking-wide uppercase text-xs">Schreibrichtung:
-            Waagerecht</p>
     </header>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <!-- Rätsel-Gitter -->
-        <div class="lg:col-span-2 bg-slate-800 p-4 md:p-8 rounded-3xl shadow-2xl border border-slate-700">
+        <div class="lg:col-span-2 bg-[#1e1e1e] p-4 md:p-8 rounded-2xl shadow-xl border border-[#333333]">
             <div id="crossword-container">
                 <div id="grid-render" class="grid gap-1 inline-grid"></div>
             </div>
 
             <!-- Lösungswort-Anzeige -->
             <div id="final-solution-area"
-                 class="mt-8 p-6 bg-slate-900/50 rounded-2xl border border-blue-500/30 hidden text-center transition-all duration-300">
-                <h3 class="font-bold text-blue-400 mb-4 uppercase tracking-widest text-xs">Lösungswort</h3>
+                 class="mt-8 p-6 bg-[#111111] rounded-xl border border-[#333333] hidden text-center transition-all">
+                <h3 class="font-bold text-[#ff5401] mb-4 uppercase tracking-widest text-xs">Finales Lösungswort</h3>
                 <div id="final-solution-inputs" class="flex flex-wrap justify-center gap-2"></div>
-                <p id="success-msg" class="mt-6 text-emerald-400 font-bold hidden animate-bounce text-lg">Richtig! Du
-                    hast das Rätsel gelöst! 🏆</p>
+                <p id="success-msg" class="mt-6 text-emerald-400 font-bold hidden animate-bounce text-lg">Hervorragend!
+                    Das Rätsel ist gelöst! 🏆</p>
             </div>
         </div>
 
         <!-- Hinweise/Fragen -->
         <div class="space-y-6">
-            <div class="bg-slate-800 p-6 rounded-3xl shadow-xl border border-slate-700">
-                <h2 class="text-xl font-bold mb-6 flex items-center text-white">
-                    <span class="bg-blue-600 text-white w-8 h-8 rounded-xl flex items-center justify-center mr-3 text-sm">?</span>
+            <div class="bg-[#1e1e1e] p-6 rounded-2xl shadow-xl border border-[#333333]">
+                <h2 class="text-lg font-bold mb-6 flex items-center text-white">
+                    <span class="bg-[#ff5401] text-[#111111] w-6 h-6 rounded flex items-center justify-center mr-3 text-xs font-black">?</span>
                     Hinweise
                 </h2>
 
-                <div class="space-y-6">
+                <div class="space-y-8">
                     <div>
-                        <h3 id="label-h" class="text-blue-400 text-[10px] font-black uppercase tracking-widest mb-3">
+                        <h3 id="label-h"
+                            class="text-[#ff5401] text-[11px] font-bold uppercase tracking-widest mb-4 border-b border-[#333333] pb-2">
                             Waagerecht</h3>
-                        <ul id="clues-horizontal" class="space-y-3 text-sm text-slate-300"></ul>
+                        <ul id="clues-horizontal" class="space-y-3 text-sm text-neutral-300"></ul>
                     </div>
-                    <div class="pt-6 border-t border-slate-700">
-                        <h3 id="label-v" class="text-blue-400 text-[10px] font-black uppercase tracking-widest mb-3">
+                    <div>
+                        <h3 id="label-v"
+                            class="text-[#ff5401] text-[11px] font-bold uppercase tracking-widest mb-4 border-b border-[#333333] pb-2">
                             Senkrecht</h3>
-                        <ul id="clues-vertical" class="space-y-3 text-sm text-slate-300"></ul>
+                        <ul id="clues-vertical" class="space-y-3 text-sm text-neutral-300"></ul>
                     </div>
                 </div>
             </div>
 
             <!-- Steuerungs-Panel -->
-            <div class="bg-slate-900/50 p-6 rounded-3xl border border-slate-700">
+            <div class="bg-[#1e1e1e]/50 p-6 rounded-2xl border border-[#333333]">
+                <button id="edit-btn"
+                        class="w-full btn-primary font-bold py-3 rounded-xl transition-all active:scale-95 mb-4 shadow-lg flex items-center justify-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
+                    </svg>
+                    Rätsel bearbeiten
+                </button>
+
                 <div class="grid grid-cols-2 gap-3 mb-4">
-                    <button id="import-btn"
-                            class="bg-slate-700 hover:bg-slate-600 text-white text-xs font-bold py-2 px-3 rounded-xl transition-all flex items-center justify-center gap-2">
-                        📥 Import
+                    <button id="import-btn" class="btn-secondary text-xs font-bold py-2 rounded-xl transition-all">
+                        Import
                     </button>
-                    <button id="export-btn"
-                            class="bg-slate-700 hover:bg-slate-600 text-white text-xs font-bold py-2 px-3 rounded-xl transition-all flex items-center justify-center gap-2">
-                        📤 Export
+                    <button id="export-btn" class="btn-secondary text-xs font-bold py-2 rounded-xl transition-all">
+                        Export
                     </button>
                 </div>
 
                 <button id="reveal-btn"
-                        class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-2xl transition-all active:scale-95 mb-4 shadow-lg flex items-center justify-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
-                        <path fill-rule="evenodd"
-                              d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
-                              clip-rule="evenodd"/>
-                    </svg>
+                        class="w-full bg-neutral-700 hover:bg-neutral-600 text-white font-bold py-3 rounded-xl transition-all mb-4">
                     Auflösen
                 </button>
                 <button id="reset-btn"
-                        class="w-full bg-rose-600 hover:bg-rose-500 text-white font-bold py-3 rounded-2xl transition-all active:scale-95 mb-4 shadow-lg">
-                    Rätsel leeren
+                        class="w-full text-rose-500 hover:text-rose-400 text-xs font-bold py-2 transition-all opacity-60 hover:opacity-100">
+                    Eingaben leeren
                 </button>
-                <div class="text-[11px] text-slate-400 space-y-2">
-                    <p class="flex items-center gap-2"><kbd>Tab</kbd> Zum nächsten Wort springen</p>
-                    <p class="flex items-center gap-2"><kbd>Leertaste</kbd> Richtung im Feld wechseln</p>
-                </div>
             </div>
         </div>
     </div>
@@ -214,303 +295,199 @@
 
 <!-- Modals -->
 <div id="modal-container" class="fixed inset-0 z-50 flex items-center justify-center hidden modal-overlay p-4">
-    <!-- Confirm Reveal Modal -->
-    <div id="confirm-reveal-modal"
-         class="modal-content bg-slate-800 border border-slate-700 p-8 rounded-3xl shadow-2xl max-w-sm w-full hidden">
-        <h2 class="text-xl font-bold text-white mb-2">Rätsel auflösen?</h2>
-
-        <div id="reveal-confirmation-content">
-            <p class="text-slate-400 mb-8 leading-relaxed text-sm">Möchtest du wirklich alle richtigen Buchstaben
-                anzeigen lassen? Das Rätsel gilt dann als gelöst.</p>
-            <div class="flex gap-4">
-                <button onclick="closeModal()"
-                        class="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 rounded-xl transition-colors">
-                    Abbrechen
-                </button>
-                <button id="confirm-reveal-yes"
-                        class="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl transition-colors">
-                    Ja, auflösen
-                </button>
-            </div>
+    <!-- Edit Modal -->
+    <div id="edit-modal"
+         class="modal-content bg-[#1e1e1e] p-6 md:p-8 rounded-2xl shadow-2xl max-w-2xl w-full hidden flex flex-col max-h-[90vh] border border-[#333333]">
+        <h2 class="text-2xl font-bold text-white mb-6">Editor</h2>
+        <div class="mb-6">
+            <label class="block text-[10px] font-bold text-neutral-400 uppercase tracking-widest mb-2">Gesuchtes
+                Wort</label>
+            <input type="text" id="edit-solution-val"
+                   class="w-full bg-[#111111] border border-[#333333] rounded-xl py-2 px-4 text-white font-bold uppercase focus:border-[#ff5401] outline-none"
+                   placeholder="LÖSUNG">
         </div>
+        <div id="edit-questions-list" class="flex-1 overflow-y-auto custom-scroll space-y-3 pr-2 mb-6"></div>
+        <div class="flex gap-4">
+            <button id="cancel-edit-btn" class="flex-1 btn-secondary font-bold py-3 rounded-xl">Abbrechen</button>
+            <button id="save-edit-btn" class="flex-1 btn-primary font-bold py-3 rounded-xl shadow-lg">Speichern</button>
+        </div>
+    </div>
 
-        <div id="reveal-solution-challenge" class="hidden">
-            <p class="text-slate-400 mb-4 leading-relaxed text-sm">Bitte gib das <strong>Lösungswort</strong> ein, um
-                das Rätsel aufzudecken:</p>
-            <input type="text" id="reveal-solution-input"
-                   class="w-full bg-slate-900 border border-slate-700 rounded-xl py-3 px-4 text-white font-bold uppercase mb-4 focus:outline-none focus:border-blue-500 tracking-widest text-center"
-                   placeholder="...">
-            <div class="flex gap-4">
-                <button onclick="closeModal()"
-                        class="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 rounded-xl transition-colors">
-                    Abbrechen
-                </button>
-                <button id="reveal-check-btn"
-                        class="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl transition-colors">
-                    Prüfen & Lösen
-                </button>
-            </div>
-            <p id="reveal-error" class="text-center text-rose-400 text-xs mt-3 opacity-0 transition-opacity">Falsches
-                Lösungswort!</p>
+    <!-- Import Modal -->
+    <div id="import-modal"
+         class="modal-content bg-[#1e1e1e] p-8 rounded-2xl shadow-2xl max-w-md w-full hidden border border-[#333333]">
+        <h2 class="text-xl font-bold text-white mb-4">Rätsel laden</h2>
+        <textarea id="import-code"
+                  class="w-full h-32 bg-[#111111] text-neutral-300 p-3 rounded-xl text-xs font-mono border border-[#333333] mb-4 focus:outline-none focus:border-[#ff5401]"
+                  placeholder="Base64 Code einfügen..."></textarea>
+        <div class="flex gap-4">
+            <button onclick="closeModal()" class="flex-1 btn-secondary font-bold py-3 rounded-xl">Abbrechen</button>
+            <button id="load-import-btn" class="flex-1 btn-primary font-bold py-3 rounded-xl">Laden</button>
         </div>
     </div>
 
     <!-- Export Modal -->
     <div id="export-modal"
-         class="modal-content bg-slate-800 border border-slate-700 p-8 rounded-3xl shadow-2xl max-w-md w-full hidden">
-        <h2 class="text-xl font-bold text-white mb-2">Rätsel exportieren</h2>
-        <p class="text-slate-400 mb-4 leading-relaxed text-sm">Kopiere diesen Code, um dein Rätsel mit anderen zu
-            teilen:</p>
+         class="modal-content bg-[#1e1e1e] p-8 rounded-2xl shadow-2xl max-w-md w-full hidden border border-[#333333]">
+        <h2 class="text-xl font-bold text-white mb-4">Code teilen</h2>
         <textarea id="export-code" readonly
-                  class="w-full h-32 bg-slate-900 text-blue-400 p-3 rounded-xl text-xs font-mono border border-slate-700 mb-4 focus:outline-none focus:border-blue-500"></textarea>
+                  class="w-full h-32 bg-[#111111] text-[#ff5401] p-3 rounded-xl text-xs font-mono border border-[#333333] mb-4 focus:outline-none"></textarea>
         <div class="flex gap-4">
-            <button onclick="closeModal()"
-                    class="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 rounded-xl transition-colors">
-                Schließen
-            </button>
-            <button id="copy-export-btn"
-                    class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl transition-colors">
-                📋 Kopieren
-            </button>
+            <button onclick="closeModal()" class="flex-1 btn-secondary font-bold py-3 rounded-xl">Schließen</button>
+            <button id="copy-export-btn" class="flex-1 btn-primary font-bold py-3 rounded-xl">Kopieren</button>
         </div>
-        <p id="copy-success" class="text-center text-emerald-400 text-xs mt-3 opacity-0 transition-opacity">Erfolgreich
-            kopiert!</p>
     </div>
 
-    <!-- Import Modal -->
-    <div id="import-modal"
-         class="modal-content bg-slate-800 border border-slate-700 p-8 rounded-3xl shadow-2xl max-w-md w-full hidden">
-        <h2 class="text-xl font-bold text-white mb-2">Rätsel importieren</h2>
-        <p class="text-slate-400 mb-4 leading-relaxed text-sm">Füge den Base64-Code hier ein:</p>
-        <textarea id="import-code"
-                  class="w-full h-32 bg-slate-900 text-white p-3 rounded-xl text-xs font-mono border border-slate-700 mb-4 focus:outline-none focus:border-blue-500 placeholder-slate-600"
-                  placeholder="Code hier einfügen..."></textarea>
-        <div class="flex gap-4">
-            <button onclick="closeModal()"
-                    class="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 rounded-xl transition-colors">
-                Abbrechen
-            </button>
-            <button id="load-import-btn"
-                    class="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl transition-colors">
-                Laden
-            </button>
+    <!-- Confirm Reveal Modal -->
+    <div id="confirm-reveal-modal"
+         class="modal-content bg-[#1e1e1e] p-8 rounded-2xl shadow-2xl max-w-sm w-full hidden border border-[#333333]">
+        <h2 class="text-xl font-bold text-white mb-4 text-center">Rätsel auflösen</h2>
+        <div id="reveal-confirmation-content">
+            <p class="text-neutral-400 mb-8 leading-relaxed text-sm text-center">Möchtest du wirklich alle Buchstaben
+                anzeigen lassen?</p>
+            <div class="flex gap-4">
+                <button onclick="closeModal()" class="flex-1 btn-secondary font-bold py-3 rounded-xl">Abbrechen</button>
+                <button id="confirm-reveal-yes" class="flex-1 btn-primary font-bold py-3 rounded-xl">Ja</button>
+            </div>
         </div>
-        <p id="import-error" class="text-center text-rose-400 text-xs mt-3 opacity-0 transition-opacity">Ungültiger
-            Code!</p>
+        <div id="reveal-solution-challenge" class="hidden">
+            <p class="text-neutral-400 mb-4 leading-relaxed text-sm text-center">Gib das Lösungswort ein:</p>
+            <input type="text" id="reveal-solution-input"
+                   class="w-full bg-[#111111] border border-[#333333] rounded-xl py-3 px-4 text-white font-bold uppercase mb-4 text-center focus:border-[#ff5401] outline-none tracking-widest">
+            <div class="flex gap-4">
+                <button onclick="closeModal()" class="flex-1 btn-secondary font-bold py-3 rounded-xl">Abbruch</button>
+                <button id="reveal-check-btn" class="flex-1 btn-primary font-bold py-3 rounded-xl">Lösen</button>
+            </div>
+            <p id="reveal-error" class="text-center text-rose-500 text-xs mt-3 opacity-0">Falsch!</p>
+        </div>
     </div>
 </div>
 
 <script>
     const FALLBACK_DATA = {
-        "title": "IT & Technik",
-        "solution": "NETZ",
+        "title": "Standard Rätsel",
+        "solution": "NETZWERK",
         "questions": [
             {"clue": "Wichtigstes Werkzeug zum Schreiben am PC", "answer": "TASTATUR"},
-            {"clue": "Anderes Wort für tragbarer Rechner", "answer": "LAPTOP"},
-            {"clue": "Das 'Gehirn' eines Computers", "answer": "PROZESSOR"},
-            {"clue": "Globales Netzwerk für Informationen", "answer": "INTERNET"},
-            {"clue": "Programm zur Anzeige von Webseiten", "answer": "BROWSER"},
-            {"clue": "Darauf schaust du gerade", "answer": "MONITOR"},
-            {"clue": "Kleiner Nager am Schreibtisch", "answer": "MAUS"}
+            {"clue": "Globales Netzwerk", "answer": "INTERNET"},
+            {"clue": "Tragbarer Rechner", "answer": "LAPTOP"},
+            {"clue": "Das Gehirn des PCs", "answer": "PROZESSOR"},
+            {"clue": "Zeigt das Bild an", "answer": "MONITOR"},
+            {"clue": "Kleiner Nager", "answer": "MAUS"}
         ]
     };
 
-    let currentData = FALLBACK_DATA;
+    let currentData = JSON.parse(JSON.stringify(FALLBACK_DATA));
     let grid = [];
     let wordsOnGrid = [];
     let currentDir = 'H';
     let lastClickedPos = {r: -1, c: -1};
+    let foundSolIndices = new Set();
+
+    /**
+     * Schutz vor Webcrawlern für E-Mail
+     */
+    document.getElementById('email-btn').onclick = function () {
+        const u = 'academy';
+        const d = 'atvantage.com';
+        window.location.href = 'mailto:' + u + '@' + d;
+    };
 
     async function init() {
-        try {
-            const response = await fetch('crossword.json');
-            if (response.ok) currentData = await response.json();
-        } catch (e) {
-            console.log("Lade Fallback...");
+        const saved = localStorage.getItem('crossword_master_data');
+        if (saved) {
+            try {
+                currentData = JSON.parse(saved);
+            } catch (e) {
+                console.error("Storage corrupt");
+            }
         }
-
         rebuildGame();
         setupEventListeners();
     }
 
-    /**
-     * Baut das Spiel komplett neu auf und setzt alle Statusanzeigen zurück.
-     */
+    function persistData() {
+        localStorage.setItem('crossword_master_data', JSON.stringify(currentData));
+    }
+
     function rebuildGame() {
         const msg = document.getElementById('success-msg');
         const area = document.getElementById('final-solution-area');
         if (msg) msg.classList.add('hidden');
-        if (area) area.classList.remove('bg-green-900/40', 'border-green-500');
+        if (area) area.classList.remove('bg-emerald-900/20', 'border-emerald-500');
 
-        generateLayout();
+        generateLayout(currentData.questions);
         renderGrid();
         renderClues();
 
-        if (currentData.solution) {
-            setupSolutionArea();
-        } else {
-            if (area) area.classList.add('hidden');
-        }
+        if (currentData.solution) setupSolutionArea();
+        else if (area) area.classList.add('hidden');
 
         checkFinalSolution();
     }
 
-    function setupEventListeners() {
-        // Reveal Button Logic
-        document.getElementById('reveal-btn').onclick = () => {
-            const confirmDiv = document.getElementById('reveal-confirmation-content');
-            const challengeDiv = document.getElementById('reveal-solution-challenge');
-            const errorMsg = document.getElementById('reveal-error');
-            const input = document.getElementById('reveal-solution-input');
+    function generateLayout(questions) {
+        const sortedWords = questions
+            .map((q, originalIdx) => ({...q, originalIdx}))
+            .sort((a, b) => b.answer.length - a.answer.length);
 
-            errorMsg.style.opacity = '0';
-            input.value = '';
-
-            if (currentData.solution) {
-                confirmDiv.classList.add('hidden');
-                challengeDiv.classList.remove('hidden');
-            } else {
-                confirmDiv.classList.remove('hidden');
-                challengeDiv.classList.add('hidden');
-            }
-            openModal('confirm-reveal-modal');
-        };
-
-        // Yes (No solution)
-        document.getElementById('confirm-reveal-yes').onclick = () => {
-            revealAll();
-            closeModal();
-        };
-
-        // Check (With solution)
-        document.getElementById('reveal-check-btn').onclick = () => {
-            const input = document.getElementById('reveal-solution-input').value.trim().toUpperCase();
-            const target = currentData.solution.toUpperCase();
-            const errorMsg = document.getElementById('reveal-error');
-
-            if (input === target) {
-                revealAll();
-                closeModal();
-            } else {
-                errorMsg.style.opacity = '1';
-                setTimeout(() => errorMsg.style.opacity = '0', 2000);
-            }
-        };
-
-        // Enter key for solution challenge
-        document.getElementById('reveal-solution-input').onkeydown = (e) => {
-            if (e.key === 'Enter') document.getElementById('reveal-check-btn').click();
-        };
-
-        // Export Logic
-        document.getElementById('export-btn').onclick = () => {
-            const jsonStr = JSON.stringify(currentData);
-            const base64 = btoa(unescape(encodeURIComponent(jsonStr)));
-            document.getElementById('export-code').value = base64;
-            openModal('export-modal');
-        };
-
-        document.getElementById('copy-export-btn').onclick = () => {
-            const textarea = document.getElementById('export-code');
-            textarea.select();
-            document.execCommand('copy');
-            const successMsg = document.getElementById('copy-success');
-            successMsg.style.opacity = '1';
-            setTimeout(() => successMsg.style.opacity = '0', 2000);
-        };
-
-        // Import Logic
-        document.getElementById('import-btn').onclick = () => {
-            document.getElementById('import-code').value = '';
-            openModal('import-modal');
-        };
-
-        document.getElementById('load-import-btn').onclick = () => {
-            const code = document.getElementById('import-code').value.trim();
-            const errorMsg = document.getElementById('import-error');
-            try {
-                const decoded = decodeURIComponent(escape(atob(code)));
-                const parsed = JSON.parse(decoded);
-                if (parsed.questions && Array.isArray(parsed.questions)) {
-                    currentData = parsed;
-                    rebuildGame();
-                    closeModal();
-                } else {
-                    throw new Error("Invalid Format");
-                }
-            } catch (e) {
-                errorMsg.style.opacity = '1';
-                setTimeout(() => errorMsg.style.opacity = '0', 2000);
-            }
-        };
-
-        document.getElementById('reset-btn').onclick = () => {
-            document.querySelectorAll('.grid-cell input, #final-solution-inputs input').forEach(i => i.value = '');
-            document.querySelectorAll('.grid-cell').forEach(c => c.classList.remove('word-correct', 'word-incorrect'));
-            document.querySelectorAll('li').forEach(l => l.classList.remove('opacity-20', 'line-through'));
-            checkFinalSolution();
-        };
-    }
-
-    function openModal(modalId) {
-        const container = document.getElementById('modal-container');
-        container.classList.remove('hidden');
-        document.querySelectorAll('.modal-content').forEach(m => m.classList.add('hidden'));
-        document.getElementById(modalId).classList.remove('hidden');
-    }
-
-    function closeModal() {
-        document.getElementById('modal-container').classList.add('hidden');
-    }
-
-    function revealAll() {
-        for (let r = 0; r < grid.length; r++) {
-            for (let c = 0; c < grid[r].length; c++) {
-                const cell = grid[r][c];
-                if (cell) {
-                    const input = document.querySelector(`input[data-row="${r}"][data-col="${c}"]`);
-                    if (input) {
-                        input.value = cell.char;
-                        syncSolution(r, c, cell.char);
-                    }
-                }
-            }
-        }
-        checkGrid();
-    }
-
-    function generateLayout() {
-        const words = [...currentData.questions].sort((a, b) => b.answer.length - a.answer.length);
-        const SIZE = 50;
+        const SIZE = 60;
         grid = Array(SIZE).fill(null).map(() => Array(SIZE).fill(null));
         wordsOnGrid = [];
 
-        if (words.length > 0) {
-            placeWord(words[0], Math.floor(SIZE / 2), Math.floor(SIZE / 3), 'H', 1);
-            for (let i = 1; i < words.length; i++) {
-                const text = words[i].answer.toUpperCase();
-                let possibleStarts = [];
+        if (sortedWords.length === 0) return {success: true};
+
+        placeWord(sortedWords[0], Math.floor(SIZE / 3), Math.floor(SIZE / 3), 'H', 1);
+
+        let placedIndices = [0];
+        let attempts = 0;
+
+        while (placedIndices.length < sortedWords.length && attempts < 10) {
+            for (let i = 0; i < sortedWords.length; i++) {
+                if (placedIndices.includes(i)) continue;
+                const text = sortedWords[i].answer.toUpperCase();
+                let bestStart = null;
                 for (let placedWord of wordsOnGrid) {
                     for (let j = 0; j < placedWord.answer.length; j++) {
                         for (let k = 0; k < text.length; k++) {
-                            if (placedWord.answer[j] === text[k]) {
+                            if (placedWord.answer[j] === text[k] && text[k] !== ' ') {
                                 const newDir = placedWord.dir === 'H' ? 'V' : 'H';
                                 const r = newDir === 'V' ? placedWord.row - k : placedWord.row + j;
                                 const c = newDir === 'V' ? placedWord.col + j : placedWord.col - k;
                                 if (canPlaceWord(text, r, c, newDir, SIZE)) {
-                                    possibleStarts.push({r, c, dir: newDir});
+                                    bestStart = {r, c, dir: newDir};
+                                    break;
                                 }
                             }
                         }
+                        if (bestStart) break;
                     }
+                    if (bestStart) break;
                 }
-                if (possibleStarts.length > 0) {
-                    const start = possibleStarts[Math.floor(Math.random() * possibleStarts.length)];
-                    placeWord(words[i], start.r, start.c, start.dir, i + 1);
+                if (bestStart) {
+                    placeWord(sortedWords[i], bestStart.r, bestStart.c, bestStart.dir, i + 1);
+                    placedIndices.push(i);
+                }
+            }
+            attempts++;
+        }
+
+        for (let i = 0; i < sortedWords.length; i++) {
+            if (placedIndices.includes(i)) continue;
+            const text = sortedWords[i].answer.toUpperCase();
+            let placedStandalone = false;
+            for (let r = 2; r < SIZE - 2 && !placedStandalone; r += 2) {
+                for (let c = 2; c < SIZE - 2 && !placedStandalone; c += 2) {
+                    if (canPlaceWord(text, r, c, 'H', SIZE)) {
+                        placeWord(sortedWords[i], r, c, 'H', i + 1);
+                        placedIndices.push(i);
+                        placedStandalone = true;
+                    }
                 }
             }
         }
         shrinkGrid(SIZE);
+        return {success: true};
     }
 
     function canPlaceWord(word, row, col, dir, size) {
@@ -550,8 +527,7 @@
     }
 
     function shrinkGrid(size) {
-        let minR = size, maxR = 0, minC = size, maxC = 0;
-        let found = false;
+        let minR = size, maxR = 0, minC = size, maxC = 0, found = false;
         for (let r = 0; r < size; r++) {
             for (let c = 0; c < size; c++) {
                 if (grid[r][c]) {
@@ -576,12 +552,149 @@
         grid = newGrid;
     }
 
+    function setupEventListeners() {
+        document.getElementById('edit-btn').onclick = () => {
+            renderEditorRows();
+            document.getElementById('edit-solution-val').value = currentData.solution || '';
+            openModal('edit-modal');
+        };
+        document.getElementById('cancel-edit-btn').onclick = closeModal;
+        document.getElementById('save-edit-btn').onclick = () => {
+            const rows = document.querySelectorAll('.edit-row');
+            const newQuestions = [];
+            rows.forEach(row => {
+                const clue = row.querySelector('.clue-inp').value.trim();
+                const answer = row.querySelector('.answer-inp').value.trim().toUpperCase().replace(/[^A-Z\s]/g, '');
+                if (clue && answer) newQuestions.push({clue, answer});
+            });
+            currentData.questions = newQuestions;
+            currentData.solution = document.getElementById('edit-solution-val').value.trim().toUpperCase();
+            persistData();
+            rebuildGame();
+            closeModal();
+        };
+        document.getElementById('reveal-btn').onclick = () => {
+            const challenge = !!currentData.solution;
+            const confirmDiv = document.getElementById('reveal-confirmation-content');
+            const challengeDiv = document.getElementById('reveal-solution-challenge');
+            const solutionInput = document.getElementById('reveal-solution-input');
+
+            confirmDiv.classList.toggle('hidden', challenge);
+            challengeDiv.classList.toggle('hidden', !challenge);
+            solutionInput.value = '';
+            document.getElementById('reveal-error').style.opacity = '0';
+
+            openModal('confirm-reveal-modal');
+
+            if (challenge) {
+                setTimeout(() => solutionInput.focus(), 50);
+            }
+        };
+        document.getElementById('confirm-reveal-yes').onclick = () => {
+            revealAll();
+            closeModal();
+        };
+        document.getElementById('reveal-check-btn').onclick = () => {
+            if (document.getElementById('reveal-solution-input').value.trim().toUpperCase() === currentData.solution.toUpperCase()) {
+                revealAll();
+                closeModal();
+            } else {
+                const e = document.getElementById('reveal-error');
+                e.style.opacity = '1';
+                setTimeout(() => e.style.opacity = '0', 2000);
+            }
+        };
+
+        document.getElementById('reveal-solution-input').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                document.getElementById('reveal-check-btn').click();
+            }
+        });
+
+        document.getElementById('reset-btn').onclick = () => {
+            document.querySelectorAll('.grid-cell input, #final-solution-inputs input').forEach(i => {
+                if (!i.readOnly) i.value = '';
+            });
+            document.querySelectorAll('.grid-cell').forEach(c => c.classList.remove('word-correct', 'word-incorrect'));
+            checkFinalSolution();
+        };
+        document.getElementById('export-btn').onclick = () => {
+            document.getElementById('export-code').value = btoa(unescape(encodeURIComponent(JSON.stringify(currentData))));
+            openModal('export-modal');
+        };
+        document.getElementById('copy-export-btn').onclick = () => {
+            const el = document.getElementById('export-code');
+            el.select();
+            document.execCommand('copy');
+        };
+        document.getElementById('import-btn').onclick = () => {
+            document.getElementById('import-code').value = '';
+            openModal('import-modal');
+        };
+        document.getElementById('load-import-btn').onclick = () => {
+            try {
+                const parsed = JSON.parse(decodeURIComponent(escape(atob(document.getElementById('import-code').value.trim()))));
+                if (parsed.questions) {
+                    currentData = parsed;
+                    persistData();
+                    rebuildGame();
+                    closeModal();
+                }
+            } catch (e) {
+                alert("Import-Fehler.");
+            }
+        };
+    }
+
+    function renderEditorRows() {
+        const list = document.getElementById('edit-questions-list');
+        list.innerHTML = '';
+        currentData.questions.forEach((q, i) => list.appendChild(createEditorRow(q.clue, q.answer, i)));
+        list.appendChild(createEditorRow("", "", currentData.questions.length, true));
+    }
+
+    function createEditorRow(clue, answer, index, isEmptyRow = false) {
+        const row = document.createElement('div');
+        row.className = `edit-row flex gap-3 items-start bg-[#111111] p-4 rounded-xl border border-[#333333] transition-all ${isEmptyRow ? 'opacity-60 focus-within:opacity-100' : ''}`;
+        row.innerHTML = `<div class="flex-1 space-y-2"><input type="text" class="clue-inp w-full bg-[#1e1e1e] border border-[#333333] rounded-lg px-3 py-1 text-sm text-neutral-200 focus:border-[#ff5401] outline-none" placeholder="Neue Frage..." value="${clue}"><input type="text" class="answer-inp w-full bg-[#1e1e1e] border border-[#333333] rounded-lg px-3 py-1 text-sm text-[#ff5401] font-bold uppercase focus:border-[#ff5401] outline-none" placeholder="Antwort..." value="${answer}"></div>${!isEmptyRow ? `<button class="text-rose-500 p-2" onclick="removeEditorRow(${index})"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" /></svg></button>` : '<div class="w-9"></div>'}`;
+        const inputs = row.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('input', () => {
+                if (row.classList.contains('opacity-60')) {
+                    row.classList.remove('opacity-60');
+                    document.getElementById('edit-questions-list').appendChild(createEditorRow("", "", document.querySelectorAll('.edit-row').length, true));
+                    const spacer = row.querySelector('.w-9');
+                    if (spacer) {
+                        const btn = document.createElement('button');
+                        btn.className = "text-rose-500 p-2";
+                        btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" /></svg>`;
+                        btn.onclick = () => row.remove();
+                        spacer.replaceWith(btn);
+                    }
+                }
+            });
+        });
+        return row;
+    }
+
+    window.removeEditorRow = (idx) => {
+        const rows = document.querySelectorAll('.edit-row');
+        if (rows[idx]) rows[idx].remove();
+    };
+
+    function openModal(id) {
+        document.getElementById('modal-container').classList.remove('hidden');
+        document.querySelectorAll('.modal-content').forEach(m => m.classList.add('hidden'));
+        document.getElementById(id).classList.remove('hidden');
+    }
+
+    function closeModal() {
+        document.getElementById('modal-container').classList.add('hidden');
+    }
+
     function renderGrid() {
         const container = document.getElementById('grid-render');
-        if (!grid || grid.length === 0 || grid[0].length === 0) {
-            container.innerHTML = '<p class="text-rose-400 p-8 text-center">Rätsel konnte nicht generiert werden.</p>';
-            return;
-        }
+        if (!grid || grid.length === 0 || grid[0].length === 0) return;
         const h = grid.length, w = grid[0].length;
         container.style.gridTemplateColumns = `repeat(${w}, minmax(38px, 1fr))`;
         container.innerHTML = '';
@@ -590,7 +703,9 @@
             for (let c = 0; c < w; c++) {
                 const data = grid[r][c];
                 const div = document.createElement('div');
-                div.className = `grid-cell ${!data ? 'empty' : ''}`;
+                if (data && data.char === ' ') {
+                    div.className = `grid-cell space-separator`;
+                } else div.className = `grid-cell ${!data ? 'empty' : ''}`;
                 if (data) {
                     if (data.startLabels && data.startLabels.length > 0) {
                         const n = document.createElement('span');
@@ -598,22 +713,24 @@
                         n.innerHTML = data.startLabels.map(s => `<span>${s.num}${s.dir === 'V' ? '↓' : '→'}</span>`).join('');
                         div.appendChild(n);
                     }
-                    const input = document.createElement('input');
-                    input.maxLength = 1;
-                    input.dataset.row = r;
-                    input.dataset.col = c;
-                    if (data.isSolution) {
-                        div.classList.add('solution-cell');
-                        div.setAttribute('data-solution-index', data.solIndex + 1);
+                    if (data.char !== ' ') {
+                        const input = document.createElement('input');
+                        input.maxLength = 1;
+                        input.dataset.row = r;
+                        input.dataset.col = c;
+                        if (data.isSolution) {
+                            div.classList.add('solution-cell');
+                            div.setAttribute('data-solution-index', data.solIndex + 1);
+                        }
+                        input.addEventListener('input', e => handleInput(e, r, c));
+                        input.addEventListener('keydown', e => handleKeyDown(e, r, c));
+                        input.addEventListener('mousedown', e => handleCellClick(r, c));
+                        input.addEventListener('focus', (e) => {
+                            updateUIFocus(r, c);
+                            e.target.select();
+                        });
+                        div.appendChild(input);
                     }
-                    input.addEventListener('input', e => handleInput(e, r, c));
-                    input.addEventListener('keydown', e => handleKeyDown(e, r, c));
-                    input.addEventListener('mousedown', e => handleCellClick(r, c));
-                    input.addEventListener('focus', (e) => {
-                        updateUIFocus(r, c);
-                        e.target.select();
-                    });
-                    div.appendChild(input);
                 }
                 container.appendChild(div);
             }
@@ -622,15 +739,12 @@
 
     function handleCellClick(r, c) {
         const data = grid[r][c];
-        if (!data) return;
-        const hasH = data.words.some(w => w.dir === 'H');
-        const hasV = data.words.some(w => w.dir === 'V');
+        if (!data || data.char === ' ') return;
+        const hasH = data.words.some(w => w.dir === 'H'), hasV = data.words.some(w => w.dir === 'V');
         if (lastClickedPos.r === r && lastClickedPos.c === c) {
             if (hasH && hasV) currentDir = (currentDir === 'H') ? 'V' : 'H';
         } else {
-            if (hasH && currentDir === 'H') currentDir = 'H';
-            else if (hasV && currentDir === 'V') currentDir = 'V';
-            else currentDir = hasH ? 'H' : 'V';
+            if (hasH && currentDir === 'H') currentDir = 'H'; else if (hasV && currentDir === 'V') currentDir = 'V'; else currentDir = hasH ? 'H' : 'V';
         }
         lastClickedPos = {r, c};
         updateUIFocus(r, c);
@@ -649,18 +763,16 @@
                 const wordObj = wordsOnGrid.find(w => w.answer === currentWord.text && w.dir === currentWord.dir);
                 if (wordObj) {
                     for (let i = 0; i < wordObj.answer.length; i++) {
-                        const wr = wordObj.dir === 'V' ? wordObj.row + i : wordObj.row;
-                        const wc = wordObj.dir === 'H' ? wordObj.col + i : wordObj.col;
+                        const wr = wordObj.dir === 'V' ? wordObj.row + i : wordObj.row,
+                            wc = wordObj.dir === 'H' ? wordObj.col + i : wordObj.col;
                         const el = document.querySelector(`input[data-row="${wr}"][data-col="${wc}"]`);
+                        const cellDiv = document.querySelector(`.grid-cell:nth-child(${(wr * grid[0].length) + wc + 1})`);
                         if (el && el !== input) el.parentElement.classList.add('highlight-word');
+                        else if (cellDiv && grid[wr][wc]?.char === ' ') cellDiv.classList.add('highlight-word');
                     }
                 }
             }
         }
-        const hint = document.getElementById('direction-hint');
-        hint.innerText = `Schreibrichtung: ${currentDir === 'H' ? 'Waagerecht' : 'Senkrecht'}`;
-        document.getElementById('label-h').style.opacity = currentDir === 'H' ? '1' : '0.4';
-        document.getElementById('label-v').style.opacity = currentDir === 'V' ? '1' : '0.4';
     }
 
     function handleInput(e, r, c) {
@@ -682,19 +794,20 @@
         } else if (e.key.startsWith('Arrow')) {
             e.preventDefault();
             let nr = r, nc = c;
-            if (e.key === 'ArrowRight') nc++; else if (e.key === 'ArrowLeft') nc--;
-            else if (e.key === 'ArrowDown') nr++; else if (e.key === 'ArrowUp') nr--;
+            if (e.key === 'ArrowRight') nc++; else if (e.key === 'ArrowLeft') nc--; else if (e.key === 'ArrowDown') nr++; else if (e.key === 'ArrowUp') nr--;
             const next = document.querySelector(`input[data-row="${nr}"][data-col="${nc}"]`);
             if (next) next.focus();
         }
     }
 
     function moveInWord(r, c, delta, allowJump) {
-        const nr = currentDir === 'V' ? r + delta : r;
-        const nc = currentDir === 'H' ? c + delta : c;
+        let nr = currentDir === 'V' ? r + delta : r, nc = currentDir === 'H' ? c + delta : c;
+        if (grid[nr] && grid[nr][nc] && grid[nr][nc].char === ' ') {
+            nr = currentDir === 'V' ? nr + delta : nr;
+            nc = currentDir === 'H' ? nc + delta : nc;
+        }
         const next = document.querySelector(`input[data-row="${nr}"][data-col="${nc}"]`);
-        if (next) next.focus();
-        else if (allowJump && delta > 0) jumpToNextWord(r, c, 1);
+        if (next) next.focus(); else if (allowJump && delta > 0) jumpToNextWord(r, c, 1);
     }
 
     function jumpToNextWord(r, c, delta) {
@@ -712,22 +825,20 @@
 
     function assignSolutionCells() {
         if (!currentData.solution) return;
-        const sol = currentData.solution.toUpperCase().replace(/[^A-Z]/g, '');
-        for (let r = 0; r < grid.length; r++) {
-            for (let c = 0; c < grid[r].length; c++) if (grid[r][c]) grid[r][c].isSolution = false;
-        }
+        foundSolIndices.clear();
+        const sol = currentData.solution.toUpperCase().replace(/[^A-Z\s]/g, '');
+        for (let r = 0; r < grid.length; r++) for (let c = 0; c < grid[r].length; c++) if (grid[r][c]) grid[r][c].isSolution = false;
         for (let i = 0; i < sol.length; i++) {
-            const charNeeded = sol[i];
+            if (sol[i] === ' ') continue;
             const candidates = [];
-            for (let r = 0; r < grid.length; r++) {
-                for (let c = 0; c < grid[r].length; c++) {
-                    if (grid[r][c] && grid[r][c].char === charNeeded && !grid[r][c].isSolution) candidates.push({r, c});
-                }
+            for (let r = 0; r < grid.length; r++) for (let c = 0; c < grid[r].length; c++) {
+                if (grid[r][c] && grid[r][c].char === sol[i] && !grid[r][c].isSolution) candidates.push({r, c});
             }
             if (candidates.length > 0) {
-                const picked = candidates[Math.floor(Math.random() * candidates.length)];
-                grid[picked.r][picked.c].isSolution = true;
-                grid[picked.r][picked.c].solIndex = i;
+                const p = candidates[Math.floor(Math.random() * candidates.length)];
+                grid[p.r][p.c].isSolution = true;
+                grid[p.r][p.c].solIndex = i;
+                foundSolIndices.add(i);
             }
         }
     }
@@ -738,9 +849,8 @@
         vL.innerHTML = '';
         wordsOnGrid.sort((a, b) => a.num - b.num).forEach(w => {
             const li = document.createElement('li');
-            li.className = 'flex items-start p-2 rounded-xl hover:bg-slate-700/50 transition-all cursor-pointer';
-            li.id = `clue-${w.num}-${w.dir}`;
-            li.innerHTML = `<b class="mr-3 text-blue-500 font-black min-w-[20px]">${w.num}.</b> <span class="leading-relaxed">${w.clue}</span>`;
+            li.className = 'flex items-start p-2 rounded-xl hover:bg-[#2a2a2a] cursor-pointer transition-colors';
+            li.innerHTML = `<b class="mr-3 text-[#ff5401] min-w-[20px] font-bold">${w.num}.</b> <span class="leading-relaxed font-medium text-neutral-300">${w.clue}</span>`;
             li.onclick = () => {
                 currentDir = w.dir;
                 const el = document.querySelector(`input[data-row="${w.row}"][data-col="${w.col}"]`);
@@ -757,18 +867,19 @@
         box.innerHTML = '';
         const txt = currentData.solution.toUpperCase();
         for (let i = 0; i < txt.length; i++) {
+            if (txt[i] === ' ') {
+                const d = document.createElement('div');
+                d.className = 'solution-space-divider';
+                box.appendChild(d);
+                continue;
+            }
             const wrap = document.createElement('div');
             wrap.className = 'relative';
-            const label = document.createElement('span');
-            label.className = 'absolute -top-1 -left-1 text-[8px] font-bold text-blue-400';
-            label.innerText = i + 1;
-            const inp = document.createElement('input');
-            inp.className = 'w-10 h-12 bg-slate-700 border-2 border-slate-600 rounded-xl text-center font-black text-xl text-white uppercase focus:border-blue-500 outline-none';
-            inp.maxLength = 1;
-            inp.id = `sol-input-${i}`;
-            inp.addEventListener('input', checkFinalSolution);
-            wrap.appendChild(label);
-            wrap.appendChild(inp);
+            const isFoundInGrid = foundSolIndices.has(i);
+            const inputVal = isFoundInGrid ? "" : txt[i];
+            const prefilledClass = isFoundInGrid ? "" : "sol-input-prefilled";
+            wrap.innerHTML = `<span class="absolute -top-1 -left-1 text-[8px] font-bold text-[#ff5401]">${i + 1}</span><input type="text" class="w-10 h-12 bg-[#1e1e1e] border-2 border-[#333333] rounded-xl text-center font-black text-xl text-white uppercase focus:border-[#ff5401] outline-none ${prefilledClass}" maxlength="1" id="sol-input-${i}" value="${inputVal}" ${isFoundInGrid ? '' : 'readonly'}>`;
+            wrap.querySelector('input').addEventListener('input', checkFinalSolution);
             box.appendChild(wrap);
         }
     }
@@ -777,7 +888,7 @@
         const cell = grid[r][c];
         if (cell && cell.isSolution) {
             const inp = document.getElementById(`sol-input-${cell.solIndex}`);
-            if (inp) {
+            if (inp && !inp.readOnly) {
                 inp.value = char;
                 checkFinalSolution();
             }
@@ -786,21 +897,22 @@
 
     function checkGrid() {
         document.querySelectorAll('.grid-cell').forEach(cell => cell.classList.remove('word-correct', 'word-incorrect'));
-        document.querySelectorAll('li').forEach(li => li.classList.remove('opacity-20', 'line-through'));
+        document.querySelectorAll('li').forEach(li => li.classList.remove('opacity-40', 'line-through'));
         wordsOnGrid.forEach(w => {
             let currentStr = "";
             let inputs = [];
             for (let i = 0; i < w.answer.length; i++) {
                 const r = w.dir === 'V' ? w.row + i : w.row, c = w.dir === 'H' ? w.col + i : w.col;
                 const inp = document.querySelector(`input[data-row="${r}"][data-col="${c}"]`);
-                currentStr += (inp && inp.value) ? inp.value : " ";
-                inputs.push(inp);
+                currentStr += (grid[r][c].char === ' ') ? ' ' : ((inp && inp.value) ? inp.value : "_");
+                if (inp) inputs.push(inp);
             }
-            const clueEl = document.getElementById(`clue-${w.num}-${w.dir}`);
-            if (!currentStr.includes(" ")) {
+            const clues = Array.from(document.querySelectorAll('li'));
+            const clueEl = clues.find(el => el.innerText.startsWith(w.num + '.'));
+            if (!currentStr.includes("_")) {
                 if (currentStr === w.answer.toUpperCase()) {
                     inputs.forEach(i => i.parentElement.classList.add('word-correct'));
-                    if (clueEl) clueEl.classList.add('opacity-20', 'line-through');
+                    if (clueEl) clueEl.classList.add('opacity-40', 'line-through');
                 } else {
                     inputs.forEach(i => {
                         if (!i.parentElement.classList.contains('word-correct')) i.parentElement.classList.add('word-incorrect');
@@ -814,16 +926,35 @@
         if (!currentData.solution) return;
         const target = currentData.solution.toUpperCase();
         let current = "";
-        document.querySelectorAll('#final-solution-inputs input').forEach(i => current += i.value || "_");
-        const msg = document.getElementById('success-msg');
-        const area = document.getElementById('final-solution-area');
-        if (current === target) {
-            if (msg) msg.classList.remove('hidden');
-            if (area) area.classList.add('bg-green-900/40', 'border-green-500');
-        } else {
-            if (msg) msg.classList.add('hidden');
-            if (area) area.classList.remove('bg-green-900/40', 'border-green-500');
+        for (let i = 0; i < target.length; i++) {
+            if (target[i] === ' ') current += ' ';
+            else {
+                const inp = document.getElementById(`sol-input-${i}`);
+                current += inp?.value || "_";
+            }
         }
+        const msg = document.getElementById('success-msg'), area = document.getElementById('final-solution-area');
+        if (current === target) {
+            msg?.classList.remove('hidden');
+            area?.classList.add('bg-emerald-900/20', 'border-emerald-500');
+        } else {
+            msg?.classList.add('hidden');
+            area?.classList.remove('bg-emerald-900/20', 'border-emerald-500');
+        }
+    }
+
+    function revealAll() {
+        for (let r = 0; r < grid.length; r++) for (let c = 0; c < grid[r].length; c++) {
+            const cell = grid[r][c];
+            if (cell && cell.char !== ' ') {
+                const inp = document.querySelector(`input[data-row="${r}"][data-col="${c}"]`);
+                if (inp) {
+                    inp.value = cell.char;
+                    syncSolution(r, c, cell.char);
+                }
+            }
+        }
+        checkGrid();
     }
 
     window.onload = init;
