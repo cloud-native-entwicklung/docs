@@ -221,6 +221,17 @@
             border: 1px solid #222222;
             border-radius: 4px;
         }
+
+        /* Hover Brücke für E-Mail Popup */
+        .email-hover-bridge::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 0;
+            right: 0;
+            height: 20px;
+            background: transparent;
+        }
     </style>
 </head>
 <body>
@@ -232,14 +243,36 @@
         <span class="text-xl font-light text-neutral-500">Academy</span>
     </div>
     <div class="flex items-center gap-4">
-        <button id="email-btn" class="p-2 text-neutral-400 hover:text-[#ff5401] transition-colors"
-                title="E-Mail Kontakt">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                 stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-            </svg>
-        </button>
+        <!-- Email Wrapper with Hover Popover -->
+        <div class="relative group">
+            <button id="email-btn" class="p-2 text-neutral-400 hover:text-[#ff5401] transition-colors"
+                    title="E-Mail Kontakt">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                     stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+            </button>
+
+            <!-- Hover Popover mit Brücke -->
+            <div class="absolute right-0 top-10 hidden group-hover:flex items-center gap-3 bg-[#2a2a2a] border border-[#333333] p-2 px-3 rounded-lg shadow-2xl z-50 animate-in fade-in slide-in-from-top-1 email-hover-bridge">
+                <a id="email-link-display" href="#"
+                   class="text-sm font-medium text-slate-300 hover:text-[#ff5401] transition-colors underline decoration-dotted underline-offset-4 decoration-slate-600">academy@atvantage.com</a>
+                <button id="copy-email-sub-btn"
+                        class="bg-[#ff5401] hover:bg-[#e64a00] p-1.5 rounded transition-colors text-[#111111]"
+                        title="Kopieren">
+                    <svg id="copy-icon" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
+                         viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/>
+                    </svg>
+                    <svg id="check-icon" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 hidden" fill="none"
+                         viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
     </div>
 </nav>
 
@@ -327,9 +360,9 @@
     <!-- Edit Modal -->
     <div id="edit-modal"
          class="modal-content bg-[#1e1e1e] p-6 md:p-8 rounded-2xl shadow-2xl max-w-2xl w-full hidden flex flex-col max-h-[90vh] border border-[#333333]">
-        <h2 class="text-2xl font-bold text-white mb-6">Editor</h2>
+        <h2 class="text-2xl font-bold text-white mb-6 text-center lg:text-left">Rätsel Editor</h2>
         <div class="mb-6">
-            <label class="block text-[10px] font-bold text-neutral-400 uppercase tracking-widest mb-2">Gesuchtes
+            <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Gesuchtes
                 Wort</label>
             <input type="text" id="edit-solution-val"
                    class="w-full bg-[#111111] border border-[#333333] rounded-xl py-2 px-4 text-white font-bold uppercase focus:border-[#ff5401] outline-none"
@@ -345,7 +378,7 @@
     <!-- Import Modal -->
     <div id="import-modal"
          class="modal-content bg-[#1e1e1e] p-8 rounded-2xl shadow-2xl max-w-md w-full hidden border border-[#333333]">
-        <h2 class="text-xl font-bold text-white mb-4">Rätsel laden</h2>
+        <h2 class="text-xl font-bold text-white mb-4 text-center">Rätsel laden</h2>
         <textarea id="import-code"
                   class="w-full h-32 bg-[#111111] text-neutral-300 p-3 rounded-xl text-xs font-mono border border-[#333333] mb-4 focus:outline-none focus:border-[#ff5401]"
                   placeholder="Base64 Code einfügen..."></textarea>
@@ -358,7 +391,7 @@
     <!-- Export Modal -->
     <div id="export-modal"
          class="modal-content bg-[#1e1e1e] p-8 rounded-2xl shadow-2xl max-w-md w-full hidden border border-[#333333]">
-        <h2 class="text-xl font-bold text-white mb-4">Code teilen</h2>
+        <h2 class="text-xl font-bold text-white mb-4 text-center">Code teilen</h2>
         <textarea id="export-code" readonly
                   class="w-full h-32 bg-[#111111] text-[#ff5401] p-3 rounded-xl text-xs font-mono border border-[#333333] mb-4 focus:outline-none"></textarea>
         <div class="flex gap-4">
@@ -414,13 +447,13 @@
     let foundSolIndices = new Set();
 
     /**
-     * Schutz vor Webcrawlern für E-Mail
+     * Baut die E-Mail Adresse dynamisch zusammen
      */
-    document.getElementById('email-btn').onclick = function () {
-        const u = 'academy';
-        const d = 'atvantage.com';
-        window.location.href = 'mailto:' + u + '@' + d;
-    };
+    function getAcademyEmail() {
+        const part1 = 'academy';
+        const part2 = 'atvantage.com';
+        return part1 + '@' + part2;
+    }
 
     async function init() {
         const saved = localStorage.getItem('crossword_master_data');
@@ -431,6 +464,11 @@
                 console.error("Storage corrupt");
             }
         }
+
+        // E-Mail Anzeige initialisieren
+        const emailLink = document.getElementById('email-link-display');
+        emailLink.innerText = getAcademyEmail();
+
         rebuildGame();
         setupEventListeners();
     }
@@ -582,6 +620,44 @@
     }
 
     function setupEventListeners() {
+        // E-Mail Logik (Header Button)
+        document.getElementById('email-btn').onclick = function () {
+            window.location.href = 'mailto:' + getAcademyEmail();
+        };
+
+        // E-Mail Logik (Popup Link)
+        const emailLink = document.getElementById('email-link-display');
+        emailLink.onclick = function (e) {
+            e.preventDefault();
+            window.location.href = 'mailto:' + getAcademyEmail();
+        };
+        emailLink.onmouseenter = function () {
+            this.href = 'mailto:' + getAcademyEmail();
+        };
+
+        document.getElementById('copy-email-sub-btn').onclick = function () {
+            const email = getAcademyEmail();
+            const temp = document.createElement('textarea');
+            temp.value = email;
+            document.body.appendChild(temp);
+            temp.select();
+            try {
+                document.execCommand('copy');
+                const copyIcon = document.getElementById('copy-icon');
+                const checkIcon = document.getElementById('check-icon');
+                copyIcon.classList.add('hidden');
+                checkIcon.classList.remove('hidden');
+                setTimeout(() => {
+                    copyIcon.classList.remove('hidden');
+                    checkIcon.classList.add('hidden');
+                }, 2000);
+            } catch (err) {
+                console.error('Kopieren fehlgeschlagen');
+            }
+            document.body.removeChild(temp);
+        };
+
+        // Editor Logik
         document.getElementById('edit-btn').onclick = () => {
             renderEditorRows();
             document.getElementById('edit-solution-val').value = currentData.solution || '';
@@ -602,6 +678,8 @@
             rebuildGame();
             closeModal();
         };
+
+        // Reveal Logik
         document.getElementById('reveal-btn').onclick = () => {
             const challenge = !!currentData.solution;
             const confirmDiv = document.getElementById('reveal-confirmation-content');
@@ -640,6 +718,7 @@
             }
         });
 
+        // Restliche Steuerung
         document.getElementById('reset-btn').onclick = () => {
             document.querySelectorAll('.grid-cell input, #final-solution-inputs input').forEach(i => {
                 if (!i.readOnly) i.value = '';
@@ -725,7 +804,6 @@
         const container = document.getElementById('grid-render');
         if (!grid || grid.length === 0 || grid[0].length === 0) return;
         const h = grid.length, w = grid[0].length;
-        // Fixed cell width of 38px
         container.style.gridTemplateColumns = `repeat(${w}, 38px)`;
         container.innerHTML = '';
         assignSolutionCells();
