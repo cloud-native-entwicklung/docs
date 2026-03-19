@@ -44,10 +44,9 @@ Die Übungen sind nach Technologie gegliedert und bauen jeweils aufeinander auf.
 | 03  | [Rezeptliste](03-themen/03-01-frontend/03-rezeptliste/issue.md)           |
 | 04  | [Kindkomponente](03-themen/03-01-frontend/04-kindkomponente/issue.md)     |
 | 05  | [Service](03-themen/03-01-frontend/05-service/issue.md)                   |
+| 06  | [HTTP-Zugriff](03-themen/03-01-frontend/06-http-zugriff/issue.md)                           |
+| 07  | [CRUD-Service](03-themen/03-01-frontend/07-crud-service/issue.md)                           |
 
-
-<!-- | 06  | [HTTP-Zugriff](03-themen/03-01-frontend/06-http-zugriff/issue.md)                           | -->
-<!-- | 07  | [CRUD-Service](03-themen/03-01-frontend/07-crud-service/issue.md)                           | -->
 <!-- | 08  | [Umgebungskonfiguration](03-themen/03-01-frontend/08-umgebungskonfiguration/issue.md)       | -->
 <!-- | 09  | [Detail-Ansicht](03-themen/03-01-frontend/09-detail-ansicht/issue.md)                       | -->
 <!-- | 10  | [Formular](03-themen/03-01-frontend/10-formular/issue.md)                                   | -->

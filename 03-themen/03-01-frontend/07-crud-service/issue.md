@@ -38,6 +38,4 @@ Bisher kann unser Service nur Rezepte laden. Für eine vollständige Rezepteverw
 ## 🤔 Reflexionsfragen
 
 * Warum unterscheiden wir zwischen `RecipeDraft` (anlegen) und `RecipeUpdate` (aktualisieren)? Könnten wir nicht einfach `Recipe` für beides verwenden?
-* Welche HTTP-Methode verwendest Du für das Aktualisieren und warum? Was ist der Unterschied zwischen PUT und PATCH?
-* Warum brauchen wir Mapping-Funktionen in beide Richtungen (DTO zu Domäne und Domäne zu DTO)? Wäre es nicht einfacher, nur ein Modell zu haben?
 * Was passiert, wenn Du `deleteRecipe()` aufrufst, aber das Observable nie abonnierst? Warum ist das ein häufiger Fehler?

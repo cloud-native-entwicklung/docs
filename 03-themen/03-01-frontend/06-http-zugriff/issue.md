@@ -40,6 +40,5 @@ Unsere App soll die Rezeptdaten nicht mehr aus Dummy-Daten beziehen, sondern von
 ## 🤔 Reflexionsfragen
 
 * Warum führen wir separate DTO-Interfaces ein, statt die Backend-Datenstruktur direkt als Domänenmodell zu verwenden? Was passiert, wenn sich die Backend-API ändert?
-* Was ist der Unterschied zwischen einem Observable und einem Signal? Warum verwenden wir `toSignal()` als Brücke?
 * Was passiert, wenn der HTTP-Aufruf fehlschlägt? Wie könntest Du mit Fehlern umgehen?
 * Warum ist `provideHttpClient()` eine Funktion und kein Modul-Import? Welches Architekturkonzept steckt dahinter?
