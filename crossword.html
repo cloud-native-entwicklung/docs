@@ -563,6 +563,7 @@
             const r = dir === 'V' ? row + i : row;
             const c = dir === 'H' ? col + i : col;
             if (grid[r][c] && grid[r][c].char !== word[i]) return false;
+            if (grid[r][c] && grid[r][c].words.some(w => w.dir === dir)) return false;
             if (!grid[r][c]) {
                 const checks = dir === 'V' ? [[r, c - 1], [r, c + 1]] : [[r - 1, c], [r + 1, c]];
                 for (let [nr, nc] of checks) if (grid[nr][nc]) return false;
