@@ -20,15 +20,23 @@ wird.
 ## ✅ Definition of Done
 
 * [ ] Du hast `tsc` (TypeScript-Compiler) global via NPM installiert.
+* [ ] Du hast mit `tsc --init` eine `tsconfig.json` erstellt und den `dist`-Ordner als Ausgabeverzeichnis konfiguriert.
 * [ ] Du hast eine `.ts`-Datei geschrieben, die Typannotationen, ein Interface und eine typisierte Funktion enthält.
-* [ ] Du hast die Datei mit `tsc` transpiliert und die erzeugte `.js`-Datei untersucht.
+* [ ] Du hast die Datei mit `tsc` transpiliert und die erzeugte `.js`-Datei im `dist`-Ordner untersucht.
 * [ ] Du hast einen absichtlichen Typfehler eingebaut und beobachtet, welche Fehlermeldung `tsc` liefert.
 * [ ] Ihr habt die Reflexionsfragen schriftlich beantwortet.
 
 ## 🪜 Arbeitsschritte
 
 1. Installiere den TypeScript-Compiler global: `npm install -g typescript`. Prüfe die Installation mit `tsc --version`.
-2. Erstelle eine Datei `hello.ts` mit einer typisierten Funktion, z.B.:
+2. Erstelle eine TypeScript-Konfiguration mit `tsc --init`. Es wird eine `tsconfig.json` erzeugt. Öffne die Datei und
+   setze die Option `outDir` auf `"./dist"`, damit die generierten JavaScript-Dateien in einem eigenen Ordner landen:
+   ```json
+   {
+     "outDir": "./dist"   
+   }
+   ```
+3. Erstelle eine Datei `hello.ts` mit einer typisierten Funktion, z.B.:
    ```typescript
    interface Person {
      name: string;
@@ -41,9 +49,9 @@ wird.
 
    console.log(greet({ name: "Anna", age: 22 }));
    ```
-3. Transpiliere die Datei mit `tsc hello.ts`. Öffne die erzeugte `hello.js` und vergleiche sie mit dem
-   TypeScript-Original. Führe das Ergebnis mit `node hello.js` aus.
-4. Baue absichtlich einen Fehler ein (z.B. `greet({ name: "Anna", age: "zweiundzwanzig" })`) und beobachte, was `tsc`
+4. Transpiliere mit `tsc` (ohne Dateinamen — die `tsconfig.json` steuert alles). Öffne die erzeugte `dist/hello.js` und
+   vergleiche sie mit dem TypeScript-Original. Führe das Ergebnis mit `node dist/hello.js` aus.
+5. Baue absichtlich einen Fehler ein (z.B. `greet({ name: "Anna", age: "zweiundzwanzig" })`) und beobachte, was `tsc`
    meldet. Experimentiere mit weiteren Typen: Arrays, Enums, optionale Felder (`?`).
 
 ## 📚 Selbstlernmaterial
